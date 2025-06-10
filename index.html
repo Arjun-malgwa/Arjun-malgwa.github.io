@@ -31,7 +31,7 @@
             text-shadow: 0 0 8px #00f6ff, 0 0 20px #00f6ff;
         }
         .bg-card {
-            background-color: rgba(18, 18, 18, 0.8);
+            background-color: rgba(38, 38, 38, 0.8); /* Slightly different card color for skills */
             backdrop-filter: blur(4px);
         }
         .border-accent {
@@ -80,14 +80,16 @@
         .project-card:hover img {
             transform: scale(1.05);
         }
-        .skill-card {
-            border: 1px solid #222;
+        .skill-item { /* New class for individual skills */
+            background-color: #1a1a1a;
+            border: 1px solid #333;
             transition: all 0.3s ease;
         }
-        .skill-card:hover {
+        .skill-item:hover {
             border-color: #00f6ff;
-            background-color: #1a1a1a;
-            transform: scale(1.05);
+            background-color: #2a2a2a;
+            transform: translateY(-5px);
+            color: #00f6ff;
         }
         .typed-cursor {
             color: #00f6ff;
@@ -210,8 +212,8 @@
 
         <section id="skills" class="py-24">
             <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">Technical Skills</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 reveal-on-scroll">
-            </div>
+            <div id="skills-container" class="space-y-12">
+                </div>
         </section>
 
         <section id="projects" class="py-24">
@@ -268,14 +270,6 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             // --- DATA ---
-            const skillsData = [
-                { name: 'Python', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Python</title><path d="M19.426 10.163a.51.51 0 0 0-.466.31l-1.488 4.293-1.488-4.293a.51.51 0 0 0-.466-.31h-4.32a.51.51 0 0 0-.51.51v7.265a.51.51 0 0 0 .51.51h1.936a.51.51 0 0 0 .51-.51v-3.755l1.488 4.293a.51.51 0 0 0 .932 0l1.488-4.293v3.755a.51.51 0 0 0 .51.51h1.936a.51.51 0 0 0 .51-.51v-7.265a.51.51 0 0 0-.51-.51h-2.384zm-9.31 0a.51.51 0 0 0-.466.31L8.162 14.75l-1.488-4.293a.51.51 0 0 0-.466-.31H3.824a.51.51 0 0 0-.51.51v7.265a.51.51 0 0 0 .51.51h1.936a.51.51 0 0 0 .51-.51v-3.755l1.488 4.293a.51.51 0 0 0 .932 0l1.488-4.293v3.755a.51.51 0 0 0 .51.51h1.936a.51.51 0 0 0 .51-.51v-7.265a.51.51 0 0 0-.51-.51H10.116zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/></svg>' },
-                { name: 'R', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>R</title><path d="M18.841 19.739c.65.65 1.259 1.26 1.929 1.929.479.479 1.139.479 1.629 0l.97-.97c.479-.479.479-1.139 0-1.629l-1.929-1.929c-.65-.65-1.26-1.259-1.929-1.929l-3.219-3.219 3.219-3.219c.66-.66 1.28-1.28 1.93-1.93.48-.48.48-1.14 0-1.62l-.97-.97c-.48-.48-1.14-.48-1.62 0-.67.67-1.279 1.279-1.929 1.929L12 11.239l-2.58-2.58c-.65-.65-1.26-1.26-1.93-1.93-.48-.48-1.14-.48-1.62 0l-.97.97c-.48.48-.48 1.14 0 1.62.67.67 1.28 1.28 1.93 1.93l3.22 3.22-3.22 3.22c-.65.65-1.26 1.26-1.93 1.93-.48.48-.48 1.14 0 1.62l.97.97c.48.48 1.14.48 1.62 0 .67-.67 1.28-1.28 1.93-1.93l2.58-2.58 2.58 2.58z"/></svg>' },
-                { name: 'SQL', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>SQL</title><path d="M6 13h4v2H6v2h4v2H4V9h6v2H6v2zm6 6v-8h4v2h-2v6h2v2h-4v-2h2zm10-4c0-2.21-1.79-4-4-4s-4 1.79-4 4 1.79 4 4 4 4-1.79 4-4zm-6 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/></svg>' },
-                { name: 'Tableau', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Tableau</title><path d="M2.4 11.1h19.2v1.8H2.4zm0-4.8h19.2v1.8H2.4zm0 9.6h19.2v1.8H2.4zM4.2 21.9h1.8V2.1H4.2zm6.9 0h1.8V2.1h-1.8zm6.9 0h1.8V2.1h-1.8z"/></svg>' },
-                { name: 'Power BI', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Power BI</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM9.055 6.477h5.89v2.182H9.055V6.477zm5.89 11.046H9.055v-2.182h5.89v2.182zm0-4.432H9.055v-2.182h5.89v2.182z"/></svg>' },
-                { name: 'TensorFlow', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>TensorFlow</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.886 19.34L6 17.595V6.405l4.114 1.745V6.405l4.113-1.745v11.19l-4.113 1.745v-1.745l-4.114-1.745v3.49z"/></svg>' },
-            ];
             const projectsData = [
                 {
                     id: 0,
@@ -308,16 +302,39 @@
                     code_link: 'https://github.com/Arjun-malgwa'
                 },
             ];
+
+            const skillsData = {
+                "Programming Tools": ["Python", "R", "Scala", "SQL", "Excel", "Power BI", "Tableau", "Git", "Docker", "Streamlit", "SPSS", "JMP"],
+                "Data Analytics": ["Pandas", "NumPy", "EDA", "Data Cleaning", "Data Visualization", "Feature Engineering", "PCA", "Data Modeling"],
+                "Data Science & AI/ML": ["Machine Learning", "NLP", "Deep Learning", "Clustering", "Time Series Forecasting", "TensorFlow", "PyTorch"],
+                "Statistics": ["Hypothesis Testing", "Probability Distribution", "Regression Analysis", "ANOVA", "Chi-Square Test"]
+            };
+
             // --- DYNAMIC CONTENT RENDERING ---
-            const skillsContainer = document.querySelector('#skills .grid');
-            skillsData.forEach(skill => {
-                const skillEl = document.createElement('div');
-                skillEl.className = 'skill-card bg-card p-4 rounded-lg flex flex-col items-center justify-center text-center';
-                skillEl.innerHTML = `<div class="w-12 h-12 mb-2 text-accent">${skill.icon}</div><h3 class="font-semibold">${skill.name}</h3>`;
-                skillsContainer.appendChild(skillEl);
-            });
+
+            // Skills Rendering
+            const skillsContainer = document.getElementById('skills-container');
+            if (skillsContainer) {
+                for (const category in skillsData) {
+                    const categoryEl = document.createElement('div');
+                    categoryEl.className = 'reveal-on-scroll';
+                    
+                    let skillsHTML = '';
+                    skillsData[category].forEach(skill => {
+                        skillsHTML += `<div class="skill-item p-4 rounded-lg text-center font-medium transition-all">${skill}</div>`;
+                    });
+
+                    categoryEl.innerHTML = `
+                        <h3 class="text-2xl font-semibold text-center mb-6 text-accent">${category}</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">${skillsHTML}</div>
+                    `;
+                    skillsContainer.appendChild(categoryEl);
+                }
+            }
+            
+            // Projects Rendering
             const projectsContainer = document.querySelector('#projects .grid');
-            projectsData.filter(p => p.id !== 1).forEach(project => { // Filter out the featured project
+            projectsData.filter(p => p.id !== 1).forEach(project => {
                 const projectEl = document.createElement('div');
                 projectEl.className = 'project-card bg-card rounded-lg overflow-hidden';
                 projectEl.dataset.projectId = project.id;
@@ -330,6 +347,7 @@
                     </div>`;
                 projectsContainer.appendChild(projectEl);
             });
+
             // --- INTERACTIVITY ---
             const typedTextSpan = document.getElementById('typed-text');
             const textArray = ["Business Analyst.", "Data Scientist.", "Problem Solver.", "ML Enthusiast."];
@@ -338,17 +356,22 @@
             function type() { if (charIndex < textArray[textArrayIndex].length) { typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex++); setTimeout(type, 100); } else { setTimeout(erase, 2000); } }
             function erase() { if (charIndex > 0) { typedTextSpan.textContent = textArray[textArrayIndex].substring(0, --charIndex); setTimeout(erase, 50); } else { textArrayIndex = (textArrayIndex + 1) % textArray.length; setTimeout(type, 500); } }
             setTimeout(type, 1000);
+
             const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); }); }, { threshold: 0.1 });
             document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+            
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => { header.classList.toggle('shadow-lg', window.scrollY > 50); header.classList.toggle('shadow-cyan-500/10', window.scrollY > 50); });
+            
             const mobileMenuButton = document.getElementById('mobile-menu-button'), mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+            
             // --- MODAL LOGIC ---
             const modal = document.getElementById('project-modal');
             const modalCloseBtn = document.getElementById('modal-close-btn');
             const modalTitle = document.getElementById('modal-title'), modalDescription = document.getElementById('modal-description'), modalImage = document.getElementById('modal-image'), modalTools = document.getElementById('modal-tools'), modalLinks = document.getElementById('modal-links');
+            
             document.querySelectorAll('.project-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const projectId = parseInt(card.dataset.projectId);
@@ -366,9 +389,11 @@
                     }
                 });
             });
+
             const closeModal = () => modal.classList.remove('active');
             modalCloseBtn.addEventListener('click', closeModal);
             modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
             // Particles.js config
             particlesJS('particles-js', {
                 "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#00f6ff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 3, "random": true, "anim": { "enable": false } }, "line_linked": { "enable": true, "distance": 150, "color": "#00f6ff", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false } },
