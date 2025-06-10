@@ -65,21 +65,6 @@
         nav a:hover::after {
             width: 100%;
         }
-        .project-card {
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-            cursor: pointer;
-        }
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px -10px #00f6ff40;
-            border-color: #00f6ff80;
-        }
-        .project-card img {
-            transition: transform 0.3s;
-        }
-        .project-card:hover img {
-            transform: scale(1.05);
-        }
         .skill-item {
             background-color: #1a1a1a;
             border: 1px solid #333;
@@ -158,9 +143,6 @@
         .timeline-right {
             left: 50%;
         }
-        .timeline-right::after {
-            left: -10px;
-        }
         @media screen and (max-width: 768px) {
             .timeline-container::after {
                 left: 20px;
@@ -176,6 +158,40 @@
             .timeline-left, .timeline-right {
                 left: 0%;
             }
+        }
+        /* Projects Slider Styles */
+        .featured-image-container {
+            position: relative;
+        }
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+        .slider-arrow:hover {
+            background-color: rgba(0, 246, 255, 0.8);
+        }
+        #prev-project {
+            left: 1rem;
+        }
+        #next-project {
+            right: 1rem;
+        }
+        .other-project-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .other-project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px -10px #00f6ff40;
         }
         /* Modal Styles */
         .modal-overlay {
@@ -204,7 +220,7 @@
             border-radius: 0.5rem;
             border: 1px solid #00f6ff80;
             width: 90%;
-            max-width: 600px;
+            max-width: 700px;
             max-height: 90vh;
             overflow-y: auto;
             transform: scale(0.95);
@@ -323,23 +339,21 @@
         </section>
 
         <section id="projects" class="py-24">
-            <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">My Projects</h2>
-            <div class="mb-16 reveal-on-scroll">
-                <h3 class="text-2xl font-semibold text-center mb-8 text-accent">Featured Project</h3>
-                <div class="bg-card rounded-lg overflow-hidden md:flex items-center project-card" data-project-id="1">
-                    <div class="md:w-1/2">
-                        <img src="https://placehold.co/800x600/4C74B9/FFFFFF?text=Kaggle+Winner" alt="Customer Churn Prediction" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-8 md:w-1/2">
-                        <h4 class="text-2xl font-bold mb-2">Customer Churn Prediction</h4>
-                        <p class="text-gray-400 mb-4">Achieved #1 Rank in a Kaggle competition by developing a predictive model in R to identify customers at risk of churn, analyzing drivers with XGBoost.</p>
-                        <span class="text-accent font-semibold">Read more &rarr;</span>
-                    </div>
+            <div class="reveal-on-scroll">
+                <h2 class="text-4xl font-bold text-center mb-16">My Projects</h2>
+
+                <div class="mb-16">
+                    <h3 class="text-2xl font-semibold text-center mb-8 text-accent">Featured Work</h3>
+                    <div id="featured-project-container" class="max-w-5xl mx-auto">
+                        </div>
                 </div>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-on-scroll">
+
+                <h3 class="text-2xl font-semibold text-center mb-8 text-accent">More Projects</h3>
+                <div id="other-projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
             </div>
         </section>
+
 
         <section id="contact" class="py-24 text-center">
             <div class="reveal-on-scroll">
@@ -363,13 +377,14 @@
     <div id="project-modal" class="modal-overlay">
         <div class="modal-content">
             <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-accent text-4xl leading-none">&times;</button>
-            <img id="modal-image" src="" alt="Project Image" class="w-full h-56 object-cover rounded-lg mb-4">
+            <img id="modal-image" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mb-4">
             <h2 id="modal-title" class="text-3xl font-bold mb-2 text-glow"></h2>
+            <div id="modal-tags" class="flex flex-wrap gap-2 mb-4"></div>
             <p id="modal-description" class="text-gray-300 mb-4"></p>
-            <p class="font-bold text-gray-200">Tools Used: <span id="modal-tools" class="font-normal text-gray-400"></span></p>
             <div id="modal-links" class="mt-6 flex space-x-4"></div>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
@@ -415,34 +430,40 @@
             const projectsData = [
                 {
                     id: 0,
-                    title: 'RAG Model Development',
-                    short_description: 'Developed retrieval-augmented generation models to accurately respond to queries about renewable energy regulations.',
-                    full_description: 'As a Data Analytics Intern at STACKER GROUP, I developed and fine-tuned retrieval-augmented generation (RAG) models. My work focused on enabling accurate responses to queries around complex renewable energy rules and regulations. This involved evaluating the performance of large language models (LLMs) such as OpenAI’s GPT, Gemini, and Llama3, and creating a framework for comparative analysis. A key part of the project was prompt engineering to prevent hallucinations and ensure every answer provided included proper citations.',
-                    image: 'https://placehold.co/800x600/4A5568/FFFFFF?text=RAG+Model+Project',
-                    tools: "RAG, LLMs (GPT, Gemini, Llama3), Prompt Engineering, Python",
-                    live_link: '#',
-                    code_link: 'https://github.com/Arjun-malgwa'
+                    title: "Crime Analysis in LA",
+                    description: "Conducted time-series analysis of Los Angeles crime data to examine shifts in crime patterns before, during, and after COVID-19. Used Pandas, NumPy, and Seaborn for trend analysis; implemented geographic heatmaps with Folium to visualize location-based crime intensity.",
+                    image: "https://placehold.co/800x450/1a202c/e0e0e0?text=LA+Crime+Analysis",
+                    tags: ["Python", "Pandas", "Matplotlib", "Folium", "Time-Series"],
+                    github: "https://github.com/Arjun-malgwa",
+                    explanation: "#" 
                 },
                 {
                     id: 1,
-                    title: 'Customer Churn Prediction',
-                    short_description: 'Achieved #1 Rank in a Kaggle competition by developing a predictive model in R to identify customers at risk of churn.',
-                    full_description: 'In a competitive academic setting, I developed a predictive model in R to identify customers at high risk of churn for an online store. My model successfully reduced a 90% churn rate, significantly boosting retention. I analyzed crucial drivers using correlation and XGBoost, underlining the need for engagement, and enhanced model accuracy through strategic validation and tuning. This project secured the #1 Rank in the Kaggle Competition against 24 other groups.',
-                    image: 'https://placehold.co/800x600/4C74B9/FFFFFF?text=Kaggle+Winner',
-                    tools: "R, XGBoost, Predictive Modeling, Data Visualization, Kaggle",
-                    live_link: '#',
-                    code_link: 'https://github.com/Arjun-malgwa'
+                    title: "Customer Churn Prediction",
+                    description: "Achieved #1 Rank in a Kaggle competition by developing a predictive model in R to identify customers at risk of churn, analyzing drivers with XGBoost, and boosting retention.",
+                    image: "https://placehold.co/800x450/4C74B9/FFFFFF?text=Kaggle+Winner",
+                    tags: ["R", "XGBoost", "Predictive Modeling", "Kaggle"],
+                    github: "https://github.com/Arjun-malgwa",
+                    explanation: "#"
                 },
                 {
                     id: 2,
-                    title: 'Next-Word Prediction (LSTM)',
-                    short_description: 'Built an optimized LSTM model with TensorFlow to predict next-word sequences from a real-world dataset.',
-                    full_description: 'This project involved building an LSTM model using the SMS Spam Collection Dataset from UCI to predict next-word sequences. I preprocessed the text data, compared various CNN/RNN architectures, and ultimately optimized the model with LSTM for handling long-term dependencies. The outcome was a video presentation showcasing the model and its potential to reduce misclassification in automated text systems.',
-                    image: 'https://placehold.co/800x600/38B2AC/FFFFFF?text=LSTM+NLP+Project',
-                    tools: "Python, TensorFlow, Keras, NLTK, LSTM, CNN",
-                    live_link: '#',
-                    code_link: 'https://github.com/Arjun-malgwa'
+                    title: "Next-Word Prediction (LSTM)",
+                    description: "Built an optimized LSTM model using the SMS Spam Collection Dataset from UCI to predict next-word sequences. The model was developed using TensorFlow and Keras, focusing on handling long-term dependencies in text.",
+                    image: "https://placehold.co/800x450/38B2AC/FFFFFF?text=LSTM+NLP+Project",
+                    tags: ["Python", "TensorFlow", "Keras", "LSTM", "NLP"],
+                    github: "https://github.com/Arjun-malgwa",
+                    explanation: "#"
                 },
+                {
+                    id: 3,
+                    title: "HBR Case Study: Ship Price Estimation",
+                    description: "Estimated ship bid prices using multiple Linear Regression models in R for a Harvard Business Review case study. Performed ANOVA and other statistical tests to validate model significance.",
+                    image: "https://placehold.co/800x450/9F7AEA/FFFFFF?text=Ship+Price+Analysis",
+                    tags: ["R", "Regression Analysis", "ANOVA", "Statistics"],
+                    github: "https://github.com/Arjun-malgwa",
+                    explanation: "#"
+                }
             ];
             
             const technicalSkillsBarsData = [
@@ -539,21 +560,73 @@
                 }
             }
             
-            // Projects Rendering
-            const projectsContainer = document.querySelector('#projects .grid');
-            projectsData.filter(p => p.id !== 1).forEach(project => {
-                const projectEl = document.createElement('div');
-                projectEl.className = 'project-card bg-card rounded-lg overflow-hidden';
-                projectEl.dataset.projectId = project.id;
-                projectEl.innerHTML = `
-                    <div class="overflow-hidden h-48"><img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover"></div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">${project.title}</h3>
-                        <p class="text-gray-400 mb-4">${project.short_description}</p>
-                        <span class="text-accent font-semibold">Read more &rarr;</span>
-                    </div>`;
-                projectsContainer.appendChild(projectEl);
-            });
+            // Projects Section Logic
+            const featuredContainer = document.getElementById('featured-project-container');
+            const otherProjectsContainer = document.getElementById('other-projects-container');
+            let currentFeaturedIndex = 0;
+
+            function renderFeaturedProject(index) {
+                const project = projectsData[index];
+                featuredContainer.innerHTML = `
+                    <div class="bg-card p-6 rounded-lg md:flex items-center gap-8">
+                        <div class="md:w-1/2 mb-6 md:mb-0 featured-image-container">
+                            <img src="${project.image}" alt="${project.title}" class="w-full h-auto rounded-md shadow-lg">
+                            <button id="prev-project" class="slider-arrow">&#10094;</button>
+                            <button id="next-project" class="slider-arrow">&#10095;</button>
+                        </div>
+                        <div class="md:w-1/2">
+                            <h4 class="text-2xl font-bold text-white mb-3">${project.title}</h4>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                ${project.tags.map(tag => `<span class="bg-gray-700 text-accent text-xs font-semibold px-2 py-1 rounded-full">${tag}</span>`).join('')}
+                            </div>
+                            <p class="text-gray-300 mb-6">${project.description}</p>
+                            <div class="flex items-center space-x-4">
+                                <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="bg-accent text-gray-900 font-bold py-2 px-4 rounded-md text-sm hover:bg-cyan-300 transition-all">GitHub</a>
+                                <button data-project-id="${project.id}" class="explanation-btn border border-accent text-accent font-bold py-2 px-4 rounded-md text-sm hover:bg-accent hover:text-gray-900 transition-all">Explanation</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('prev-project').addEventListener('click', () => {
+                    currentFeaturedIndex = (currentFeaturedIndex - 1 + projectsData.length) % projectsData.length;
+                    renderFeaturedProject(currentFeaturedIndex);
+                });
+
+                document.getElementById('next-project').addEventListener('click', () => {
+                    currentFeaturedIndex = (currentFeaturedIndex + 1) % projectsData.length;
+                    renderFeaturedProject(currentFeaturedIndex);
+                });
+            }
+
+            function renderOtherProjects() {
+                 otherProjectsContainer.innerHTML = ''; // Clear existing projects
+                 projectsData.forEach(proj => {
+                    const projEl = document.createElement('div');
+                    projEl.className = 'other-project-card bg-card rounded-lg overflow-hidden flex flex-col';
+                    projEl.setAttribute('data-project-id', proj.id);
+                    projEl.innerHTML = `
+                        <div class="h-48 overflow-hidden">
+                            <img src="${proj.image}" alt="${proj.title}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white mb-2">${proj.title}</h3>
+                            <p class="text-gray-400 text-sm flex-grow mb-4">${proj.description.substring(0, 100)}...</p>
+                            <div class="flex items-center space-x-4 mt-auto pt-4 border-t border-gray-700">
+                                <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent transition-colors text-sm">GitHub</a>
+                                <button data-project-id="${proj.id}" class="explanation-btn text-accent hover:underline text-sm">Read More</button>
+                            </div>
+                        </div>
+                    `;
+                    otherProjectsContainer.appendChild(projEl);
+                });
+            }
+
+            if (featuredContainer && otherProjectsContainer) {
+                renderFeaturedProject(currentFeaturedIndex);
+                renderOtherProjects();
+            }
+
 
             // --- INTERACTIVITY ---
             const typedTextSpan = document.getElementById('typed-text');
@@ -577,24 +650,37 @@
             // --- MODAL LOGIC ---
             const modal = document.getElementById('project-modal');
             const modalCloseBtn = document.getElementById('modal-close-btn');
-            const modalTitle = document.getElementById('modal-title'), modalDescription = document.getElementById('modal-description'), modalImage = document.getElementById('modal-image'), modalTools = document.getElementById('modal-tools'), modalLinks = document.getElementById('modal-links');
+            const modalTitle = document.getElementById('modal-title'), modalDescription = document.getElementById('modal-description'), modalImage = document.getElementById('modal-image'), modalTags = document.getElementById('modal-tags'), modalLinks = document.getElementById('modal-links');
             
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.addEventListener('click', () => {
+            function openProjectModal(projectId) {
+                const project = projectsData.find(p => p.id === projectId);
+                if (project) {
+                    modalTitle.textContent = project.title;
+                    modalDescription.textContent = project.description;
+                    modalImage.src = project.image;
+                    modalTags.innerHTML = project.tags.map(tag => `<span class="bg-gray-700 text-accent text-xs font-semibold px-2 py-1 rounded-full">${tag}</span>`).join('');
+                    modalLinks.innerHTML = `
+                        <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="bg-accent text-gray-900 font-bold py-2 px-4 rounded-md text-sm hover:bg-cyan-300 transition-all">View on GitHub</a>
+                        ${project.explanation !== '#' ? `<a href="${project.explanation}" target="_blank" rel="noopener noreferrer" class="border border-accent text-accent font-bold py-2 px-4 rounded-md text-sm hover:bg-accent hover:text-gray-900 transition-all">Live Demo</a>` : ''}
+                    `;
+                    modal.classList.add('active');
+                }
+            }
+
+            // Event delegation for explanation buttons
+            document.body.addEventListener('click', function(event) {
+                if (event.target.matches('.explanation-btn')) {
+                    const projectId = parseInt(event.target.dataset.projectId);
+                    openProjectModal(projectId);
+                }
+                 if (event.target.closest('.other-project-card')) {
+                    const card = event.target.closest('.other-project-card');
                     const projectId = parseInt(card.dataset.projectId);
-                    const project = projectsData.find(p => p.id === projectId);
-                    if (project) {
-                        modalTitle.textContent = project.title;
-                        modalDescription.textContent = project.full_description;
-                        modalImage.src = project.image;
-                        modalTools.textContent = project.tools;
-                        modalLinks.innerHTML = `
-                            ${project.live_link !== '#' ? `<a href="${project.live_link}" target="_blank" rel="noopener noreferrer" class="bg-accent text-black font-bold py-2 px-4 rounded-lg hover:bg-opacity-80 transition-all">View Live</a>` : ''}
-                            ${project.code_link !== '#' ? `<a href="${project.code_link}" target="_blank" rel="noopener noreferrer" class="border border-accent text-accent font-bold py-2 px-4 rounded-lg hover:bg-accent hover:text-black transition-all">View Code</a>` : ''}
-                        `;
-                        modal.classList.add('active');
+                    // Check if the click was not on the GitHub link itself
+                    if (!event.target.matches('a[target="_blank"]')) {
+                         openProjectModal(projectId);
                     }
-                });
+                }
             });
 
             const closeModal = () => modal.classList.remove('active');
