@@ -31,7 +31,7 @@
             text-shadow: 0 0 8px #00f6ff, 0 0 20px #00f6ff;
         }
         .bg-card {
-            background-color: rgba(38, 38, 38, 0.8); /* Slightly different card color for skills */
+            background-color: rgba(18, 18, 18, 0.8);
             backdrop-filter: blur(4px);
         }
         .border-accent {
@@ -80,7 +80,7 @@
         .project-card:hover img {
             transform: scale(1.05);
         }
-        .skill-item { /* New class for individual skills */
+        .skill-item {
             background-color: #1a1a1a;
             border: 1px solid #333;
             transition: all 0.3s ease;
@@ -194,18 +194,25 @@
         </section>
 
         <section id="about" class="py-24">
-            <h2 class="text-4xl font-bold text-center mb-12 reveal-on-scroll">About Me</h2>
-            <div class="grid md:grid-cols-5 gap-12 items-center reveal-on-scroll">
-                <div class="md:col-span-2">
-                    <img src="arjun_malgwa.png.png" alt="Arjun Malgwa" class="rounded-lg shadow-lg shadow-cyan-500/20">
-                </div>
-                <div class="md:col-span-3 text-lg text-gray-300 space-y-4">
-                    <p>I am a highly motivated and analytical Business Analytics graduate student at Drexel University with a passion for uncovering stories hidden within data.</p>
-                    <p>My journey in this field is driven by a curiosity to understand complex systems and a desire to build intelligent solutions that create tangible business value. From predictive modeling and machine learning to in-depth statistical analysis, I thrive on tackling challenging problems.</p>
-                    <p>I have hands-on experience developing RAG models, evaluating LLMs, predicting customer churn, and building deep learning models for NLP tasks. I'm proficient with a range of tools including Python, R, SQL, and various data visualization platforms. I'm currently seeking opportunities where I can apply my skills to solve real-world problems and contribute to a data-driven culture.</p>
-                    <a href="#" download="Arjun_Malgwa_Resume.pdf" class="inline-block mt-4 bg-accent text-black font-bold py-3 px-6 rounded-lg text-lg hover:bg-opacity-80 transition-all duration-300">
-                        Download Resume
-                    </a>
+            <div class="reveal-on-scroll">
+                <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
+                <div class="max-w-4xl mx-auto bg-card p-8 rounded-lg border border-gray-800 shadow-lg">
+                    <div class="text-lg leading-relaxed space-y-6 text-gray-300">
+                        <p>
+                            As a Business Analytics graduate student with a strong foundation in data science and AI, I thrive on bridging the gap between complex data and strategic business outcomes. My goal is to leverage my skills as a <strong class="text-accent">Business Analyst</strong>, <strong class="text-accent">Data Analyst</strong>, and <strong class="text-accent">AI/ML Enthusiast</strong> to help organizations make smarter, data-driven decisions.
+                        </p>
+                        <p>
+                            My experience ranges from developing sophisticated Retrieval-Augmented Generation (RAG) models at Stacker Group to building Python automation scripts that boosted sales by 20% at Majitel Solutions. I enjoy the full spectrum of a data project, from initial analysis and feature engineering to building predictive models and visualizing results.
+                        </p>
+                        <p>
+                            I am proficient in Python, R, SQL, and various ML frameworks, and I am actively seeking roles where I can apply my analytical and technical skills to solve challenging problems and create tangible value.
+                        </p>
+                         <div class="pt-4">
+                             <a href="#" download="Arjun_Malgwa_Resume.pdf" class="inline-block bg-accent text-black font-bold py-3 px-6 rounded-lg text-lg hover:bg-opacity-80 transition-all duration-300">
+                                Download Resume
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
