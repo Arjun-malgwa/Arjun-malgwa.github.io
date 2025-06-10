@@ -65,27 +65,16 @@
         nav a:hover::after {
             width: 100%;
         }
-        .skill-item {
-            background-color: #1a1a1a;
-            border: 1px solid #333;
+        .skill-pill {
+            background-color: #1f2937; /* A dark blue-gray */
+            border: 1px solid #374151;
             transition: all 0.3s ease;
         }
-        .skill-item:hover {
-            border-color: #00f6ff;
-            background-color: #2a2a2a;
-            transform: translateY(-5px);
-            color: #00f6ff;
-        }
-        .soft-skill-tag {
-             background-color: #2a2a2a;
-             border: 1px solid #444;
-             transition: all 0.3s ease;
-        }
-        .soft-skill-tag:hover {
+        .skill-pill:hover {
             background-color: #00f6ff;
             color: #0a0a0a;
             border-color: #00f6ff;
-            transform: scale(1.05);
+            transform: translateY(-4px);
         }
         .typed-cursor {
             color: #00f6ff;
@@ -312,30 +301,9 @@
         </section>
 
         <section id="skills" class="py-24">
-            <div class="reveal-on-scroll">
-                <h2 class="text-4xl font-bold text-center mb-16">Skills</h2>
-
-                <div class="grid md:grid-cols-2 gap-12 mb-24 max-w-6xl mx-auto">
-                    
-                    <div class="bg-card p-8 rounded-lg">
-                        <h3 class="text-2xl font-semibold text-accent text-center mb-8">Technical Proficiencies</h3>
-                        <div id="technical-skills-bars" class="space-y-6">
-                            </div>
-                    </div>
-
-                    <div class="bg-card p-8 rounded-lg">
-                        <h3 class="text-2xl font-semibold text-accent text-center mb-8">Professional Competencies</h3>
-                        <div id="soft-skills-tags" class="flex flex-wrap justify-center gap-4">
-                            </div>
-                    </div>
-
-                </div>
-
-                <div id="more-skills-container" class="space-y-12">
-                    <h2 class="text-4xl font-bold text-center mb-12">Full Technical Skillset</h2>
-                    </div>
-
-            </div>
+             <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">Technical Skillset</h2>
+             <div id="skills-container" class="max-w-6xl mx-auto space-y-12">
+                 </div>
         </section>
 
         <section id="projects" class="py-24">
@@ -466,28 +434,13 @@
                 }
             ];
             
-            const technicalSkillsBarsData = [
-                { name: 'Python', percentage: 90 },
-                { name: 'R', percentage: 85 },
-                { name: 'SQL', percentage: 95 },
-                { name: 'Tableau', percentage: 80 },
-                { name: 'Power BI', percentage: 85 },
-                { name: 'Machine Learning', percentage: 80 }
-            ];
-
-            const softSkillsData = [
-                "Problem Solving", "Critical Thinking", "Communication", 
-                "Attention to Detail", "Adaptability", "Teamwork", 
-                "Leadership", "Time Management", "Project Management", 
-                "Analytical Thinking", "Decision Making", "Creativity"
-            ];
-
-            const allSkillsData = {
-                "Programming Tools": ["Python", "R", "Scala", "SQL", "Excel", "Power BI", "Tableau", "Git", "Docker", "Streamlit", "SPSS", "JMP"],
-                "Data Analytics": ["Pandas", "NumPy", "EDA", "Data Cleaning", "Data Visualization", "Feature Engineering", "PCA", "Data Modeling"],
-                "Data Science & AI/ML": ["Machine Learning", "NLP", "Deep Learning", "Clustering", "Time Series Forecasting", "TensorFlow", "PyTorch"],
-                "Statistics": ["Hypothesis Testing", "Probability Distribution", "Regression Analysis", "ANOVA", "Chi-Square Test"]
+            const skillsData = {
+                "Programming & Databases": ["Python", "R", "Scala", "SQL", "Git", "Docker"],
+                "BI & Data Visualization": ["Power BI", "Tableau", "Streamlit", "Matplotlib", "Seaborn"],
+                "Data Science & ML": ["Pandas", "NumPy", "Scikit-learn", "Machine Learning", "NLP", "Deep Learning", "TensorFlow", "PyTorch"],
+                "Statistical Analysis": ["Hypothesis Testing", "Regression", "ANOVA", "Chi-Square Test", "SPSS", "JMP"]
             };
+
 
             // --- DYNAMIC CONTENT RENDERING ---
 
@@ -514,49 +467,30 @@
                 });
             }
 
-            // Inject Technical Skills with Progress Bars
-            const techSkillsContainer = document.getElementById('technical-skills-bars');
-            if (techSkillsContainer) {
-                technicalSkillsBarsData.forEach(skill => {
-                    const skillEl = document.createElement('div');
-                    skillEl.innerHTML = `
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium text-gray-300">${skill.name}</span>
-                            <span class="text-sm font-medium text-accent">${skill.percentage}%</span>
-                        </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-accent h-2.5 rounded-full" style="width: ${skill.percentage}%"></div>
-                        </div>
-                    `;
-                    techSkillsContainer.appendChild(skillEl);
-                });
-            }
-            
-            // Inject Soft Skills Tags
-            const softSkillsContainer = document.getElementById('soft-skills-tags');
-            if (softSkillsContainer) {
-                softSkillsData.forEach(skill => {
-                    const skillEl = document.createElement('div');
-                    skillEl.className = 'soft-skill-tag text-gray-300 text-center py-2 px-4 rounded-lg font-medium cursor-default';
-                    skillEl.textContent = skill;
-                    softSkillsContainer.appendChild(skillEl);
-                });
-            }
-            
-            // Inject the full categorized list of skills
-            const moreSkillsContainer = document.getElementById('more-skills-container');
-            if (moreSkillsContainer) {
-                for (const category in allSkillsData) {
-                    const categoryEl = document.createElement('div');
-                    let skillsHTML = '';
-                    allSkillsData[category].forEach(skill => {
-                        skillsHTML += `<div class="skill-item p-4 rounded-lg text-center font-medium transition-all">${skill}</div>`;
+            // Inject Skills Section
+            const skillsContainer = document.getElementById('skills-container');
+            if (skillsContainer) {
+                for (const category in skillsData) {
+                    const categoryCard = document.createElement('div');
+                    categoryCard.className = 'bg-card p-8 rounded-lg reveal-on-scroll';
+
+                    const categoryTitle = document.createElement('h3');
+                    categoryTitle.className = 'text-2xl font-semibold text-center mb-6 text-accent';
+                    categoryTitle.textContent = category;
+                    
+                    const skillsGrid = document.createElement('div');
+                    skillsGrid.className = 'flex flex-wrap justify-center gap-3';
+
+                    skillsData[category].forEach(skill => {
+                        const skillEl = document.createElement('div');
+                        skillEl.className = 'skill-pill p-3 rounded-md text-center font-medium';
+                        skillEl.textContent = skill;
+                        skillsGrid.appendChild(skillEl);
                     });
-                    categoryEl.innerHTML = `
-                        <h3 class="text-2xl font-semibold text-center mb-6 text-accent">${category}</h3>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">${skillsHTML}</div>
-                    `;
-                    moreSkillsContainer.appendChild(categoryEl);
+
+                    categoryCard.appendChild(categoryTitle);
+                    categoryCard.appendChild(skillsGrid);
+                    skillsContainer.appendChild(categoryCard);
                 }
             }
             
