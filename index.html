@@ -33,6 +33,7 @@
         .bg-card {
             background-color: rgba(18, 18, 18, 0.8);
             backdrop-filter: blur(4px);
+            border: 1px solid #2a2a2a;
         }
         .border-accent {
             border-color: #00f6ff;
@@ -66,7 +67,6 @@
         }
         .project-card {
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-            border: 1px solid #222;
             cursor: pointer;
         }
         .project-card:hover {
@@ -90,6 +90,17 @@
             background-color: #2a2a2a;
             transform: translateY(-5px);
             color: #00f6ff;
+        }
+        .soft-skill-tag {
+             background-color: #2a2a2a;
+             border: 1px solid #444;
+             transition: all 0.3s ease;
+        }
+        .soft-skill-tag:hover {
+            background-color: #00f6ff;
+            color: #0a0a0a;
+            border-color: #00f6ff;
+            transform: scale(1.05);
         }
         .typed-cursor {
             color: #00f6ff;
@@ -196,7 +207,7 @@
         <section id="about" class="py-24">
             <div class="reveal-on-scroll">
                 <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
-                <div class="max-w-4xl mx-auto bg-card p-8 rounded-lg border border-gray-800 shadow-lg">
+                <div class="max-w-4xl mx-auto bg-card p-8 rounded-lg shadow-lg">
                     <div class="text-lg leading-relaxed space-y-6 text-gray-300">
                         <p>
                             As a Business Analytics graduate student with a strong foundation in data science and AI, I thrive on bridging the gap between complex data and strategic business outcomes. My goal is to leverage my skills as a <strong class="text-accent">Business Analyst</strong>, <strong class="text-accent">Data Analyst</strong>, and <strong class="text-accent">AI/ML Enthusiast</strong> to help organizations make smarter, data-driven decisions.
@@ -218,9 +229,30 @@
         </section>
 
         <section id="skills" class="py-24">
-            <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">Technical Skills</h2>
-            <div id="skills-container" class="space-y-12">
+            <div class="reveal-on-scroll">
+                <h2 class="text-4xl font-bold text-center mb-16">Skills</h2>
+
+                <div class="grid md:grid-cols-2 gap-12 mb-24 max-w-6xl mx-auto">
+                    
+                    <div class="bg-card p-8 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-accent text-center mb-8">Technical Proficiencies</h3>
+                        <div id="technical-skills-bars" class="space-y-6">
+                            </div>
+                    </div>
+
+                    <div class="bg-card p-8 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-accent text-center mb-8">Professional Competencies</h3>
+                        <div id="soft-skills-tags" class="flex flex-wrap justify-center gap-4">
+                            </div>
+                    </div>
+
                 </div>
+
+                <div id="more-skills-container" class="space-y-12">
+                    <h2 class="text-4xl font-bold text-center mb-12">Full Technical Skillset</h2>
+                    </div>
+
+            </div>
         </section>
 
         <section id="projects" class="py-24">
@@ -309,8 +341,24 @@
                     code_link: 'https://github.com/Arjun-malgwa'
                 },
             ];
+            
+            const technicalSkillsBarsData = [
+                { name: 'Python', percentage: 90 },
+                { name: 'R', percentage: 85 },
+                { name: 'SQL', percentage: 95 },
+                { name: 'Tableau', percentage: 80 },
+                { name: 'Power BI', percentage: 85 },
+                { name: 'Machine Learning', percentage: 80 }
+            ];
 
-            const skillsData = {
+            const softSkillsData = [
+                "Problem Solving", "Critical Thinking", "Communication", 
+                "Attention to Detail", "Adaptability", "Teamwork", 
+                "Leadership", "Time Management", "Project Management", 
+                "Analytical Thinking", "Decision Making", "Creativity"
+            ];
+
+            const allSkillsData = {
                 "Programming Tools": ["Python", "R", "Scala", "SQL", "Excel", "Power BI", "Tableau", "Git", "Docker", "Streamlit", "SPSS", "JMP"],
                 "Data Analytics": ["Pandas", "NumPy", "EDA", "Data Cleaning", "Data Visualization", "Feature Engineering", "PCA", "Data Modeling"],
                 "Data Science & AI/ML": ["Machine Learning", "NLP", "Deep Learning", "Clustering", "Time Series Forecasting", "TensorFlow", "PyTorch"],
@@ -319,23 +367,49 @@
 
             // --- DYNAMIC CONTENT RENDERING ---
 
-            // Skills Rendering
-            const skillsContainer = document.getElementById('skills-container');
-            if (skillsContainer) {
-                for (const category in skillsData) {
+            // Inject Technical Skills with Progress Bars
+            const techSkillsContainer = document.getElementById('technical-skills-bars');
+            if (techSkillsContainer) {
+                technicalSkillsBarsData.forEach(skill => {
+                    const skillEl = document.createElement('div');
+                    skillEl.innerHTML = `
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium text-gray-300">${skill.name}</span>
+                            <span class="text-sm font-medium text-accent">${skill.percentage}%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-accent h-2.5 rounded-full" style="width: ${skill.percentage}%"></div>
+                        </div>
+                    `;
+                    techSkillsContainer.appendChild(skillEl);
+                });
+            }
+            
+            // Inject Soft Skills Tags
+            const softSkillsContainer = document.getElementById('soft-skills-tags');
+            if (softSkillsContainer) {
+                softSkillsData.forEach(skill => {
+                    const skillEl = document.createElement('div');
+                    skillEl.className = 'soft-skill-tag text-gray-300 text-center py-2 px-4 rounded-lg font-medium cursor-default';
+                    skillEl.textContent = skill;
+                    softSkillsContainer.appendChild(skillEl);
+                });
+            }
+            
+            // Inject the full categorized list of skills
+            const moreSkillsContainer = document.getElementById('more-skills-container');
+            if (moreSkillsContainer) {
+                for (const category in allSkillsData) {
                     const categoryEl = document.createElement('div');
-                    categoryEl.className = 'reveal-on-scroll';
-                    
                     let skillsHTML = '';
-                    skillsData[category].forEach(skill => {
+                    allSkillsData[category].forEach(skill => {
                         skillsHTML += `<div class="skill-item p-4 rounded-lg text-center font-medium transition-all">${skill}</div>`;
                     });
-
                     categoryEl.innerHTML = `
                         <h3 class="text-2xl font-semibold text-center mb-6 text-accent">${category}</h3>
                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">${skillsHTML}</div>
                     `;
-                    skillsContainer.appendChild(categoryEl);
+                    moreSkillsContainer.appendChild(categoryEl);
                 }
             }
             
