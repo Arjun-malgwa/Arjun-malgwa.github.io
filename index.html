@@ -364,7 +364,7 @@
         </section>
 
         <section id="skills" class="py-24">
-             <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">Skills</h2>
+             <h2 class="text-4xl font-bold text-center mb-12 reveal-on-scroll">Skills</h2>
              <div id="skills-container" class="max-w-6xl mx-auto space-y-16">
                  </div>
         </section>
@@ -546,12 +546,14 @@
                 });
             }
 
-            // --- SKILLS SECTION LOGIC ---
+            // --- SKILLS SECTION LOGIC (HYBRID APPROACH WITH TABS) ---
             const skillsContainer = document.getElementById('skills-container');
             if (skillsContainer) {
+                // --- 1. Visual Skills Display (Progress Bars & Soft Skills) ---
                 const visualSkillsWrapper = document.createElement('div');
-                visualSkillsWrapper.className = 'grid md:grid-cols-2 gap-12 mb-24 max-w-6xl mx-auto reveal-on-scroll';
+                visualSkillsWrapper.className = 'grid md:grid-cols-2 gap-12 mb-24 reveal-on-scroll';
 
+                // Left Column: Technical Proficiencies
                 const techBarsContainer = document.createElement('div');
                 techBarsContainer.className = 'bg-card p-8 rounded-lg';
                 let techBarsHTML = '<h3 class="text-2xl font-semibold text-accent text-center mb-8">Technical Proficiencies</h3><div class="space-y-6">';
@@ -561,9 +563,10 @@
                 techBarsHTML += '</div>';
                 techBarsContainer.innerHTML = techBarsHTML;
 
+                // Right Column: Professional Competencies
                 const softSkillsContainer = document.createElement('div');
                 softSkillsContainer.className = 'bg-card p-8 rounded-lg';
-                let softSkillsHTML = '<h3 class="text-2xl font-semibold text-accent text-center mb-8">Professional Competencies</h3><div id="soft-skills-tags" class="flex flex-wrap justify-center gap-4">';
+                let softSkillsHTML = '<h3 class="text-2xl font-semibold text-accent text-center mb-8">Professional Competencies</h3><div class="flex flex-wrap justify-center gap-4">';
                 softSkillsData.forEach(skill => {
                     softSkillsHTML += `<div class="soft-skill-tag text-gray-300 text-center py-2 px-4 rounded-lg font-medium cursor-default">${skill}</div>`;
                 });
@@ -574,20 +577,63 @@
                 visualSkillsWrapper.appendChild(softSkillsContainer);
                 skillsContainer.appendChild(visualSkillsWrapper);
 
+                // --- 2. Full Technical Skillset (Tabbed Interface) ---
                 const fullSkillsWrapper = document.createElement('div');
-                fullSkillsWrapper.className = 'max-w-6xl mx-auto space-y-12 reveal-on-scroll';
-                let fullSkillsHTML = '<h2 class="text-4xl font-bold text-center mb-12">Comprehensive Skillset</h2>';
+                fullSkillsWrapper.className = 'reveal-on-scroll';
+                
+                let tabsHTML = '<div class="mb-4 flex flex-wrap justify-center border-b border-gray-700">';
+                let tabContentHTML = '<div>';
+                let isFirstTab = true;
+
                 for (const category in fullSkillsData) {
-                    fullSkillsHTML += `<div class="bg-card p-8 rounded-lg mb-8"><h3 class="text-2xl font-semibold text-center mb-6 text-accent">${category}</h3><div class="flex flex-wrap justify-center gap-3">`;
+                    const categoryId = category.replace(/[^a-zA-Z0-9]/g, ''); // Create a safe ID
+                    tabsHTML += `
+                        <button class="tab-button text-lg font-medium py-2 px-6 border-b-2 ${isFirstTab ? 'text-accent border-accent' : 'border-transparent text-gray-400 hover:text-white hover:border-gray-500'}" data-tab="${categoryId}">
+                            ${category}
+                        </button>`;
+                    
+                    tabContentHTML += `<div id="${categoryId}" class="tab-content p-4 ${isFirstTab ? '' : 'hidden'}">`;
+                    tabContentHTML += '<div class="flex flex-wrap justify-center gap-3">';
                     fullSkillsData[category].forEach(skill => {
-                        fullSkillsHTML += `<div class="skill-pill p-3 rounded-md text-center font-medium">${skill}</div>`;
+                        tabContentHTML += `<div class="skill-pill p-3 rounded-md text-center font-medium">${skill}</div>`;
                     });
-                    fullSkillsHTML += '</div></div>';
+                    tabContentHTML += '</div></div>';
+                    isFirstTab = false;
                 }
-                fullSkillsWrapper.innerHTML = fullSkillsHTML;
+                tabsHTML += '</div>';
+                tabContentHTML += '</div>';
+
+                fullSkillsWrapper.innerHTML = `
+                    <h2 class="text-4xl font-bold text-center mb-12">Comprehensive Skillset</h2>
+                    <div class="bg-card p-8 rounded-lg">
+                        ${tabsHTML}
+                        ${tabContentHTML}
+                    </div>
+                `;
                 skillsContainer.appendChild(fullSkillsWrapper);
+
+                // Add event listeners for the new tabs
+                const tabButtons = document.querySelectorAll('.tab-button');
+                const tabContents = document.querySelectorAll('.tab-content');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabId = button.dataset.tab;
+
+                        tabButtons.forEach(btn => {
+                            btn.classList.remove('text-accent', 'border-accent');
+                            btn.classList.add('text-gray-400', 'border-transparent');
+                        });
+                        
+                        button.classList.add('text-accent', 'border-accent');
+                        button.classList.remove('text-gray-400', 'border-transparent');
+                        
+                        tabContents.forEach(content => {
+                            content.classList.toggle('hidden', content.id !== tabId);
+                        });
+                    });
+                });
             }
-            
             
             // Projects Section Logic
             const featuredContainer = document.getElementById('featured-project-container');
@@ -659,7 +705,7 @@
 
             // --- INTERACTIVITY ---
             const typedTextSpan = document.getElementById('typed-text');
-            const textArray = ["Business Analyst.", "Data Scientist.", "Problem Solver.", "ML Enthusiast."];
+            const textArray = ["Business Analyst.", "Data Science Enthusiast .", "Problem Solver.", "AI/ML Enthusiast."];
             let textArrayIndex = 0, charIndex = 0;
             typedTextSpan.insertAdjacentHTML('afterend', '<span class="typed-cursor">&nbsp;</span>');
             function type() { if (charIndex < textArray[textArrayIndex].length) { typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex++); setTimeout(type, 100); } else { setTimeout(erase, 2000); } }
