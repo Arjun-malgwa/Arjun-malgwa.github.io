@@ -94,6 +94,9 @@
             border-color: #00f6ff;
             transform: scale(1.05);
         }
+        .tab-button {
+            transition: color 0.3s, border-color 0.3s;
+        }
         .typed-cursor {
             color: #00f6ff;
             animation: blink 0.7s infinite;
@@ -336,7 +339,7 @@
             <h2 class="text-4xl font-bold text-center mb-12 reveal-on-scroll">About Me</h2>
             <div class="grid md:grid-cols-5 gap-12 items-center reveal-on-scroll max-w-6xl mx-auto">
                 <div class="md:col-span-2">
-                    <img src="arjun_malgwa.png.png" alt="Professional headshot of Arjun Malgwa" class="rounded-lg shadow-lg shadow-cyan-500/20 w-full">
+                    <img src="arjun_malgwa.png.jpg" alt="Professional headshot of Arjun Malgwa" class="rounded-lg shadow-lg shadow-cyan-500/20 w-full">
                 </div>
                 <div class="md:col-span-3 text-lg text-gray-300 space-y-4">
                      <p>
@@ -361,30 +364,9 @@
         </section>
 
         <section id="skills" class="py-24">
-            <div class="reveal-on-scroll">
-                <h2 class="text-4xl font-bold text-center mb-16">Skills</h2>
-
-                <div class="grid md:grid-cols-2 gap-12 mb-24 max-w-6xl mx-auto">
-                    
-                    <div class="bg-card p-8 rounded-lg">
-                        <h3 class="text-2xl font-semibold text-accent text-center mb-8">Technical Proficiencies</h3>
-                        <div id="technical-skills-bars" class="space-y-6">
-                            </div>
-                    </div>
-
-                    <div class="bg-card p-8 rounded-lg">
-                        <h3 class="text-2xl font-semibold text-accent text-center mb-8">Professional Competencies</h3>
-                        <div id="soft-skills-tags" class="flex flex-wrap justify-center gap-4">
-                            </div>
-                    </div>
-
-                </div>
-
-                <div id="full-skillset-container" class="max-w-6xl mx-auto space-y-12">
-                    <h2 class="text-4xl font-bold text-center mb-12">Comprehensive Skillset</h2>
-                    </div>
-
-            </div>
+             <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">Skills</h2>
+             <div id="skills-container" class="max-w-6xl mx-auto space-y-16">
+                 </div>
         </section>
 
         <section id="projects" class="py-24">
@@ -564,63 +546,48 @@
                 });
             }
 
-            // --- SKILLS SECTION LOGIC (HYBRID APPROACH) ---
+            // --- SKILLS SECTION LOGIC ---
+            const skillsContainer = document.getElementById('skills-container');
+            if (skillsContainer) {
+                const visualSkillsWrapper = document.createElement('div');
+                visualSkillsWrapper.className = 'grid md:grid-cols-2 gap-12 mb-24 max-w-6xl mx-auto reveal-on-scroll';
 
-            // 1. Inject Technical Skills with Progress Bars
-            const techSkillsContainer = document.getElementById('technical-skills-bars');
-            if (techSkillsContainer) {
+                const techBarsContainer = document.createElement('div');
+                techBarsContainer.className = 'bg-card p-8 rounded-lg';
+                let techBarsHTML = '<h3 class="text-2xl font-semibold text-accent text-center mb-8">Technical Proficiencies</h3><div class="space-y-6">';
                 technicalSkillsBarsData.forEach(skill => {
-                    const skillEl = document.createElement('div');
-                    skillEl.innerHTML = `
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium text-gray-300">${skill.name}</span>
-                            <span class="text-sm font-medium text-accent">${skill.percentage}%</span>
-                        </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-accent h-2.5 rounded-full" style="width: ${skill.percentage}%"></div>
-                        </div>
-                    `;
-                    techSkillsContainer.appendChild(skillEl);
+                    techBarsHTML += `<div><div class="flex justify-between items-center mb-1"><span class="font-medium text-gray-300">${skill.name}</span><span class="text-sm font-medium text-accent">${skill.percentage}%</span></div><div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-accent h-2.5 rounded-full" style="width: ${skill.percentage}%"></div></div></div>`;
                 });
-            }
-            
-            // 2. Inject Soft Skills Tags
-            const softSkillsContainer = document.getElementById('soft-skills-tags');
-            if (softSkillsContainer) {
+                techBarsHTML += '</div>';
+                techBarsContainer.innerHTML = techBarsHTML;
+
+                const softSkillsContainer = document.createElement('div');
+                softSkillsContainer.className = 'bg-card p-8 rounded-lg';
+                let softSkillsHTML = '<h3 class="text-2xl font-semibold text-accent text-center mb-8">Professional Competencies</h3><div id="soft-skills-tags" class="flex flex-wrap justify-center gap-4">';
                 softSkillsData.forEach(skill => {
-                    const skillEl = document.createElement('div');
-                    skillEl.className = 'soft-skill-tag text-gray-300 text-center py-2 px-4 rounded-lg font-medium cursor-default';
-                    skillEl.textContent = skill;
-                    softSkillsContainer.appendChild(skillEl);
+                    softSkillsHTML += `<div class="soft-skill-tag text-gray-300 text-center py-2 px-4 rounded-lg font-medium cursor-default">${skill}</div>`;
                 });
+                softSkillsHTML += '</div>';
+                softSkillsContainer.innerHTML = softSkillsHTML;
+
+                visualSkillsWrapper.appendChild(techBarsContainer);
+                visualSkillsWrapper.appendChild(softSkillsContainer);
+                skillsContainer.appendChild(visualSkillsWrapper);
+
+                const fullSkillsWrapper = document.createElement('div');
+                fullSkillsWrapper.className = 'max-w-6xl mx-auto space-y-12 reveal-on-scroll';
+                let fullSkillsHTML = '<h2 class="text-4xl font-bold text-center mb-12">Comprehensive Skillset</h2>';
+                for (const category in fullSkillsData) {
+                    fullSkillsHTML += `<div class="bg-card p-8 rounded-lg mb-8"><h3 class="text-2xl font-semibold text-center mb-6 text-accent">${category}</h3><div class="flex flex-wrap justify-center gap-3">`;
+                    fullSkillsData[category].forEach(skill => {
+                        fullSkillsHTML += `<div class="skill-pill p-3 rounded-md text-center font-medium">${skill}</div>`;
+                    });
+                    fullSkillsHTML += '</div></div>';
+                }
+                fullSkillsWrapper.innerHTML = fullSkillsHTML;
+                skillsContainer.appendChild(fullSkillsWrapper);
             }
             
-            // 3. Inject the full categorized list of skills
-            const fullSkillsetContainer = document.getElementById('full-skillset-container');
-            if (fullSkillsetContainer) {
-                for (const category in fullSkillsData) {
-                    const categoryCard = document.createElement('div');
-                    categoryCard.className = 'bg-card p-8 rounded-lg reveal-on-scroll';
-
-                    const categoryTitle = document.createElement('h3');
-                    categoryTitle.className = 'text-2xl font-semibold text-center mb-6 text-accent';
-                    categoryTitle.textContent = category;
-                    
-                    const skillsGrid = document.createElement('div');
-                    skillsGrid.className = 'flex flex-wrap justify-center gap-3';
-
-                    fullSkillsData[category].forEach(skill => {
-                        const skillEl = document.createElement('div');
-                        skillEl.className = 'skill-pill p-3 rounded-md text-center font-medium';
-                        skillEl.textContent = skill;
-                        skillsGrid.appendChild(skillEl);
-                    });
-
-                    categoryCard.appendChild(categoryTitle);
-                    categoryCard.appendChild(skillsGrid);
-                    fullSkillsetContainer.appendChild(categoryCard);
-                }
-            }
             
             // Projects Section Logic
             const featuredContainer = document.getElementById('featured-project-container');
