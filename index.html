@@ -528,10 +528,11 @@
             // Inject Experience Timeline
             const experienceContainer = document.getElementById('experience-container');
             if (experienceContainer) {
+                // FIX: Sort experience data by date to ensure correct timeline order
                 const sortedExperience = [...experienceData].sort((a, b) => {
-                    const aYear = a.duration.split(' ')[2];
-                    const bYear = b.duration.split(' ')[2];
-                    return bYear - aYear;
+                    const dateA = new Date(a.duration.split(' - ')[0]);
+                    const dateB = new Date(b.duration.split(' - ')[0]);
+                    return dateB - dateA;
                 });
 
                 sortedExperience.forEach((exp, index) => {
@@ -540,8 +541,8 @@
                     expEl.className = `timeline-item ${sideClass} reveal-on-scroll`;
                     expEl.innerHTML = `
                         <div class="bg-card p-6 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
-                            <p class="text-sm font-medium text-accent"><span class="math-inline">\{exp\.duration\}</p\>
-<h3 class\="text\-xl font\-bold text\-white mt\-1"\></span>{exp.role}</h3>
+                            <p class="text-sm font-medium text-accent">${exp.duration}</p>
+                            <h3 class="text-xl font-bold text-white mt-1">${exp.role}</h3>
                             <p class="text-md text-gray-400 mb-4">${exp.company}</p>
                             <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm">
                                 ${exp.tasks.map(task => `<li>${task}</li>`).join('')}
@@ -565,7 +566,7 @@
                 techBarsContainer.className = 'bg-card p-8 rounded-lg';
                 let techBarsHTML = '<h3 class="text-2xl font-semibold text-accent text-center mb-8">Technical Proficiencies</h3><div class="space-y-6">';
                 technicalSkillsBarsData.forEach(skill => {
-                    techBarsHTML += `<div><div class="flex justify-between items-center mb-1"><span class="font-medium text-gray-300"><span class="math-inline">\{skill\.name\}</span\><span class\="text\-sm font\-medium text\-accent"\></span>{skill.percentage}%</span></div><div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-accent h-2.5 rounded-full" style="width: ${skill.percentage}%"></div></div></div>`;
+                    techBarsHTML += `<div><div class="flex justify-between items-center mb-1"><span class="font-medium text-gray-300">${skill.name}</span><span class="text-sm font-medium text-accent">${skill.percentage}%</span></div><div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-accent h-2.5 rounded-full" style="width: ${skill.percentage}%"></div></div></div>`;
                 });
                 techBarsHTML += '</div>';
                 techBarsContainer.innerHTML = techBarsHTML;
@@ -594,7 +595,7 @@
                 for (const category in fullSkillsData) {
                     const categoryId = category.replace(/[^a-zA-Z0-9]/g, ''); 
                     tabsHTML += `
-                        <button class="tab-button text-lg font-medium py-2 px-6 border-b-2 <span class="math-inline">\{isFirstTab ? 'text\-accent border\-accent' \: 'border\-transparent text\-gray\-400 hover\:text\-white hover\:border\-gray\-500'\}" data\-tab\="</span>{categoryId}">
+                        <button class="tab-button text-lg font-medium py-2 px-6 border-b-2 ${isFirstTab ? 'text-accent border-accent' : 'border-transparent text-gray-400 hover:text-white hover:border-gray-500'}" data-tab="${categoryId}">
                             ${category}
                         </button>`;
                     
@@ -650,7 +651,7 @@
                 featuredContainer.innerHTML = `
                     <div class="bg-card p-6 rounded-lg md:flex items-center gap-8">
                         <div class="md:w-1/2 mb-6 md:mb-0 featured-image-container">
-                            <img src="<span class="math-inline">\{project\.image\}" alt\="</span>{project.title}" class="w-full h-auto rounded-md shadow-lg">
+                            <img src="${project.image}" alt="${project.title}" class="w-full h-auto rounded-md shadow-lg">
                             <button id="prev-project" class="slider-arrow">&#10094;</button>
                             <button id="next-project" class="slider-arrow">&#10095;</button>
                         </div>
@@ -659,9 +660,9 @@
                             <div class="flex flex-wrap gap-2 mb-4">
                                 ${project.tags.map(tag => `<span class="bg-gray-700 text-accent text-xs font-semibold px-2 py-1 rounded-full">${tag}</span>`).join('')}
                             </div>
-                            <p class="text-gray-300 mb-6"><span class="math-inline">\{project\.description\}</p\>
-<div class\="flex items\-center space\-x\-4"\>
-<a href\="</span>{project.github}" target="_blank" rel="noopener noreferrer" class="bg-accent text-gray-900 font-bold py-2 px-4 rounded-md text-sm hover:bg-cyan-300 transition-all">GitHub</a>
+                            <p class="text-gray-300 mb-6">${project.description}</p>
+                            <div class="flex items-center space-x-4">
+                                <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="bg-accent text-gray-900 font-bold py-2 px-4 rounded-md text-sm hover:bg-cyan-300 transition-all">GitHub</a>
                                 <button data-project-id="${project.id}" class="explanation-btn border border-accent text-accent font-bold py-2 px-4 rounded-md text-sm hover:bg-accent hover:text-gray-900 transition-all">Explanation</button>
                             </div>
                         </div>
@@ -687,14 +688,14 @@
                     projEl.setAttribute('data-project-id', proj.id);
                     projEl.innerHTML = `
                         <div class="h-48 overflow-hidden">
-                            <img src="<span class="math-inline">\{proj\.image\}" alt\="</span>{proj.title}" class="w-full h-full object-cover">
+                            <img src="${proj.image}" alt="${proj.title}" class="w-full h-full object-cover">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold text-white mb-2"><span class="math-inline">\{proj\.title\}</h3\>
-<p class\="text\-gray\-400 text\-sm flex\-grow mb\-4"\></span>{proj.description.substring(0, 100)}...</p>
+                            <h3 class="text-xl font-bold text-white mb-2">${proj.title}</h3>
+                            <p class="text-gray-400 text-sm flex-grow mb-4">${proj.description.substring(0, 100)}...</p>
                             <div class="flex items-center space-x-4 mt-auto pt-4 border-t border-gray-700">
-                                <a href="<span class="math-inline">\{proj\.github\}" target\="\_blank" rel\="noopener noreferrer" class\="text\-gray\-400 hover\:text\-accent transition\-colors text\-sm"\>GitHub</a\>
-<button data\-project\-id\="</span>{proj.id}" class="explanation-btn text-accent hover:underline text-sm">Read More</button>
+                                <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent transition-colors text-sm">GitHub</a>
+                                <button data-project-id="${proj.id}" class="explanation-btn text-accent hover:underline text-sm">Read More</button>
                             </div>
                         </div>
                     `;
