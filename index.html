@@ -349,7 +349,7 @@
                         My experience ranges from developing sophisticated Retrieval-Augmented Generation (RAG) models to building Python automation scripts that have driven 20% sales growth. I enjoy the full spectrum of a data project—from initial analysis and feature engineering to building predictive models and visualizing results.
                     </p>
                     <div class="pt-4">
-                         <a href="./Arjun Malgwa Portfolio Resume.pdf" download="Arjun Malgwa - Resume.pdf" class="inline-block bg-accent text-black font-bold py-3 px-6 rounded-lg text-lg hover:bg-opacity-80 transition-all duration-300">
+                         <a href="Arjun Malgwa Portfolio Resume.pdf" download="Arjun Malgwa - Resume.pdf" class="inline-block bg-accent text-black font-bold py-3 px-6 rounded-lg text-lg hover:bg-opacity-80 transition-all duration-300">
                             Download Resume
                         </a>
                     </div>
@@ -360,7 +360,7 @@
         <section id="experience" class="py-24">
             <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">Work Experience</h2>
             <div id="experience-container" class="timeline-container">
-                </div>
+            </div>
         </section>
 
         <section id="skills" class="py-24">
@@ -428,9 +428,9 @@
                     company: "Stacker Group",
                     duration: "June 2024 - Dec 2024",
                     tasks: [
-                        "Developed retrieval-augmented generation (RAG) models that are enabling Stacker to build a model that will efficiently and accurately respond to queries around renewable energy rules and regulations.",
-                        "Evaluated the performance of large language models (LLMs) such as OpenAI’s GPT, Gemini, and Llama3, and created a framework for comparative analysis.",
-                        "Conducted prompt engineering that prevents hallucinations and provides citations for each answer provided."
+                        "Engineered and deployed Retrieval-Augmented Generation (RAG) models to streamline information retrieval for complex renewable energy regulations.",
+                        "Benchmarked performance of leading LLMs (GPT, Gemini, Llama3) by creating a robust evaluation framework for model selection.",
+                        "Implemented advanced prompt engineering techniques to eliminate model hallucinations and ensure all generated responses are supported by verifiable citations."
                     ],
                     tags: ["RAG", "LLMs", "Python", "Prompt Engineering", "NLP"]
                 },
@@ -439,18 +439,20 @@
                     company: "Sonil Selfcare Pvt. Ltd.",
                     duration: "Feb 2023 - June 2023",
                     tasks: [
-                        "Analyzed India hygiene industry and competitor data.",
-                        "Reported insights that shaped pricing and marketing decisions for a new product, which is currently selling ~ 1000 items month while yielding a 22% profit margin."
+                        "Conducted comprehensive market analysis of India's hygiene industry, identifying key trends and competitor strategies.",
+                        "Translated raw data into actionable insights that directly influenced pricing and marketing strategy for a new product launch.",
+                        "Contributed to a successful launch, with the product achieving ~1,000 units/month in sales and a 22% profit margin."
                     ],
-                    tags: ["Market Research", "Competitor Analysis", "Data-Driven Strategy"]
+                    tags: ["Market Research", "Competitor Analysis", "Data-Driven Strategy", "Pricing Analysis"]
                 },
                 {
                     role: "Business Development Analyst",
                     company: "Majitel Solutions Pvt. Ltd.",
                     duration: "Jan 2021 - Jan 2023",
                     tasks: [
-                        "Managed 10+ Amazon seller accounts, achieving 20% average sales growth through accurate listings and by writing Python code that enabled automated inventory tracking.",
-                        "Performed data-driven research for 10 client companies; wrote customized recommendations that were implemented to increase sales and improve online presence."
+                        "Managed and optimized 10+ Amazon seller accounts, driving a 20% average increase in sales through data-driven listing enhancements.",
+                        "Developed and implemented Python automation scripts for real-time inventory tracking, reducing stock-outs and improving operational efficiency.",
+                        "Synthesized client data to formulate and present customized growth strategies that were successfully implemented to increase revenue."
                     ],
                     tags: ["E-commerce", "Python Automation", "Sales Growth", "Client Strategy"]
                 },
@@ -459,9 +461,9 @@
                     company: "Majitel Solutions Pvt. Ltd.",
                     duration: "Nov 2020 - Jan 2021",
                     tasks: [
-                        "Conducted foundational market research and competitor analysis to support senior analysts.",
-                        "Assisted in gathering and cleaning data for client reports and e-commerce strategy.",
-                        "Contributed to research that informed listing optimization and sales strategies."
+                        "Conducted foundational market research and competitor analysis to support senior analysts in developing e-commerce strategies.",
+                        "Assisted in gathering and cleaning data for client reports.",
+                        "Contributed to research that informed listing optimization and initial sales strategies."
                     ],
                     tags: ["Market Research", "Data Collection", "E-commerce Support"]
                 }
@@ -471,7 +473,7 @@
                 {
                     id: 0,
                     title: "Next-Word Prediction Model Using LSTM",
-                    description: "(Apr 2024 - June 2024) Built an LSTM model using the SMS Spam Collection Dataset (UCI) to predict next-word sequences. Preprocessed text; compared CNN/RNN architectures; optimized the model with LSTM for long-term dependencies. Created a video presentation of the model and its potential to reduce misclassification in automated text systems.",
+                    description: "(Apr 2024 - June 2024) Built an LSTM model using the SMS Spam Collection Dataset (UCI) to predict next-word sequences. Preprocessed text, compared CNN/RNN architectures, and optimized the model with LSTM for long-term dependencies. Created a video presentation of the model and its potential to reduce misclassification in automated text systems.",
                     image: "https://placehold.co/800x450/38B2AC/FFFFFF?text=LSTM+NLP+Project",
                     tags: ["Python", "TensorFlow", "Keras", "NLTK", "LSTM", "CNN"],
                     github: "https://github.com/Arjun-malgwa",
@@ -514,8 +516,7 @@
             ];
             
             const fullSkillsData = {
-                "Programming Tools": ["Python", "R", "Scala", "Excel", "Git", "Visual Studio", "Docker", "Streamlit"],
-                "BI & Data Visualization": ["Power BI", "Tableau", "SPSS", "JMP"],
+                "Programming Tools": ["Python", "R", "Scala", "Excel", "Power BI", "Tableau", "Git", "Visual Studio", "SPSS", "JMP", "Docker", "Streamlit"],
                 "Data Analytics": ["Pandas", "NumPy", "EDA", "Data cleaning", "Data visualization", "Feature engineering", "PCA", "Data modeling"],
                 "Data Science & AI/ML": ["Machine learning", "NLP", "Deep learning", "Clustering", "Time series forecasting", "TensorFlow", "PyTorch"],
                 "Statistics": ["Hypothesis testing", "Probability distribution", "Regression analysis", "ANOVA", "Chi-Square Test"]
@@ -527,9 +528,13 @@
             // Inject Experience Timeline
             const experienceContainer = document.getElementById('experience-container');
             if (experienceContainer) {
-                // Sorting data by start date to ensure correct timeline order
-                experienceData.sort((a, b) => new Date(b.duration.split(' ')[0] + ' 1, ' + b.duration.split(' - ')[0].split(' ')[1]) - new Date(a.duration.split(' ')[0] + ' 1, ' + a.duration.split(' - ')[0].split(' ')[1]));
-                experienceData.forEach((exp, index) => {
+                const sortedExperience = [...experienceData].sort((a, b) => {
+                    const aYear = a.duration.split(' ')[2];
+                    const bYear = b.duration.split(' ')[2];
+                    return bYear - aYear;
+                });
+
+                sortedExperience.forEach((exp, index) => {
                     const sideClass = index % 2 === 0 ? 'timeline-left' : 'timeline-right';
                     const expEl = document.createElement('div');
                     expEl.className = `timeline-item ${sideClass} reveal-on-scroll`;
@@ -552,6 +557,7 @@
             // --- SKILLS SECTION LOGIC (HYBRID APPROACH WITH TABS) ---
             const skillsContainer = document.getElementById('skills-container');
             if (skillsContainer) {
+                // --- 1. Visual Skills Display (Progress Bars & Soft Skills) ---
                 const visualSkillsWrapper = document.createElement('div');
                 visualSkillsWrapper.className = 'grid md:grid-cols-2 gap-12 mb-24 reveal-on-scroll';
 
@@ -577,6 +583,7 @@
                 visualSkillsWrapper.appendChild(softSkillsContainer);
                 skillsContainer.appendChild(visualSkillsWrapper);
 
+                // --- 2. Full Technical Skillset (Tabbed Interface) ---
                 const fullSkillsWrapper = document.createElement('div');
                 fullSkillsWrapper.className = 'reveal-on-scroll';
                 
