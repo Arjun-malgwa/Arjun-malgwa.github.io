@@ -6,7 +6,9 @@
     <title>Arjun Malgwa | Business Analytics Portfolio</title>
     <meta name="description" content="The data analytics and business intelligence portfolio of Arjun Malgwa, showcasing projects in Python, R, SQL, and Machine Learning.">
 
-    <link rel="icon" type="image/png" href="favicon.png"> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -254,6 +256,7 @@
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
@@ -267,6 +270,7 @@
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
@@ -330,7 +334,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
                         </div>
                     </div>
-                    <h3 class="text-3xl font-bold text-white">8+</h3>
+                    <h3 class="text-3xl font-bold text-white">7+</h3>
                     <p class="text-gray-400 mt-2">Certifications</p>
                 </div>
             </div>
@@ -361,6 +365,12 @@
         <section id="experience" class="py-24">
             <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">Work Experience</h2>
             <div id="experience-container" class="timeline-container">
+            </div>
+        </section>
+
+        <section id="education" class="py-24">
+            <h2 class="text-4xl font-bold text-center mb-16 reveal-on-scroll">Education & Certifications</h2>
+            <div id="education-container" class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
             </div>
         </section>
 
@@ -470,21 +480,46 @@
                 }
             ];
 
+            const educationData = [
+                {
+                    degree: "MS in Business Analytics",
+                    institution: "Drexel University, LeBow College of Business",
+                    date: "Anticipated Mar 2025",
+                    details: "GPA: 3.9"
+                },
+                {
+                    degree: "BCom in Business and Finance",
+                    institution: "Devi Ahilya Vishwa Vidyalaya, Indore",
+                    date: "July 2020",
+                    details: ""
+                }
+            ];
+
+            const certificationsData = [
+                { title: "Feature Engineering in R", issuer: "DataCamp", date: "Mar 2024" },
+                { title: "Intermediate Data Visualization with ggplot2", issuer: "DataCamp", date: "Mar 2024" },
+                { title: "Python for Business Data Analytics & Intelligence", issuer: "Zero To Mastery Academy", date: "May 2023" },
+                { title: "Financial Markets", issuer: "Yale University", date: "Aug 2022" },
+                { title: "Attract and Engage Customers with Digital Marketing", issuer: "Coursera", date: "Jul 2022" },
+                { title: "Foundations of Digital Marketing and E-commerce", issuer: "Google Career Certificates", date: "Jun 2022" },
+                { title: "Advanced Excel workshop", issuer: "JS Academy", date: "" }
+            ];
+
             const projectsData = [
                  {
                     id: 0,
-                    title: "Flood Risk Analytics for Montpelier, VT - Capstone Project",
-                    description: "(Sep 2024 - Dec 2024) As a capstone project, I developed a multi-faceted flood risk solution. Action: Built a K-means clustering model to identify high-risk zones, an Insurance-to-Value (ITV) model to detect underinsured properties, and a Random Forest Regressor for premium optimization. Result: The models successfully identified critical areas near the Winooski River, uncovered 25%+ insurance coverage gaps, and provided a framework that improved projected policyholder satisfaction by 15%.",
-                    image: "project-flood-risk.png", // TODO: Replace with your custom project image
+                    title: "Flood Risk Analytics for Montpelier, VT",
+                    description: "As a capstone project, I developed a multi-faceted flood risk solution. Action: Built a K-means clustering model to identify high-risk zones, an Insurance-to-Value (ITV) model to detect underinsured properties, and a Random Forest Regressor for premium optimization. Result: The models successfully identified critical areas near the Winooski River, uncovered 25%+ insurance coverage gaps, and provided a framework that improved projected policyholder satisfaction by 15%.",
+                    image: "project-flood-risk.png", 
                     tags: ["Python", "k-means clustering", "Random Forest", "Precisely APIs", "FEMA Data"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#" 
                 },
                 {
                     id: 1,
-                    title: "Broadband Plan Recommendation Engine - Business Consulting",
-                    description: "(Jun 2024 - Aug 2024) Problem: To help users find optimal broadband plans. Action: Engineered a synthetic dataset from US Census/FCC data and trained a Random Forest model to predict internet speeds based on user demographics. Integrated FIPS codes for geospatial analysis of providers. Result: The model achieved 95% accuracy, and the end-to-end solution was delivered as an interactive Streamlit web app for real-time recommendations.",
-                    image: "project-broadband.jpg", // TODO: Replace with your custom project image
+                    title: "Broadband Plan Recommendation Engine",
+                    description: "Problem: To help users find optimal broadband plans. Action: Engineered a synthetic dataset from US Census/FCC data and trained a Random Forest model to predict internet speeds based on user demographics. Integrated FIPS codes for geospatial analysis of providers. Result: The model achieved 95% accuracy, and the end-to-end solution was delivered as an interactive Streamlit web app for real-time recommendations.",
+                    image: "project-broadband.jpg", 
                     tags: ["Python", "Random Forest", "Streamlit", "Geospatial Analysis"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#"
@@ -492,8 +527,8 @@
                 {
                     id: 2,
                     title: "Next-Word Prediction Model Using LSTM",
-                    description: "(Apr 2024 - Jun 2024) Problem: To predict text sequences with high accuracy for applications like spam detection. Action: Built an LSTM model using TensorFlow/Keras on the SMS Spam Collection Dataset. Compared various RNN architectures and optimized the final model. Result: Produced a highly accurate prediction model and created a video presentation explaining its potential to reduce misclassification in automated systems.",
-                    image: "project-lstm.jpg", // TODO: Replace with your custom project image
+                    description: "Problem: To predict text sequences with high accuracy for applications like spam detection. Action: Built an LSTM model using TensorFlow/Keras on the SMS Spam Collection Dataset. Compared various RNN architectures and optimized the final model. Result: Produced a highly accurate prediction model and created a video presentation explaining its potential to reduce misclassification in automated systems.",
+                    image: "project-lstm.jpg", 
                     tags: ["Python", "TensorFlow", "Keras", "NLTK", "LSTM", "CNN"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#" 
@@ -501,8 +536,8 @@
                 {
                     id: 3,
                     title: "Predicting Customer Churn for an Online Store",
-                    description: "(Mar 2024) Problem: Addressed a high 90% customer churn rate for an online store. Action: Developed a predictive model in R using XGBoost to analyze key churn drivers and identify at-risk customers. Result: Secured the #1 Rank against 24 groups in the Kaggle Competition, delivering a highly accurate model for customer retention.",
-                    image: "project-churn.jpg", // TODO: Replace with your custom project image
+                    description: "Problem: Addressed a high 90% customer churn rate for an online store. Action: Developed a predictive model in R using XGBoost to analyze key churn drivers. Result: Secured the #1 Rank against 24 groups in the Kaggle Competition, delivering a highly accurate model for customer retention.",
+                    image: "project-churn.jpg", 
                     tags: ["R", "XGBoost", "Predictive Modeling", "Kaggle"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#"
@@ -510,8 +545,8 @@
                 {
                     id: 4,
                     title: "Co-Op Evaluation Data Project",
-                    description: "(Sep 2023 - Dec 2023) Conducted an analysis of Drexel University's Co-Op program by exploring student and employer perspectives through post-co-op surveys. Leveraged Python for robust data processing and analysis in conjunction with Tableau for insightful visualization of the findings.",
-                    image: "project-coop.jpg", // TODO: Replace with your custom project image
+                    description: "Conducted an analysis of Drexel University's Co-Op program by exploring student and employer perspectives through post-co-op surveys. Leveraged Python for robust data processing and analysis in conjunction with Tableau for insightful visualization of the findings.",
+                    image: "project-coop.jpg", 
                     tags: ["Python", "Tableau", "Data Analysis", "Survey Analysis"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#"
@@ -519,8 +554,8 @@
                 {
                     id: 5,
                     title: "Compass Maritime Service - HBR Case Study",
-                    description: "(Sep 2023 - Nov 2023) Problem: Accurately estimate ship bid prices for a Harvard Business Review case study. Action: Constructed and evaluated multiple Linear Regression models in R, Python, and Excel. Result: Validated the final model's predictive efficiency using R-squared, ANOVA, and factor analysis.",
-                    image: "project-shipping.jpg", // TODO: Replace with your custom project image
+                    description: "Problem: Accurately estimate ship bid prices for a Harvard Business Review case study. Action: Constructed and evaluated multiple Linear Regression models in R, Python, and Excel. Result: Validated the final model's predictive efficiency using R-squared, ANOVA, and factor analysis.",
+                    image: "project-shipping.jpg",
                     tags: ["R", "Python", "Excel", "Regression", "ANOVA"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#"
@@ -544,8 +579,8 @@
             ];
             
             const fullSkillsData = {
-                "Programming & Tools": ["Python", "R", "SQL", "Git", "Docker", "Streamlit", "Keras", "NLTK", "Precisely APIs"],
-                "Data Analytics & BI": ["Pandas", "NumPy", "EDA", "Data Cleaning", "Feature Engineering", "Tableau", "Power BI"],
+                "Programming Tools": ["Python", "R", "Scala", "Excel", "Git", "Docker", "Streamlit", "Keras", "NLTK", "Precisely APIs"],
+                "Data Analytics & BI": ["Pandas", "NumPy", "EDA", "Data Cleaning", "Feature Engineering", "Tableau", "Power BI", "SPSS", "JMP"],
                 "Data Science & ML": ["Machine Learning", "Random Forest", "k-means Clustering", "NLP", "Deep Learning", "LSTM", "CNN", "TensorFlow", "PyTorch", "XGBoost"],
                 "Statistical Analysis": ["Regression Analysis", "ANOVA", "Hypothesis Testing", "Factor Analysis"]
             };
@@ -556,7 +591,6 @@
             // Inject Experience Timeline
             const experienceContainer = document.getElementById('experience-container');
             if (experienceContainer) {
-                // Correctly sort experience data by start date, most recent first
                 const sortedExperience = [...experienceData].sort((a, b) => {
                     const dateA = new Date(a.duration.split(' - ')[0]);
                     const dateB = new Date(b.duration.split(' - ')[0]);
@@ -583,10 +617,34 @@
                 });
             }
 
+            // Inject Education and Certifications
+            const educationContainer = document.getElementById('education-container');
+            if(educationContainer) {
+                const eduCard = document.createElement('div');
+                eduCard.className = 'bg-card p-8 rounded-lg';
+                let eduHTML = '<h3 class="text-2xl font-semibold text-center mb-6 text-accent">Education</h3><div class="space-y-4">';
+                educationData.forEach(edu => {
+                    eduHTML += `<div><h4 class="text-lg font-bold text-white">${edu.degree}</h4><p class="text-gray-400">${edu.institution}</p><p class="text-gray-500 text-sm">${edu.date} ${edu.details ? `(${edu.details})` : ''}</p></div>`
+                });
+                eduHTML += '</div>';
+                eduCard.innerHTML = eduHTML;
+
+                const certCard = document.createElement('div');
+                certCard.className = 'bg-card p-8 rounded-lg';
+                let certHTML = '<h3 class="text-2xl font-semibold text-center mb-6 text-accent">Licenses & Certifications</h3><div class="space-y-4">';
+                certificationsData.forEach(cert => {
+                    certHTML += `<div><h4 class="text-lg font-bold text-white">${cert.title}</h4><p class="text-gray-400">${cert.issuer}</p><p class="text-gray-500 text-sm">${cert.date}</p></div>`
+                });
+                certHTML += '</div>';
+                certCard.innerHTML = certHTML;
+
+                educationContainer.appendChild(eduCard);
+                educationContainer.appendChild(certCard);
+            }
+
             // --- SKILLS SECTION LOGIC (HYBRID APPROACH WITH TABS) ---
             const skillsContainer = document.getElementById('skills-container');
             if (skillsContainer) {
-                // --- 1. Visual Skills Display (Progress Bars & Soft Skills) ---
                 const visualSkillsWrapper = document.createElement('div');
                 visualSkillsWrapper.className = 'grid md:grid-cols-2 gap-12 mb-24 reveal-on-scroll';
 
@@ -612,7 +670,6 @@
                 visualSkillsWrapper.appendChild(softSkillsContainer);
                 skillsContainer.appendChild(visualSkillsWrapper);
 
-                // --- 2. Full Technical Skillset (Tabbed Interface) ---
                 const fullSkillsWrapper = document.createElement('div');
                 fullSkillsWrapper.className = 'reveal-on-scroll';
                 
