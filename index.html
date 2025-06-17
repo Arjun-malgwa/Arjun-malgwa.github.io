@@ -310,7 +310,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104l-1.932 1.932C6.92 5.92 6 7.33 6 8.828v7.344a2.25 2.25 0 002.25 2.25h8.5a2.25 2.25 0 002.25-2.25v-7.344c0-1.498-.92-2.908-1.818-3.794l-1.932-1.932M9 19V9h6v10M9 9a2.25 2.25 0 012.25-2.25h.75a2.25 2.25 0 012.25 2.25v10" /></svg>
                         </div>
                     </div>
-                    <h3 class="text-3xl font-bold text-white">7+</h3>
+                    <h3 class="text-3xl font-bold text-white">6+</h3>
                     <p class="text-gray-400 mt-2">Projects Completed</p>
                 </div>
 
@@ -441,7 +441,7 @@
                     duration: "Feb 2023 - June 2023",
                     tasks: [
                         "Conducted in-depth market and competitor analysis of India's hygiene industry to identify strategic opportunities.",
-                        "Translated complex market data into actionable insights that directly shaped the pricing and marketing strategy for a new product.",
+                        "Translated complex market data into actionable insights that directly shaped the pricing and marketing strategy for a new product launch.",
                         "The resulting strategy contributed to the product achieving ~1,000 sales/month with a sustainable 22% profit margin."
                     ],
                     tags: ["Market Research", "Competitor Analysis", "Data-Driven Strategy", "Pricing Analysis"]
@@ -471,30 +471,57 @@
             ];
 
             const projectsData = [
-                {
+                 {
                     id: 0,
+                    title: "Flood Risk Analytics for Montpelier, VT - Capstone Project",
+                    description: "(Sep 2024 - Dec 2024) As a capstone project, I developed a multi-faceted flood risk solution. Action: Built a K-means clustering model to identify high-risk zones, an Insurance-to-Value (ITV) model to detect underinsured properties, and a Random Forest Regressor for premium optimization. Result: The models successfully identified critical areas near the Winooski River, uncovered 25%+ insurance coverage gaps, and provided a framework that improved projected policyholder satisfaction by 15%.",
+                    image: "project-flood-risk.jpg", // TODO: Replace with your custom project image
+                    tags: ["Python", "k-means clustering", "Random Forest", "Precisely APIs", "FEMA Data"],
+                    github: "https://github.com/Arjun-malgwa",
+                    explanation: "#" 
+                },
+                {
+                    id: 1,
+                    title: "Broadband Plan Recommendation Engine - Business Consulting",
+                    description: "(Jun 2024 - Aug 2024) Problem: To help users find optimal broadband plans. Action: Engineered a synthetic dataset from US Census/FCC data and trained a Random Forest model to predict internet speeds based on user demographics. Integrated FIPS codes for geospatial analysis of providers. Result: The model achieved 95% accuracy, and the end-to-end solution was delivered as an interactive Streamlit web app for real-time recommendations.",
+                    image: "project-broadband.jpg", // TODO: Replace with your custom project image
+                    tags: ["Python", "Random Forest", "Streamlit", "Geospatial Analysis"],
+                    github: "https://github.com/Arjun-malgwa",
+                    explanation: "#"
+                },
+                {
+                    id: 2,
                     title: "Next-Word Prediction Model Using LSTM",
-                    description: "(Apr 2024 - June 2024) Problem: To predict text sequences with high accuracy. Action: Built an LSTM model using TensorFlow/Keras on the SMS Spam Collection Dataset. Compared various RNN architectures and optimized the final model for long-term dependencies. Result: Produced a highly accurate prediction model and created a video presentation explaining its potential to reduce misclassification in automated systems.",
+                    description: "(Apr 2024 - Jun 2024) Problem: To predict text sequences with high accuracy for applications like spam detection. Action: Built an LSTM model using TensorFlow/Keras on the SMS Spam Collection Dataset. Compared various RNN architectures and optimized the final model. Result: Produced a highly accurate prediction model and created a video presentation explaining its potential to reduce misclassification in automated systems.",
                     image: "project-lstm.jpg", // TODO: Replace with your custom project image
                     tags: ["Python", "TensorFlow", "Keras", "NLTK", "LSTM", "CNN"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#" 
                 },
                 {
-                    id: 1,
+                    id: 3,
                     title: "Predicting Customer Churn for an Online Store",
-                    description: "(Feb 2024 - Mar 2024) Problem: Tackled a high 90% customer churn rate for an online store. Action: Developed a predictive model in R using XGBoost to analyze key churn drivers and identify at-risk customers. Result: Secured the #1 Rank against 24 groups in the Kaggle competition, delivering a highly accurate model for customer retention.",
+                    description: "(Mar 2024) Problem: Addressed a high 90% customer churn rate for an online store. Action: Developed a predictive model in R using XGBoost to analyze key churn drivers and identify at-risk customers. Result: Secured the #1 Rank against 24 groups in the Kaggle Competition, delivering a highly accurate model for customer retention.",
                     image: "project-churn.jpg", // TODO: Replace with your custom project image
                     tags: ["R", "XGBoost", "Predictive Modeling", "Kaggle"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#"
                 },
                 {
-                    id: 2,
-                    title: "HBR Case Study: Ship Price Estimation",
-                    description: "(Sept 2023 - Dec 2023) Problem: Accurately estimate ship bid prices for the Compass Maritime Service HBR case study. Action: Constructed and evaluated multiple Linear Regression models in R. Result: Validated the final model's predictive efficiency using R-squared, ANOVA, and factor analysis, demonstrating strong statistical modeling skills.",
+                    id: 4,
+                    title: "Co-Op Evaluation Data Project",
+                    description: "(Sep 2023 - Dec 2023) Conducted an analysis of Drexel University's Co-Op program by exploring student and employer perspectives through post-co-op surveys. Leveraged Python for robust data processing and analysis in conjunction with Tableau for insightful visualization of the findings.",
+                    image: "project-coop.jpg", // TODO: Replace with your custom project image
+                    tags: ["Python", "Tableau", "Data Analysis", "Survey Analysis"],
+                    github: "https://github.com/Arjun-malgwa",
+                    explanation: "#"
+                },
+                {
+                    id: 5,
+                    title: "Compass Maritime Service - HBR Case Study",
+                    description: "(Sep 2023 - Nov 2023) Problem: Accurately estimate ship bid prices for a Harvard Business Review case study. Action: Constructed and evaluated multiple Linear Regression models in R, Python, and Excel. Result: Validated the final model's predictive efficiency using R-squared, ANOVA, and factor analysis.",
                     image: "project-shipping.jpg", // TODO: Replace with your custom project image
-                    tags: ["R", "Regression Analysis", "ANOVA", "Statistics"],
+                    tags: ["R", "Python", "Excel", "Regression", "ANOVA"],
                     github: "https://github.com/Arjun-malgwa",
                     explanation: "#"
                 }
@@ -517,10 +544,10 @@
             ];
             
             const fullSkillsData = {
-                "Programming Tools": ["Python", "R", "Scala", "Excel", "Git", "Visual Studio", "SPSS", "JMP", "Docker", "Streamlit"],
-                "Data Analytics": ["Pandas", "NumPy", "EDA", "Data cleaning", "Data visualization", "Feature engineering", "PCA", "Data modeling"],
-                "Data Science & AI/ML": ["Machine learning", "NLP", "Deep learning", "Clustering", "Time series forecasting", "TensorFlow", "PyTorch"],
-                "Statistics": ["Hypothesis testing", "Probability distribution", "Regression analysis", "ANOVA", "Chi-Square Test"]
+                "Programming & Tools": ["Python", "R", "SQL", "Git", "Docker", "Streamlit", "Keras", "NLTK", "Precisely APIs"],
+                "Data Analytics & BI": ["Pandas", "NumPy", "EDA", "Data Cleaning", "Feature Engineering", "Tableau", "Power BI"],
+                "Data Science & ML": ["Machine Learning", "Random Forest", "k-means Clustering", "NLP", "Deep Learning", "LSTM", "CNN", "TensorFlow", "PyTorch", "XGBoost"],
+                "Statistical Analysis": ["Regression Analysis", "ANOVA", "Hypothesis Testing", "Factor Analysis"]
             };
 
 
@@ -531,7 +558,6 @@
             if (experienceContainer) {
                 // Correctly sort experience data by start date, most recent first
                 const sortedExperience = [...experienceData].sort((a, b) => {
-                    // Extract the year and month from the start of the duration string
                     const dateA = new Date(a.duration.split(' - ')[0]);
                     const dateB = new Date(b.duration.split(' - ')[0]);
                     return dateB - dateA;
