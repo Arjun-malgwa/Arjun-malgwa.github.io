@@ -87,22 +87,24 @@
 
       <section>
         <h2>Approach & Methodology</h2>
-        <ul style="list-style: disc; padding-left: 2rem;">
-          <li><strong>Data Integration:</strong> Processed US Census demographic data and FCC broadband availability databases using FIPS codes for geographic mapping</li>
-          <li><strong>Feature Engineering:</strong> Created feature set combining income levels, population density, available ISPs, and plan speeds</li>
-          <li><strong>Model Development:</strong> Built Random Forest classifier achieving 95% accuracy in plan predictions</li>
-          <li><strong>Streamlit Dashboard:</strong> Developed real-time interactive interface for end-users to filter and compare plans</li>
-          <li><strong>Geospatial Mapping:</strong> Visualized coverage gaps and plan availability by zip code</li>
-        </ul>
+
+        <h3 style="margin-top: 1.5rem;">1. Predictive Modeling</h3>
+        <p>Engineered a synthetic dataset combining US Census demographic data and FCC broadband availability databases. Trained a Random Forest model to predict optimal internet speeds based on age, income, and device usage patterns, achieving 95% accuracy in plan recommendations.</p>
+
+        <h3 style="margin-top: 1.5rem;">2. Geospatial Analysis</h3>
+        <p>Integrated FIPS codes to map county-level broadband providers and service availability. This enabled personalized recommendations for the top 3 service providers in users' regions, improving accessibility for underserved demographics.</p>
+
+        <h3 style="margin-top: 1.5rem;">3. End-to-End Solution</h3>
+        <p>Built a Streamlit web app for real-time plan filtering and UX demonstration. The interactive interface allows users to input their profile and receive instant recommendations for optimal broadband plans aligned with their needs and budget.</p>
       </section>
 
       <section>
         <h2>Results & Impact</h2>
         <ul style="list-style: disc; padding-left: 2rem;">
-          <li><strong>Prediction Accuracy:</strong> 95% accuracy in recommending plans matched to user demographics</li>
-          <li><strong>Coverage:</strong> Identified solutions for underserved demographic groups (rural/low-income areas)</li>
-          <li><strong>User Experience:</strong> Real-time Streamlit interface enables customers to find optimal plans in seconds</li>
-          <li><strong>Scalability:</strong> System ready to process millions of customer profiles</li>
+          <li><strong>Prediction Accuracy:</strong> 95% accuracy in recommending plans based on demographics (age, income, device usage)</li>
+          <li><strong>Geospatial Coverage:</strong> County-level provider mapping enabling personalized top 3 provider recommendations</li>
+          <li><strong>Accessibility:</strong> Streamlit web app provides real-time filtering for underserved demographics</li>
+          <li><strong>Business Value:</strong> Demonstrates scalable solution for ISPs to improve customer targeting and satisfaction</li>
         </ul>
       </section>
 
