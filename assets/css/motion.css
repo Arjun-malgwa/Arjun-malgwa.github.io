@@ -1,0 +1,118 @@
+/* ========================================
+   MOTION PACK: Gradient, Blobs, Typewriter, Noise
+   ======================================== */
+
+/* ANIMATED GRADIENT BACKGROUND */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  filter: saturate(1.1);
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(40% 60% at 20% 30%, hsl(210 90% 60% / .6), transparent 60%),
+    radial-gradient(50% 60% at 80% 70%, hsl(280 90% 60% / .6), transparent 60%),
+    linear-gradient(120deg, hsl(220 35% 12%), hsl(260 35% 12%));
+  animation: bgShift 28s ease-in-out infinite alternate;
+  will-change: transform, filter;
+}
+
+@keyframes bgShift {
+  0% {
+    transform: translate3d(-2%, -2%, 0) scale(1.02);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: translate3d(2%, 2%, 0) scale(1.06);
+    filter: hue-rotate(40deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg::before {
+    animation: none;
+    transform: translate3d(0, 0, 0) scale(1.02);
+    filter: hue-rotate(0deg);
+  }
+}
+
+/* NOISE TEXTURE OVERLAY */
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('/assets/img/noise.png');
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  image-rendering: pixelated;
+}
+
+@supports not (mix-blend-mode: overlay) {
+  .hero-noise {
+    opacity: 0.04;
+  }
+}
+
+/* BLOB MOTION - DRIFTING ELEMENTS */
+.blob {
+  position: absolute;
+  width: 42vmax;
+  height: 42vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  will-change: transform;
+  background: radial-gradient(circle at 30% 30%, hsl(320 95% 65% / .6), transparent 60%);
+  animation: blobDrift 36s ease-in-out infinite alternate;
+}
+
+.blob.b2 {
+  background: radial-gradient(circle at 60% 40%, hsl(190 95% 60% / .6), transparent 60%);
+  animation-duration: 44s;
+  mix-blend-mode: screen;
+}
+
+@keyframes blobDrift {
+  0% {
+    transform: translate3d(-10%, -5%, 0) scale(1.0);
+  }
+  100% {
+    transform: translate3d(8%, 6%, 0) scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+    transform: translate3d(0, 0, 0) scale(1.0);
+  }
+}
+
+/* TYPEWRITER EFFECT - CURSOR STYLING */
+.hero-rotate::after {
+  content: "";
+  display: inline-block;
+  width: 1ch;
+  margin-left: 2px;
+  border-right: 2px solid currentColor;
+  animation: caret 0.9s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rotate::after {
+    animation: none;
+    border-color: currentColor;
+  }
+}
