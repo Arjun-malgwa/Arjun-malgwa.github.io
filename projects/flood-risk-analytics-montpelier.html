@@ -87,22 +87,24 @@
 
       <section>
         <h2>Approach & Methodology</h2>
-        <ul style="list-style: disc; padding-left: 2rem;">
-          <li><strong>Data Collection:</strong> Integrated FEMA flood data, geospatial coordinates, and property information using Precisely APIs</li>
-          <li><strong>Clustering:</strong> Applied K-means clustering to identify distinct flood-risk zones with varying severity levels</li>
-          <li><strong>Regression:</strong> Built Random Forest regressor to predict optimal insurance premiums based on risk zone, property features, and historical claims</li>
-          <li><strong>Validation:</strong> Cross-validated models using temporal data splits to ensure robustness</li>
-          <li><strong>Visualization:</strong> Mapped results with interactive geospatial dashboards showing risk zones and coverage gaps</li>
-        </ul>
+
+        <h3 style="margin-top: 1.5rem;">1. Risk Zone Identification</h3>
+        <p>Built a K-means clustering model using geospatial data (elevation, proximity to water bodies) to classify high-risk flood zones. Integrated FEMA flood data and Precisely APIs to identify critical areas near the Winooski River and low-elevation regions with heightened vulnerability.</p>
+
+        <h3 style="margin-top: 1.5rem;">2. Underinsurance Detection</h3>
+        <p>Designed an Insurance-to-Value (ITV) model to flag underinsured properties in flood-prone zones. This analysis uncovered significant coverage gaps in high-value properties, enabling targeted upselling opportunities and risk mitigation strategies.</p>
+
+        <h3 style="margin-top: 1.5rem;">3. Premium Optimization</h3>
+        <p>Developed a Random Forest Regressor to predict localized premium ranges, balancing affordability for policyholders with profitability for the insurer. The model incorporated risk zone classification, property features, and historical claims data.</p>
       </section>
 
       <section>
         <h2>Results & Impact</h2>
         <ul style="list-style: disc; padding-left: 2rem;">
-          <li><strong>Coverage Gaps:</strong> Identified 25%+ previously unmapped high-risk areas near Winooski River</li>
-          <li><strong>Premium Optimization:</strong> Random Forest model achieved 87% accuracy in predicting risk-adjusted premiums</li>
-          <li><strong>Customer Satisfaction:</strong> 15% improvement in risk assessment accuracy led to more fair pricing</li>
-          <li><strong>Operational Efficiency:</strong> Automated zone mapping reduced manual analysis time by 60%</li>
+          <li><strong>Coverage Gap Identification:</strong> Uncovered 25%+ coverage gaps in high-value properties within flood-prone zones</li>
+          <li><strong>Customer Satisfaction:</strong> 15% improvement in policyholder satisfaction through more accurate and fair premium pricing</li>
+          <li><strong>Risk Mitigation:</strong> Successfully classified critical flood-risk areas near Winooski River and low-elevation regions</li>
+          <li><strong>Business Value:</strong> Targeted upselling opportunities for underinsured properties and optimized premium ranges</li>
         </ul>
       </section>
 
