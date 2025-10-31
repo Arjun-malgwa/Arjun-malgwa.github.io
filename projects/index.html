@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projects - Arjun Malgwa | Data Analyst">
+  <title>Projects - Arjun Malgwa | Data Analyst</title>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">Arjun</a>
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects/">Projects</a>
+        <a href="/experience.html">Experience</a>
+        <a href="/dashboards.html">Dashboards</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="theme-toggle">🌙</button>
+    </div>
+  </header>
+  <main class="container">
+    <h1>Projects</h1>
+    <div class="filter-chips">
+      <button class="chip active" data-filter="all">Show All</button>
+      <button class="chip" data-filter="Python">Python</button>
+      <button class="chip" data-filter="ML">ML</button>
+    </div>
+    <div class="project-grid">
+      <div class="project-card" data-tags="Python,ML">
+        <h3>Flood Risk Analytics</h3>
+        <p class="project-description">K-means clustering for geospatial flood risk classification. 25%+ coverage gaps identified.</p>
+        <div class="project-tech"><span class="tech-badge">Python</span><span class="tech-badge">K-means</span></div>
+      </div>
+      <div class="project-card" data-tags="Python,ML">
+        <h3>Broadband Recommendation</h3>
+        <p class="project-description">Random Forest model with 95% accuracy for plan recommendations.</p>
+        <div class="project-tech"><span class="tech-badge">Python</span><span class="tech-badge">Random Forest</span></div>
+      </div>
+      <div class="project-card" data-tags="ML">
+        <h3>Customer Churn Prediction</h3>
+        <p class="project-description">#1 Kaggle ranking out of 24 teams. XGBoost-powered churn prediction.</p>
+        <div class="project-tech"><span class="tech-badge">R</span><span class="tech-badge">XGBoost</span></div>
+      </div>
+    </div>
+  </main>
+  <footer><p>&copy; 2024 Arjun Malgwa. All rights reserved.</p></footer>
+  <script defer src="/assets/js/motion.js"></script>
+  <script defer src="/assets/js/main.js"></script>
+</body>
+</html>
