@@ -3,18 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Projects - Arjun Malgwa | Data Analyst">
-  <title>Projects - Arjun Malgwa | Data Analyst</title>
+  <meta name="description" content="Featured projects by Arjun Malgwa - Machine learning, data visualization, and analytics solutions.">
+  <meta name="theme-color" content="#0066cc">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Projects - Arjun Malgwa">
+  <meta property="og:description" content="Portfolio projects showcasing data analytics and machine learning work">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arjun-malgwa.github.io/projects/">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://arjun-malgwa.github.io"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://arjun-malgwa.github.io/projects/"
+      }
+    ]
+  }
+  </script>
+
+  <title>Projects - Arjun Malgwa</title>
+  <link rel="canonical" href="https://arjun-malgwa.github.io/projects/">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="stylesheet" href="/assets/css/motion.css">
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
   <header>
     <div class="header-content">
       <a href="/" class="logo">Arjun</a>
-      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <nav>
         <a href="/">Home</a>
         <a href="/about.html">About</a>
@@ -24,35 +57,146 @@
         <a href="/resume.html">Resume</a>
         <a href="/contact.html">Contact</a>
       </nav>
-      <button class="theme-toggle">🌙</button>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
-  <main class="container">
-    <h1>Projects</h1>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <span aria-current="page">Projects</span>
+  </div>
+
+  <main id="main" class="container">
+    <h1>Featured Projects</h1>
+    <p>A selection of my recent work in machine learning, data analytics, and business intelligence.</p>
+
     <div class="filter-chips">
-      <button class="chip active" data-filter="all">Show All</button>
-      <button class="chip" data-filter="Python">Python</button>
-      <button class="chip" data-filter="ML">ML</button>
+      <button class="chip active" data-filter="all" tabindex="0">Show All</button>
+      <button class="chip" data-filter="Python" tabindex="0">Python</button>
+      <button class="chip" data-filter="ML" tabindex="0">Machine Learning</button>
+      <button class="chip" data-filter="Tableau" tabindex="0">Tableau</button>
+      <button class="chip" data-filter="R" tabindex="0">R</button>
+      <button class="chip" data-filter="Deep Learning" tabindex="0">Deep Learning</button>
+      <button class="chip" data-filter="Geospatial" tabindex="0">Geospatial</button>
+      <button class="chip" data-filter="Statistics" tabindex="0">Statistics</button>
     </div>
+
     <div class="project-grid">
-      <div class="project-card" data-tags="Python,ML">
-        <h3>Flood Risk Analytics</h3>
-        <p class="project-description">K-means clustering for geospatial flood risk classification. 25%+ coverage gaps identified.</p>
-        <div class="project-tech"><span class="tech-badge">Python</span><span class="tech-badge">K-means</span></div>
+      <!-- Project 1: Flood Risk Analytics -->
+      <div class="project-card" data-tags="Python,ML,Geospatial,Insurance,Capstone">
+        <h3>Flood Risk Analytics for Montpelier, VT</h3>
+        <p class="project-description">K-means clustering model for geospatial flood risk zone classification and Random Forest regressor for premium optimization in flood-prone areas.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">K-means</span>
+          <span class="tech-badge">Random Forest</span>
+          <span class="tech-badge">Geospatial</span>
+        </div>
+        <div class="project-metrics">
+          <strong>Impact:</strong> 25%+ coverage gaps identified | 15% customer satisfaction improvement
+        </div>
+        <div class="project-links">
+          <a href="/projects/flood-risk-analytics-montpelier.html">View Details</a>
+        </div>
       </div>
-      <div class="project-card" data-tags="Python,ML">
-        <h3>Broadband Recommendation</h3>
-        <p class="project-description">Random Forest model with 95% accuracy for plan recommendations.</p>
-        <div class="project-tech"><span class="tech-badge">Python</span><span class="tech-badge">Random Forest</span></div>
+
+      <!-- Project 2: Broadband Plan Recommendation Engine -->
+      <div class="project-card" data-tags="Python,ML,Recommendation Engine,Business Consulting">
+        <h3>Broadband Plan Recommendation Engine</h3>
+        <p class="project-description">End-to-end predictive system recommending optimal broadband plans based on demographics and region using Random Forest model and geospatial mapping.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Random Forest</span>
+          <span class="tech-badge">Streamlit</span>
+          <span class="tech-badge">Geospatial</span>
+        </div>
+        <div class="project-metrics">
+          <strong>Impact:</strong> 95% prediction accuracy | Real-time plan filtering
+        </div>
+        <div class="project-links">
+          <a href="/projects/broadband-plan-recommendation-engine.html">View Details</a>
+        </div>
       </div>
-      <div class="project-card" data-tags="ML">
-        <h3>Customer Churn Prediction</h3>
-        <p class="project-description">#1 Kaggle ranking out of 24 teams. XGBoost-powered churn prediction.</p>
-        <div class="project-tech"><span class="tech-badge">R</span><span class="tech-badge">XGBoost</span></div>
+
+      <!-- Project 3: Customer Churn Prediction -->
+      <div class="project-card" data-tags="R,ML,XGBoost,Kaggle,Predictive Modeling">
+        <h3>Customer Churn Prediction for Online Store</h3>
+        <p class="project-description">Predictive model identifying at-risk customers addressing 90% churn rate; won #1 rank in Kaggle competition against 24 teams.</p>
+        <div class="project-tech">
+          <span class="tech-badge">R</span>
+          <span class="tech-badge">XGBoost</span>
+          <span class="tech-badge">Feature Engineering</span>
+          <span class="tech-badge">Kaggle</span>
+        </div>
+        <div class="project-metrics">
+          <strong>Impact:</strong> #1 Kaggle Rank | Outperformed 24 competing teams
+        </div>
+        <div class="project-links">
+          <a href="/projects/customer-churn-prediction.html">View Details</a>
+        </div>
+      </div>
+
+      <!-- Project 4: LSTM Next-Word Prediction -->
+      <div class="project-card" data-tags="Python,Deep Learning,NLP,TensorFlow,LSTM">
+        <h3>Next-Word Prediction Model Using LSTM</h3>
+        <p class="project-description">Deep learning model using LSTM architecture for next-word sequence prediction, tested against CNN/RNN alternatives for spam detection and predictive text.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">TensorFlow</span>
+          <span class="tech-badge">Keras</span>
+          <span class="tech-badge">LSTM</span>
+        </div>
+        <div class="project-metrics">
+          <strong>Impact:</strong> Optimal LSTM performance | Text preprocessing & validation
+        </div>
+        <div class="project-links">
+          <a href="/projects/next-word-prediction-lstm.html">View Details</a>
+        </div>
+      </div>
+
+      <!-- Project 5: Co-Op Program Evaluation -->
+      <div class="project-card" data-tags="Python,Tableau,Analytics,Education">
+        <h3>Co-Op Program Evaluation Analysis</h3>
+        <p class="project-description">Comprehensive analysis of Drexel University's Co-Op program synthesizing student and employer perspectives via Python and Tableau dashboards.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Tableau</span>
+          <span class="tech-badge">Data Analysis</span>
+          <span class="tech-badge">Survey Analytics</span>
+        </div>
+        <div class="project-metrics">
+          <strong>Impact:</strong> Multi-perspective insights | Interactive dashboards
+        </div>
+        <div class="project-links">
+          <a href="/projects/coop-program-evaluation.html">View Details</a>
+        </div>
+      </div>
+
+      <!-- Project 6: Maritime Bid Estimation -->
+      <div class="project-card" data-tags="R,Python,Statistics,Regression,Case Study">
+        <h3>Compass Maritime - Bid Price Estimation</h3>
+        <p class="project-description">Harvard Business Review case study estimating ship bid prices using multiple linear regression models across R, Python, and Excel with statistical validation.</p>
+        <div class="project-tech">
+          <span class="tech-badge">R</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Linear Regression</span>
+          <span class="tech-badge">ANOVA</span>
+        </div>
+        <div class="project-metrics">
+          <strong>Impact:</strong> Multi-model validation | R-squared & ANOVA analysis
+        </div>
+        <div class="project-links">
+          <a href="/projects/compass-maritime-bid-estimation.html">View Details</a>
+        </div>
       </div>
     </div>
   </main>
-  <footer><p>&copy; 2024 Arjun Malgwa. All rights reserved.</p></footer>
+
+  <footer>
+    <p>&copy; 2024 Arjun Malgwa. All rights reserved.</p>
+  </footer>
+
   <script defer src="/assets/js/motion.js"></script>
   <script defer src="/assets/js/main.js"></script>
 </body>

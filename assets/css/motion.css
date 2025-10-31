@@ -1,3 +1,7 @@
+/* ========================================
+   MOTION PACK: Gradient, Blobs, Typewriter, Noise
+   ======================================== */
+
 /* ANIMATED GRADIENT BACKGROUND */
 .hero-bg {
   position: absolute;
@@ -55,7 +59,7 @@
   }
 }
 
-/* BLOB MOTION */
+/* BLOB MOTION - DRIFTING ELEMENTS */
 .blob {
   position: absolute;
   width: 42vmax;
@@ -90,7 +94,7 @@
   }
 }
 
-/* TYPEWRITER CURSOR */
+/* TYPEWRITER EFFECT - CURSOR STYLING */
 .hero-rotate::after {
   content: "";
   display: inline-block;

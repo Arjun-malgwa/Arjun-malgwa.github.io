@@ -3,18 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="resume - Arjun Malgwa | Data Analyst">
-  <title>resume - Arjun Malgwa | Data Analyst</title>
+  <meta name="description" content="Resume - Arjun Malgwa's complete professional CV and credentials.">
+  <meta name="theme-color" content="#0066cc">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Resume - Arjun Malgwa">
+  <meta property="og:description" content="Complete CV with education, experience, and skills">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arjun-malgwa.github.io/resume.html">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://arjun-malgwa.github.io"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Resume",
+        "item": "https://arjun-malgwa.github.io/resume.html"
+      }
+    ]
+  }
+  </script>
+
+  <title>Resume - Arjun Malgwa</title>
+  <link rel="canonical" href="https://arjun-malgwa.github.io/resume.html">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="stylesheet" href="/assets/css/motion.css">
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
   <header>
     <div class="header-content">
       <a href="/" class="logo">Arjun</a>
-      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <nav>
         <a href="/">Home</a>
         <a href="/about.html">About</a>
@@ -24,11 +57,145 @@
         <a href="/resume.html">Resume</a>
         <a href="/contact.html">Contact</a>
       </nav>
-      <button class="theme-toggle">🌙</button>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
-  <main class="container"><h1>resume</h1><p>Page content coming soon.</p></main>
-  <footer><p>&copy; 2024 Arjun Malgwa. All rights reserved.</p></footer>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <span aria-current="page">Resume</span>
+  </div>
+
+  <main id="main" class="container-narrow">
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+      <a href="/assets/resume/resume.pdf" class="btn" download>↓ Download Resume (PDF)</a>
+      <a href="/assets/resume/resume.pdf" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View in Browser</a>
+    </div>
+
+    <!-- HTML Version of Resume (Print-friendly) -->
+    <article style="background-color: rgba(255, 255, 255, 0.5); border: 1px solid var(--color-light-border); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="margin-bottom: 0.5rem;">Arjun Malgwa</h1>
+        <p style="font-size: 1.1rem; color: var(--color-accent); margin-bottom: 0.5rem;">Data & AI Analyst</p>
+        <p>Philadelphia, PA | arjun.malgwa@gmail.com | <a href="https://www.linkedin.com/in/arjunmalgwa">LinkedIn</a> | <a href="https://github.com/Arjun-malgwa">GitHub</a></p>
+      </div>
+
+      <!-- Professional Summary -->
+      <section style="margin-bottom: 2rem;">
+        <h2 style="border-bottom: 2px solid var(--color-accent); padding-bottom: 0.5rem; margin-top: 0;">Professional Summary</h2>
+        <p>Data & AI Analyst with MSc Business Analytics from Drexel University. Specialized in machine learning, statistical analysis, and data visualization. Proven track record of driving business impact through data-driven insights, including #1 Kaggle ranking, 25%+ analytics improvements, and 20% sales optimization. Experienced in Python, SQL, R, Tableau, and advanced ML techniques.</p>
+      </section>
+
+      <!-- Professional Experience -->
+      <section style="margin-bottom: 2rem;">
+        <h2 style="border-bottom: 2px solid var(--color-accent); padding-bottom: 0.5rem; margin-top: 0;">Professional Experience</h2>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.25rem;">Data Analytics Intern</h3>
+          <p style="margin: 0; font-weight: 600; color: var(--color-accent);">Stacker Group | Philadelphia, PA | Current</p>
+          <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+            <li>Developed Python-based ETL pipelines processing 100K+ daily data records</li>
+            <li>Built interactive Tableau visualizations reducing reporting time by 40%</li>
+            <li>Collaborated on KPI definition and business objective tracking</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.25rem;">Business Development Associate / Market Researcher</h3>
+          <p style="margin: 0; font-weight: 600; color: var(--color-accent);">Multiple Companies | Remote | 2022-2023</p>
+          <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+            <li>Managed 10+ Amazon Seller accounts, driving 20% sales increase through data analysis</li>
+            <li>Conducted market research and competitor analysis for 10+ enterprise clients</li>
+            <li>Optimized advertising strategies, improving campaign ROI by 35%</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.25rem;">Market Research Associate</h3>
+          <p style="margin: 0; font-weight: 600; color: var(--color-accent);">Majitel Solutions Pvt. Ltd. | India | 2021-2022</p>
+          <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+            <li>Analyzed market trends across 20+ clients, identifying growth opportunities</li>
+            <li>Delivered competitive intelligence reports for strategic decision-making</li>
+            <li>Automated data processes, reducing manual work by 50%</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 0.25rem;">Data Analyst</h3>
+          <p style="margin: 0; font-weight: 600; color: var(--color-accent);">SONIL SELFCARE PVT. LTD. | India | 2020-2021</p>
+          <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+            <li>Analyzed self-care industry data, identifying key market opportunities</li>
+            <li>Built financial reports and dashboards for executive leadership</li>
+            <li>Optimized supply chain using data insights</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section style="margin-bottom: 2rem;">
+        <h2 style="border-bottom: 2px solid var(--color-accent); padding-bottom: 0.5rem; margin-top: 0;">Education</h2>
+
+        <div style="margin-bottom: 1rem;">
+          <h3 style="margin-bottom: 0.25rem;">MSc Business Analytics</h3>
+          <p style="margin: 0; color: var(--color-accent); font-weight: 600;">Drexel University, LeBow College of Business</p>
+          <p style="margin: 0; font-size: 0.95rem;">Focus: Machine Learning, Data Visualization, Advanced Analytics</p>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <h3 style="margin-bottom: 0.25rem;">CA Intermediate</h3>
+          <p style="margin: 0; color: var(--color-accent); font-weight: 600;">Institute of Chartered Accountants of India (ICAI)</p>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <h3 style="margin-bottom: 0.25rem;">B.Comm Finance</h3>
+          <p style="margin: 0; color: var(--color-accent); font-weight: 600;">Devi Ahilya Vishwa Vidyalaya (DAVV), India</p>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section style="margin-bottom: 2rem;">
+        <h2 style="border-bottom: 2px solid var(--color-accent); padding-bottom: 0.5rem; margin-top: 0;">Technical Skills</h2>
+
+        <div style="margin-bottom: 1rem;">
+          <strong>Languages:</strong> Python, SQL, R, Excel
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <strong>Data & ML:</strong> Machine Learning, Deep Learning (TensorFlow/Keras), Statistical Analysis, RAG Development, Feature Engineering, Model Evaluation
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <strong>Visualization:</strong> Tableau, Power BI, Matplotlib, Seaborn
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <strong>Tools & Platforms:</strong> Streamlit, Git/GitHub, Jupyter Notebooks, RStudio, APIs, Web Scraping
+        </div>
+        <div>
+          <strong>Domain:</strong> E-commerce Analytics, Market Research, Financial Analysis, Geospatial Analysis, Predictive Modeling
+        </div>
+      </section>
+
+      <!-- Featured Achievements -->
+      <section>
+        <h2 style="border-bottom: 2px solid var(--color-accent); padding-bottom: 0.5rem; margin-top: 0;">Key Achievements</h2>
+        <ul style="padding-left: 1.5rem;">
+          <li><strong>#1 Kaggle Ranking:</strong> Won customer churn prediction competition against 24 teams</li>
+          <li><strong>25%+ Analytics Improvement:</strong> Identified and mapped flood-risk zones, improving coverage analysis</li>
+          <li><strong>20% Sales Optimization:</strong> Data-driven strategies for Amazon Seller platform clients</li>
+          <li><strong>95% Prediction Accuracy:</strong> Built broadband plan recommendation engine for underserved demographics</li>
+          <li><strong>40% Reporting Efficiency:</strong> Implemented Tableau dashboards reducing reporting time</li>
+        </ul>
+      </section>
+    </article>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="/contact.html" class="btn">Get in Touch</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Arjun Malgwa. All rights reserved.</p>
+  </footer>
+
   <script defer src="/assets/js/motion.js"></script>
   <script defer src="/assets/js/main.js"></script>
 </body>
