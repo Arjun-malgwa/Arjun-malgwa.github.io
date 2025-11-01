@@ -105,15 +105,39 @@ Save as index.html and deploy via GitHub Pages.
 
     // ------------------ Data ------------------
     const STACK = [
-      { name:'Python', svg:'https://cdn.simpleicons.org/python', alt:'Python logo' },
-      { name:'SQL', svg:'https://cdn.simpleicons.org/postgresql', alt:'PostgreSQL logo' },
-      { name:'Tableau', svg:'https://cdn.simpleicons.org/tableau', alt:'Tableau logo' },
-      { name:'Power BI', svg:'https://cdn.simpleicons.org/powerbi', alt:'Power BI logo' },
-      { name:'TensorFlow', svg:'https://cdn.simpleicons.org/tensorflow', alt:'TensorFlow logo' },
-      { name:'Streamlit', svg:'https://cdn.simpleicons.org/streamlit', alt:'Streamlit logo' },
-      { name:'Docker', svg:'https://cdn.simpleicons.org/docker', alt:'Docker logo' },
-      { name:'Git', svg:'https://cdn.simpleicons.org/git', alt:'Git logo' }
-    ];
+  { name:'Python',
+    svg:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23FFD43B" d="M12 1c-5.5 0-5 4-5 4v3h5v1H5S1 9 1 13s3 6 6 6h2v-3s-.1-2 2-2h4s4 .1 4-4V6s.5-5-5-5zm-3 3a1 1 0 1 1-.001 2.001A1 1 0 0 1 9 4z"/><path fill="%233776AB" d="M13 22c5.5 0 5-4 5-4v-3h-5v-1h7s4 0 4-4-3-6-6-6h-2v3s.1 2-2 2h-4s-4-.1-4 4v4s-.5 5 5 5zm3-3a1 1 0 1 1 .001-2.001A1 1 0 0 1 16 19z"/></svg>',
+    alt:'Python logo'
+  },
+  { name:'SQL (PostgreSQL)',
+    svg:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23336791" d="M12 2C6.48 2 2 4.24 2 7v10c0 2.76 4.48 5 10 5s10-2.24 10-5V7c0-2.76-4.48-5-10-5zm0 2c4.97 0 8 .99 8 3s-3.03 3-8 3-8-.99-8-3 3.03-3 8-3zm8 8c0 2.01-3.03 3-8 3s-8-.99-8-3V9.76C5.23 11.14 8.26 12 12 12s6.77-.86 8-2.24V12zm0 5c0 2.01-3.03 3-8 3s-8-.99-8-3v-2.24C5.23 16.14 8.26 17 12 17s6.77-.86 8-2.24V17z"/></svg>',
+    alt:'PostgreSQL logo'
+  },
+  { name:'Tableau',
+    svg:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><g fill="%234F46E5"><path d="M124 16h8v32h32v8h-32v32h-8V56H92v-8h32z"/><path d="M44 96h8v24h24v8H52v24h-8v-24H20v-8h24z"/><path d="M204 96h8v24h24v8h-24v24h-8v-24h-24v-8h24z"/><path d="M124 168h8v32h32v8h-32v32h-8v-32H92v-8h32z"/><circle cx="128" cy="128" r="10"/></g></svg>',
+    alt:'Tableau logo'
+  },
+  { name:'Power BI',
+    svg:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect x="24" y="96" width="40" height="96" rx="6" fill="%23F2C811"/><rect x="80" y="72" width="40" height="120" rx="6" fill="%23F2C811"/><rect x="136" y="48" width="40" height="144" rx="6" fill="%23F2C811"/><path d="M200 48h20a12 12 0 0 1 12 12v136a12 12 0 0 1-12 12h-84" fill="none" stroke="%23F2C811" stroke-width="16" stroke-linecap="round"/></svg>',
+    alt:'Power BI logo'
+  },
+  { name:'TensorFlow',
+    svg:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="%23FF6F00" d="M128 24L24 80v24l40-20v88l24 12V96l40-20v160l24-12V56l40 20v48l24 12V80z"/></svg>',
+    alt:'TensorFlow logo'
+  },
+  { name:'Streamlit',
+    svg:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="%23FF4B4B" d="M128 32L16 96l112 64 112-64z"/><path fill="%23E64545" d="M16 112l112 64 112-64v48l-112 64L16 160z"/></svg>',
+    alt:'Streamlit logo'
+  },
+  { name:'Docker',
+    svg:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect x="16" y="112" width="40" height="32" fill="%230099CC"/><rect x="60" y="112" width="40" height="32" fill="%230099CC"/><rect x="104" y="112" width="40" height="32" fill="%230099CC"/><rect x="60" y="76" width="40" height="32" fill="%230099CC"/><rect x="104" y="76" width="40" height="32" fill="%230099CC"/><rect x="148" y="112" width="40" height="32" fill="%230099CC"/><path fill="%230099CC" d="M220 120c16 0 24 12 24 28 0 38-36 60-96 60H56c-24 0-40-12-40-28 0-12 8-22 20-26 12-4 40-2 40-2h136s-8-16 8-30z"/></svg>',
+    alt:'Docker logo'
+  },
+  { name:'Git',
+    svg:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="%23F1502F" d="M236 120L136 20a12 12 0 0 0-17 0L92 47l26 26a20 20 0 0 1 26 26l22 22a20 20 0 1 1-17 17l-22-22v48a20 20 0 1 1-16 0v-64L72 68 20 120a12 12 0 0 0 0 17l100 100a12 12 0 0 0 17 0l100-100a12 12 0 0 0 0-17z"/></svg>',
+    alt:'Git logo'
+  }
+];
 
     const PROJECTS = [
       { id:1, title:'Flood Risk Analytics for Montpelier, VT', outcome:'Flagged under‑insured zones and improved satisfaction by 15%', category:'Analysis', image:'https://placehold.co/600x400/1e40af/ffffff?text=Flood+Analytics', tags:['Python','K-means','Random Forest'], description:'Capstone identifying flood risks, detecting underinsured properties, and optimizing premiums.', problem:'Identify high‑risk flood zones and flag underinsured properties in Montpelier, VT.', process:'K‑means on geospatial features; ITV model for coverage gap; Random Forest for premiums.', findings:'Critical areas near Winooski River; 25%+ coverage gaps in high‑value properties.' },
@@ -231,28 +255,51 @@ Save as index.html and deploy via GitHub Pages.
     const AvailableChip = ()=> h('span',{className:'inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200 px-3 py-1 text-sm font-medium'}, ['●',' Open to opportunities']);
 
     // NEW: StackGrid
-    const StackGrid = ()=> h(Section,{id:'stack',title:'My Stack'}, h('div',{className:'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-4xl mx-auto'}, STACK.map(s=> h('div',{key:s.name,className:'group bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-md transition p-4 flex items-center gap-3 focus-ring', tabIndex:0},[
-      h('img',{src:s.svg, alt:s.alt, width:28, height:28, loading:'lazy', className:'opacity-80 group-hover:opacity-100'}),
-      h('span',{className:'text-sm font-medium text-gray-800 dark:text-gray-200'}, s.name)
-    ]))));
-
-    const Navbar = ({ currentPage, setCurrentPage, theme, toggleTheme })=>{
-      const items=['Home','About','Stack','Skills','Projects','Experience','Certifications','Contact'];
-      return h('nav',{className:'sticky top-0 z-50 w-full bg-white/70 dark:bg-gray-950/70 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800'},
-        h('div',{className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'},
-          h('div',{className:'flex justify-between items-center h-16'},[
-            h('div',{className:'flex items-center gap-3'},[
-              h('span',{className:'text-2xl font-bold text-indigo-600 dark:text-indigo-400'},'AM'),
-              h('span',{className:'text-lg font-semibold text-gray-900 dark:text-white'},'Arjun Malgwa')
-            ]),
-            h('div',{className:'hidden md:flex md:items-center md:space-x-4 lg:space-x-6'},[
-              ...items.map(it=> h('button',{key:it,onClick:()=>setCurrentPage(it.toLowerCase()),className:'px-3 py-2 rounded-md text-sm font-medium transition-colors '+(currentPage===it.toLowerCase()?'text-indigo-600 dark:text-indigo-400':'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white')}, it)),
-              h('button',{onClick:toggleTheme,className:'p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus-ring',title:'Toggle theme'}, '🌓')
+    // PATCH: Combine Stack tiles + Skills bars into one section
+const StackGrid = () =>
+  h(Section, { id:'stack', title:'Skills & Stack' },
+    h('div', { className:'grid gap-10 md:grid-cols-2 max-w-6xl mx-auto' }, [
+      // Left: Stack tiles
+      h('div', { className:'space-y-4' }, [
+        h('h3', { className:'text-xl font-semibold mb-2' }, 'Tools I Use'),
+        h('div', { className:'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4' },
+          STACK.map(s =>
+            h('div', {
+              key:s.name,
+              className:'group bg-slate-800/60 text-white rounded-2xl shadow p-5 flex items-center gap-3 focus-ring',
+              tabIndex:0
+            }, [
+              h('img', { src:s.svg, alt:s.alt, width:28, height:28, loading:'lazy',
+                className:'opacity-90 group-hover:opacity-100' }),
+              h('span', { className:'text-sm font-medium' }, s.name)
             ])
+          )
+        )
+      ]),
+
+      // Right: Skills bars (reuse SKILLS data)
+      h('div', { className:'space-y-6' }, [
+        h('h3', { className:'text-xl font-semibold mb-2' }, 'Core Skills'),
+        ...Object.entries(SKILLS).map(([cat, items]) =>
+          h('div', { key:cat, className:'bg-white/5 dark:bg-white/5 p-5 rounded-xl border border-white/10' }, [
+            h('div', { className:'text-sm font-semibold mb-3 text-indigo-300' }, cat),
+            ...items.map(s =>
+              h('div', { key:s.name, className:'mb-3' }, [
+                h('div', { className:'flex justify-between mb-1' }, [
+                  h('span', { className:'text-sm' }, s.name),
+                  h('span', { className:'text-xs text-gray-400' }, s.level + '%')
+                ]),
+                h('div', { className:'w-full bg-gray-700/60 rounded-full h-2.5' },
+                  h('div', { className:'bg-indigo-500 h-2.5 rounded-full', style:{ width:s.level+'%' } })
+                )
+              ])
+            )
           ])
         )
-      );
-    };
+      ])
+    ])
+  );
+
 
     const Hero = ({ setCurrentPage })=>{
       React.useEffect(()=>{
@@ -455,7 +502,7 @@ Save as index.html and deploy via GitHub Pages.
           case 'home': return h(Hero,{setCurrentPage:setPage});
           case 'about': return h(About,{setCurrentPage:setPage});
           case 'stack': return h(StackGrid);
-          case 'skills': return h(SkillsPage);
+          case 'skills': return h(StackGrid);
           case 'projects': return h(ProjectGallery,{onProjectSelect:setModal});
           case 'experience': return h(Experience);
           case 'certifications': return h(CertificationsView);
