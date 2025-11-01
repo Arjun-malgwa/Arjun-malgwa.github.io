@@ -1,3 +1,22 @@
+<!--
+Arjun Portfolio — No‑Build React (UMD) — CTA/Stack/Sticky Bar Upgrade
+====================================================================
+Implements your choices:
+- CTA tone: "Open to opportunities"
+- Stack logos: analytics + a little dev (Docker/Git)
+- Sticky contact bar: on all pages (appears after ~20% scroll)
+
+What’s included:
+- New components: AvailableChip, StackGrid, CTASticky
+- Hero polish + shorter typed strings
+- Project card microcopy tightened (business-outcome line)
+- Perf: preconnect + preload fonts/CDNs; all images lazy-loaded
+- A11y: labels and focus states
+- Non-crashing Recharts handling remains (ChartBlock)
+- Runtime sanity checks ("tests") in console
+
+Save as index.html and deploy via GitHub Pages.
+-->
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -9,6 +28,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%A7%3C/text%3E%3C/svg%3E" />
 
   <!-- Performance: preconnects & font preload -->
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,24 +66,24 @@
     @media (prefers-reduced-motion: reduce){.animate-gradient-xy,.animate-blob,.animate-fade-in,.animate-slide-up,.transition-all,.transition-colors,.transition-opacity,.transition-transform{animation:none!important;transition:none!important}.reveal{opacity:1!important;transform:none!important}}
   </style>
 
-  <!-- Libraries (jsDelivr primary, older Recharts v2 UMD for stability) -->
-  <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script crossorigin src="https://cdn.jsdelivr.net/npm/react-helmet-async@1.3.0/dist/index.umd.js"></script>
-  <script crossorigin src="https://cdn.jsdelivr.net/npm/recharts@2.10.4/umd/Recharts.min.js"></script>
+  <!-- React / ReactDOM UMD -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- react-helmet-async UMD (global: window.reactHelmetAsync) -->
+  <script crossorigin src="https://unpkg.com/react-helmet-async@1.3.0/dist/index.umd.js"></script>
+
+  <!-- Recharts UMD (global: window.Recharts) -->
+  <script crossorigin src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+
+  <!-- Effects -->
   <script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body class="bg-white dark:bg-black font-inter text-gray-800 dark:text-gray-200 min-h-screen">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white px-3 py-1 rounded">Skip to content</a>
   <div id="root"></div>
-  <noscript>
-    <div style="max-width:720px;margin:24px auto;padding:16px;background:#fee2e2;color:#991b1b;border:1px solid #fecaca;border-radius:8px;font-family:sans-serif">
-      This site needs JavaScript to run. Please enable JavaScript and refresh.
-    </div>
-  </noscript>
 
-  <!-- App Code (unchanged logic, but works with Recharts v2 and jsDelivr) -->
   <script>
   (function(){
     const React = window.React; const ReactDOM = window.ReactDOM; const h = React.createElement;
@@ -157,32 +177,34 @@
         const el=ref.current; if(!el) return; const obs=new IntersectionObserver(([e])=>{ if(e.isIntersecting){ setVis(true); obs.unobserve(el);} },{threshold:.1}); obs.observe(el);
         return ()=>{ try{obs.disconnect();}catch(_){} };
       },[]);
-      return React.createElement('div',{ref,className:'reveal'+(vis?' visible':''),style:{transitionDelay:(props.delay||0)+'ms'}}, props.children);
+      return h('div',{ref,className:'reveal'+(vis?' visible':''),style:{transitionDelay:(props.delay||0)+'ms'}}, props.children);
     };
 
-    const Section = (p)=> React.createElement('section',{id:p.id,className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24'},[
-      React.createElement(RevealOnScroll,null, React.createElement('h2',{className:'text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-12'}, p.title)), p.children
+    const Section = (p)=> h('section',{id:p.id,className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24'},[
+      h(RevealOnScroll,null, h('h2',{className:'text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-12'}, p.title)), p.children
     ]);
 
-    const AvailableChip = ()=> React.createElement('span',{className:'inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200 px-3 py-1 text-sm font-medium'}, ['●',' Open to opportunities']);
+    // NEW: Available chip
+    const AvailableChip = ()=> h('span',{className:'inline-flex items-center rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200 px-3 py-1 text-sm font-medium'}, ['●',' Open to opportunities']);
 
-    const StackGrid = ()=> React.createElement(Section,{id:'stack',title:'My Stack'}, React.createElement('div',{className:'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-4xl mx-auto'}, STACK.map(s=> React.createElement('div',{key:s.name,className:'group bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-md transition p-4 flex items-center gap-3 focus-ring', tabIndex:0},[
-      React.createElement('img',{src:s.svg, alt:s.alt, width:28, height:28, loading:'lazy', className:'opacity-80 group-hover:opacity-100'}),
-      React.createElement('span',{className:'text-sm font-medium text-gray-800 dark:text-gray-200'}, s.name)
+    // NEW: StackGrid
+    const StackGrid = ()=> h(Section,{id:'stack',title:'My Stack'}, h('div',{className:'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-4xl mx-auto'}, STACK.map(s=> h('div',{key:s.name,className:'group bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-md transition p-4 flex items-center gap-3 focus-ring', tabIndex:0},[
+      h('img',{src:s.svg, alt:s.alt, width:28, height:28, loading:'lazy', className:'opacity-80 group-hover:opacity-100'}),
+      h('span',{className:'text-sm font-medium text-gray-800 dark:text-gray-200'}, s.name)
     ]))));
 
     const Navbar = ({ currentPage, setCurrentPage, theme, toggleTheme })=>{
       const items=['Home','About','Stack','Skills','Projects','Experience','Certifications','Contact'];
-      return React.createElement('nav',{className:'sticky top-0 z-50 w-full bg-white/70 dark:bg-gray-950/70 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800'},
-        React.createElement('div',{className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'},
-          React.createElement('div',{className:'flex justify-between items-center h-16'},[
-            React.createElement('div',{className:'flex items-center gap-3'},[
-              React.createElement('span',{className:'text-2xl font-bold text-indigo-600 dark:text-indigo-400'},'AM'),
-              React.createElement('span',{className:'text-lg font-semibold text-gray-900 dark:text-white'},'Arjun Malgwa')
+      return h('nav',{className:'sticky top-0 z-50 w-full bg-white/70 dark:bg-gray-950/70 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800'},
+        h('div',{className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'},
+          h('div',{className:'flex justify-between items-center h-16'},[
+            h('div',{className:'flex items-center gap-3'},[
+              h('span',{className:'text-2xl font-bold text-indigo-600 dark:text-indigo-400'},'AM'),
+              h('span',{className:'text-lg font-semibold text-gray-900 dark:text-white'},'Arjun Malgwa')
             ]),
-            React.createElement('div',{className:'hidden md:flex md:items-center md:space-x-4 lg:space-x-6'},[
-              ...items.map(it=> React.createElement('button',{key:it,onClick:()=>setCurrentPage(it.toLowerCase()),className:'px-3 py-2 rounded-md text-sm font-medium transition-colors '+(currentPage===it.toLowerCase()?'text-indigo-600 dark:text-indigo-400':'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white')}, it)),
-              React.createElement('button',{onClick:toggleTheme,className:'p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus-ring',title:'Toggle theme'}, '🌓')
+            h('div',{className:'hidden md:flex md:items-center md:space-x-4 lg:space-x-6'},[
+              ...items.map(it=> h('button',{key:it,onClick:()=>setCurrentPage(it.toLowerCase()),className:'px-3 py-2 rounded-md text-sm font-medium transition-colors '+(currentPage===it.toLowerCase()?'text-indigo-600 dark:text-indigo-400':'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white')}, it)),
+              h('button',{onClick:toggleTheme,className:'p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus-ring',title:'Toggle theme'}, '🌓')
             ])
           ])
         )
@@ -198,27 +220,27 @@
         if(document.readyState==='complete') start(); else window.addEventListener('load', start, {once:true});
       },[]);
 
-      return React.createElement('section',{id:'home',className:'min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 py-20 relative overflow-hidden'},[
-        React.createElement('div',{className:'absolute inset-0 z-[-2] bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-indigo-950 dark:to-gray-900 animate-gradient-xy'}),
-        React.createElement('div',{id:'particles-js',className:'absolute inset-0 z-[-1]'}),
-        React.createElement('div',{className:'absolute inset-0 z-[-1] opacity-5 pointer-events-none bg-repeat',style:{backgroundImage:'url(https://placehold.co/8x8/000/000.png)'}}),
-        React.createElement('div',{className:'absolute top-1/4 left-1/4 w-72 h-72 bg-purple-300 dark:bg-purple-600 rounded-full filter blur-3xl opacity-30 dark:opacity-20 animate-blob z-[-1]'}),
-        React.createElement('div',{className:'absolute top-1/2 left-1/2 w-72 h-72 bg-indigo-300 dark:bg-indigo-600 rounded-full filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000 z-[-1]'}),
-        React.createElement('div',{className:'absolute top-1/3 left-3/4 w-72 h-72 bg-pink-300 dark:bg-pink-600 rounded-full filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-4000 z-[-1]'}),
-        React.createElement(RevealOnScroll,null, React.createElement('div',{className:'max-w-3xl relative z-10'},[
-          React.createElement('div',{className:'flex justify-center mb-4'}, React.createElement(AvailableChip)),
-          React.createElement('h1',{className:'text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight'},'Data & AI Analyst'),
-          React.createElement('h2',{className:'mt-3 text-2xl md:text-4xl font-semibold text-indigo-600 dark:text-indigo-400 h-12 md:h-16'}, React.createElement('span',{id:'typed-output',className:'font-mono'})),
-          React.createElement('p',{className:'mt-5 text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto'}, 'I turn messy data into clear decisions: predictive modeling, KPI dashboards, and reliable LLM/RAG evaluation.'),
-          React.createElement('div',{className:'mt-8 flex flex-col sm:flex-row justify-center gap-4'},[
-            React.createElement('button',{onClick:()=>setCurrentPage('projects'),className:'px-8 py-3 bg-indigo-600 text-white text-lg font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-transform hover:scale-105 focus-ring','aria-label':'View Projects'},'View Projects'),
-            React.createElement('a',{href:'#contact',onClick:(e)=>{e.preventDefault();setCurrentPage('contact');},className:'px-8 py-3 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 text-lg font-medium rounded-lg shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-transform hover:scale-105 focus-ring','aria-label':'Get in Touch'},'Get in Touch')
+      return h('section',{id:'home',className:'min-h-[calc(100vh-4rem)] flex items-center justify-center text-center px-4 py-20 relative overflow-hidden'},[
+        h('div',{className:'absolute inset-0 z-[-2] bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-indigo-950 dark:to-gray-900 animate-gradient-xy'}),
+        h('div',{id:'particles-js',className:'absolute inset-0 z-[-1]'}),
+        h('div',{className:'absolute inset-0 z-[-1] opacity-5 pointer-events-none bg-repeat',style:{backgroundImage:'url(https://placehold.co/8x8/000/000.png)'}}),
+        h('div',{className:'absolute top-1/4 left-1/4 w-72 h-72 bg-purple-300 dark:bg-purple-600 rounded-full filter blur-3xl opacity-30 dark:opacity-20 animate-blob z-[-1]'}),
+        h('div',{className:'absolute top-1/2 left-1/2 w-72 h-72 bg-indigo-300 dark:bg-indigo-600 rounded-full filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000 z-[-1]'}),
+        h('div',{className:'absolute top-1/3 left-3/4 w-72 h-72 bg-pink-300 dark:bg-pink-600 rounded-full filter blur-3xl opacity-30 dark:opacity-20 animate-blob animation-delay-4000 z-[-1]'}),
+        h(RevealOnScroll,null, h('div',{className:'max-w-3xl relative z-10'},[
+          h('div',{className:'flex justify-center mb-4'}, h(AvailableChip)),
+          h('h1',{className:'text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight'},'Data & AI Analyst'),
+          h('h2',{className:'mt-3 text-2xl md:text-4xl font-semibold text-indigo-600 dark:text-indigo-400 h-12 md:h-16'}, h('span',{id:'typed-output',className:'font-mono'})),
+          h('p',{className:'mt-5 text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto'}, 'I turn messy data into clear decisions: predictive modeling, KPI dashboards, and reliable LLM/RAG evaluation.'),
+          h('div',{className:'mt-8 flex flex-col sm:flex-row justify-center gap-4'},[
+            h('button',{onClick:()=>setCurrentPage('projects'),className:'px-8 py-3 bg-indigo-600 text-white text-lg font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-transform hover:scale-105 focus-ring','aria-label':'View Projects'},'View Projects'),
+            h('a',{href:'#contact',onClick:(e)=>{e.preventDefault();setCurrentPage('contact');},className:'px-8 py-3 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 text-lg font-medium rounded-lg shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-transform hover:scale-105 focus-ring','aria-label':'Get in Touch'},'Get in Touch')
           ]),
-          React.createElement('div',{className:'mt-10 w-36 h-36 mx-auto rounded-full overflow-hidden shadow-xl ring-4 ring-indigo-500/50 dark:ring-indigo-400/50'}, React.createElement('img',{src:'https://placehold.co/144x144/cccccc/ffffff?text=AM',alt:'Arjun Malgwa headshot',className:'w-full h-full object-cover',loading:'lazy',onError:(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/144x144/cccccc/ffffff?text=AM';}})),
-          React.createElement('div',{className:'mt-6 flex justify-center gap-6'},[
-            React.createElement('a',{href:'https://www.linkedin.com/in/arjunmalgwa',target:'_blank',rel:'noopener noreferrer',title:'LinkedIn',className:'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring','aria-label':'Open LinkedIn'}, 'in'),
-            React.createElement('a',{href:'https://github.com/Arjun-malgwa',target:'_blank',rel:'noopener noreferrer',title:'GitHub',className:'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring','aria-label':'Open GitHub'}, 'gh'),
-            React.createElement('a',{href:'mailto:arjun.malgwa@gmail.com',title:'Email',className:'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring','aria-label':'Email Arjun'}, '✉')
+          h('div',{className:'mt-10 w-36 h-36 mx-auto rounded-full overflow-hidden shadow-xl ring-4 ring-indigo-500/50 dark:ring-indigo-400/50'}, h('img',{src:'https://media.licdn.com/dms/image/v2/D4E03AQEGTnvp62iywQ/profile-displayphoto-crop_800_800/B4EZnkuBaeHoAI-/0/1760478894342?e=1763596800&v=beta&t=V4HklmSyjV1zqVlsBwfJ6Gv3_QOA-45jQXt6ssyVw-M',alt:'Arjun Malgwa headshot',className:'w-full h-full object-cover',loading:'lazy',onError:(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/144x144/cccccc/ffffff?text=AM';}})),
+          h('div',{className:'mt-6 flex justify-center gap-6'},[
+            h('a',{href:'https://www.linkedin.com/in/arjunmalgwa',target:'_blank',rel:'noopener noreferrer',title:'LinkedIn',className:'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring','aria-label':'Open LinkedIn'}, 'in'),
+            h('a',{href:'https://github.com/Arjun-malgwa',target:'_blank',rel:'noopener noreferrer',title:'GitHub',className:'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring','aria-label':'Open GitHub'}, 'gh'),
+            h('a',{href:'mailto:arjun.malgwa@gmail.com',title:'Email',className:'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring','aria-label':'Email Arjun'}, '✉')
           ])
         ]))
       ]);
@@ -226,69 +248,70 @@
 
     const About = ({ setCurrentPage })=>{
       const [active, setActive] = React.useState(Object.keys(SKILLS)[0]);
-      return React.createElement(Section,{id:'about',title:'About Me'}, React.createElement('div',{className:'grid grid-cols-1 lg:grid-cols-2 gap-12 items-start'},[
-        React.createElement(RevealOnScroll,null, React.createElement('div',{className:'space-y-8'},[
-          React.createElement('div',{className:'prose prose-lg dark:prose-invert text-gray-700 dark:text-gray-300'},[
-            React.createElement('p',null, "I’m Arjun, a Data & AI Analyst focused on KPI dashboards, automation, and trustworthy LLM evaluation."),
-            React.createElement('p',null, 'MS in Business Analytics (Drexel, GPA 3.9). I connect modeling to outcomes: forecasts, time series, and decisions.'),
-            React.createElement('p',null, 'If you need clean reporting or a fast ML proof‑of‑value, I’m your person.')
+      return h(Section,{id:'about',title:'About Me'}, h('div',{className:'grid grid-cols-1 lg:grid-cols-2 gap-12 items-start'},[
+        h(RevealOnScroll,null, h('div',{className:'space-y-8'},[
+          h('div',{className:'prose prose-lg dark:prose-invert text-gray-700 dark:text-gray-300'},[
+            h('p',null, "I’m Arjun, a Data & AI Analyst focused on KPI dashboards, automation, and trustworthy LLM evaluation."),
+            h('p',null, 'MS in Business Analytics (Drexel, GPA 3.9). I connect modeling to outcomes: forecasts, time series, and decisions.'),
+            h('p',null, 'If you need clean reporting or a fast ML proof‑of‑value, I’m your person.')
           ]),
-          React.createElement('button',{onClick:()=>setCurrentPage('certifications'),className:'inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white text-lg font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-transform hover:scale-105 focus-ring'}, '🧠 View My Certifications')
+          h('button',{onClick:()=>setCurrentPage('certifications'),className:'inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white text-lg font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-transform hover:scale-105 focus-ring'}, '🧠 View My Certifications')
         ])),
-        React.createElement(RevealOnScroll,{delay:150}, React.createElement('div',{className:'bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg'},[
-          React.createElement('h3',{className:'text-2xl font-bold text-gray-900 dark:text-white mb-6'},'Top Skills Matrix'),
-          React.createElement('div',{className:'flex flex-wrap gap-2 mb-6'}, Object.keys(SKILLS).map(tab=> React.createElement('button',{key:tab,onClick:()=>setActive(tab),className:'px-4 py-2 text-sm font-medium rounded-full transition-colors '+(active===tab?'bg-indigo-600 text-white':'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600')}, tab))),
-          React.createElement('div',{className:'space-y-4'}, SKILLS[active].map(s=> React.createElement('div',{key:s.name},[
-            React.createElement('div',{className:'flex justify-between mb-1'},[ React.createElement('span',{className:'text-sm font-medium text-gray-700 dark:text-gray-300'}, s.name), React.createElement('span',{className:'text-sm font-medium text-gray-500 dark:text-gray-400'}, s.level+'%') ]),
-            React.createElement('div',{className:'w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5'}, React.createElement('div',{className:'bg-indigo-600 h-2.5 rounded-full',style:{width:s.level+'%'}}))
+        h(RevealOnScroll,{delay:150}, h('div',{className:'bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg'},[
+          h('h3',{className:'text-2xl font-bold text-gray-900 dark:text-white mb-6'},'Top Skills Matrix'),
+          h('div',{className:'flex flex-wrap gap-2 mb-6'}, Object.keys(SKILLS).map(tab=> h('button',{key:tab,onClick:()=>setActive(tab),className:'px-4 py-2 text-sm font-medium rounded-full transition-colors '+(active===tab?'bg-indigo-600 text-white':'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600')}, tab))),
+          h('div',{className:'space-y-4'}, SKILLS[active].map(s=> h('div',{key:s.name},[
+            h('div',{className:'flex justify-between mb-1'},[ h('span',{className:'text-sm font-medium text-gray-700 dark:text-gray-300'}, s.name), h('span',{className:'text-sm font-medium text-gray-500 dark:text-gray-400'}, s.level+'%') ]),
+            h('div',{className:'w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5'}, h('div',{className:'bg-indigo-600 h-2.5 rounded-full',style:{width:s.level+'%'}}))
           ])))
         ]))
       ]));
     };
 
-    const SkillsPage = ()=> React.createElement(Section,{id:'skills',title:'Comprehensive Skills'}, React.createElement('div',{className:'max-w-5xl mx-auto space-y-12'}, [
+    const SkillsPage = ()=> h(Section,{id:'skills',title:'Comprehensive Skills'}, h('div',{className:'max-w-5xl mx-auto space-y-12'}, [
       ['AI & ML',['Predictive Modeling','RAG','k‑means','Random Forest','TensorFlow','Keras','NLTK','LSTM','CNN','Feature Eng','Hyperparameter Tuning']],
       ['Data & Analytics',['Python','R','SQL','Tableau','Power BI','Visualization','BI','Statistics','Data Analysis','Data Management']],
       ['Business & Strategy',['Business Analysis','Critical Thinking','KPIs','Market Research','Operations','Program Management','Marketing Analytics','Supply Chain','Project Management','Finance']]
-    ].map(([cat,arr], idx)=> React.createElement(RevealOnScroll,{key:cat,delay:idx*150}, React.createElement('div',{className:'bg-white dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg'},[
-      React.createElement('h3',{className:'text-2xl font-bold text-indigo-600 dark:text-indigo-400 mb-6'},cat),
-      React.createElement('div',{className:'flex flex-wrap gap-3'}, arr.map(s=> React.createElement('div',{key:s,className:'px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium'}, s)))
+    ].map(([cat,arr], idx)=> h(RevealOnScroll,{key:cat,delay:idx*150}, h('div',{className:'bg-white dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg'},[
+      h('h3',{className:'text-2xl font-bold text-indigo-600 dark:text-indigo-400 mb-6'},cat),
+      h('div',{className:'flex flex-wrap gap-3'}, arr.map(s=> h('div',{key:s,className:'px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium'}, s)))
     ])))));
 
     const ProjectGallery = ({ onProjectSelect })=>{
       const [flt,setFlt] = React.useState('All');
       const filters=['All','Analysis','Machine Learning'];
       const list = flt==='All'? PROJECTS : PROJECTS.filter(p=>p.category===flt);
-      return React.createElement(Section,{id:'projects',title:'Featured Projects'},[
-        React.createElement(RevealOnScroll,null, React.createElement('div',{className:'flex justify-center flex-wrap gap-3 mb-10'},[
-          React.createElement('span',{className:'text-gray-600 dark:text-gray-400'},'🔎'),
-          ...filters.map(f=> React.createElement('button',{key:f,onClick:()=>setFlt(f),className:'px-5 py-2 text-sm font-medium rounded-full transition-all '+(flt===f?'bg-indigo-600 text-white shadow-md':'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700')}, f))
+      return h(Section,{id:'projects',title:'Featured Projects'},[
+        h(RevealOnScroll,null, h('div',{className:'flex justify-center flex-wrap gap-3 mb-10'},[
+          h('span',{className:'text-gray-600 dark:text-gray-400'},'🔎'),
+          ...filters.map(f=> h('button',{key:f,onClick:()=>setFlt(f),className:'px-5 py-2 text-sm font-medium rounded-full transition-all '+(flt===f?'bg-indigo-600 text-white shadow-md':'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700')}, f))
         ])),
-        React.createElement('div',{className:'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'}, list.map((p,i)=> React.createElement(RevealOnScroll,{key:p.id,delay:i*100},
-          React.createElement('div',{onClick:()=>onProjectSelect(p),className:'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer group transition hover:shadow-2xl hover:scale-[1.02] focus-ring', tabIndex:0},[
-            React.createElement('img',{src:p.image,alt:p.title,className:'w-full h-48 object-cover',loading:'lazy',onError:(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Error';}}),
-            React.createElement('div',{className:'p-6'},[
-              React.createElement('span',{className:'text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400'}, p.category),
-              React.createElement('h3',{className:'mt-2 text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors'}, p.title),
-              React.createElement('p',{className:'mt-1 text-sm text-gray-700 dark:text-gray-300'}, p.outcome),
-              React.createElement('div',{className:'mt-3 flex flex-wrap gap-2'}, p.tags.map(t=> React.createElement('span',{key:t,className:'px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full'}, t)))
+        h('div',{className:'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'}, list.map((p,i)=> h(RevealOnScroll,{key:p.id,delay:i*100},
+          h('div',{onClick:()=>onProjectSelect(p),className:'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer group transition hover:shadow-2xl hover:scale-[1.02] focus-ring', tabIndex:0},[
+            h('img',{src:p.image,alt:p.title,className:'w-full h-48 object-cover',loading:'lazy',onError:(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Error';}}),
+            h('div',{className:'p-6'},[
+              h('span',{className:'text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400'}, p.category),
+              h('h3',{className:'mt-2 text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors'}, p.title),
+              h('p',{className:'mt-1 text-sm text-gray-700 dark:text-gray-300'}, p.outcome),
+              h('div',{className:'mt-3 flex flex-wrap gap-2'}, p.tags.map(t=> h('span',{key:t,className:'px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full'}, t)))
             ])
           ])
         )))
       ]);
     };
 
+    // Safe chart block for Recharts
     const ChartBlock = ({ data })=>{
       const R = window.Recharts;
       if(!R || !R.BarChart){
-        return React.createElement('div',{className:'p-4 text-sm rounded-lg bg-yellow-50 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-200 border border-yellow-200 dark:border-yellow-700'}, 'Chart unavailable right now. The visualization library hasn\'t finished loading.');
+        return h('div',{className:'p-4 text-sm rounded-lg bg-yellow-50 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-200 border border-yellow-200 dark:border-yellow-700'}, 'Chart unavailable right now. The visualization library hasn\'t finished loading.');
       }
-      return React.createElement(R.ResponsiveContainer,{width:'100%',height:'100%'}, React.createElement(R.BarChart,{data,margin:{top:5,right:20,left:-20,bottom:5}},[
-        React.createElement(R.XAxis,{dataKey:'name',stroke: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280'}),
-        React.createElement(R.YAxis,{stroke: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280'}),
-        React.createElement(R.Tooltip,{contentStyle:{backgroundColor: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff', borderColor: document.documentElement.classList.contains('dark') ? '#374151' : '#e5e7eb'}}),
-        React.createElement(R.Legend,null),
-        React.createElement(R.Bar,{dataKey:'Work (hrs)', fill:'#4f46e5', radius:[4,4,0,0]})
+      return h(R.ResponsiveContainer,{width:'100%',height:'100%'}, h(R.BarChart,{data,margin:{top:5,right:20,left:-20,bottom:5}},[
+        h(R.XAxis,{dataKey:'name',stroke: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280'}),
+        h(R.YAxis,{stroke: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280'}),
+        h(R.Tooltip,{contentStyle:{backgroundColor: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff', borderColor: document.documentElement.classList.contains('dark') ? '#374151' : '#e5e7eb'}}),
+        h(R.Legend,null),
+        h(R.Bar,{dataKey:'Work (hrs)', fill:'#4f46e5', radius:[4,4,0,0]})
       ]));
     };
 
@@ -298,67 +321,68 @@
       const chartData=[{name:'Phase 1','Work (hrs)':20},{name:'Phase 2','Work (hrs)':45},{name:'Phase 3','Work (hrs)':30},{name:'Phase 4','Work (hrs)':50}];
       const askAi= async()=>{ setLoading(true); setAi(''); const txt= await callGeminiApi(`Explain in 2-3 lines: ${project.title}. Problem: ${project.problem}. Process: ${project.process}. Findings: ${project.findings}`); setAi(txt); setLoading(false); };
       const close=()=>{ setAi(''); setLoading(false); onClose(); };
-      return React.createElement('div',{onClick:close,className:'fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in'}, React.createElement('div',{onClick:(e)=>e.stopPropagation(),className:'bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-slide-up'},[
-        React.createElement('div',{className:'sticky top-0 z-10 flex justify-between items-center p-5 bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-700'}, [ React.createElement('h2',{className:'text-2xl font-bold text-gray-900 dark:text-white'}, project.title), React.createElement('button',{onClick:close,className:'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full p-2',title:'Close'}, '✕') ]),
-        React.createElement('div',{className:'p-6 md:p-8 space-y-6'},[
-          React.createElement('img',{src:project.image,alt:project.title,className:'w-full h-64 object-cover rounded-lg',loading:'lazy',onError:(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Error';}}),
-          React.createElement('div',{className:'flex flex-wrap gap-2'}, project.tags.map(t=> React.createElement('span',{key:t,className:'px-3 py-1 bg-indigo-100 dark:bg-gray-900/40 text-indigo-800 dark:text-indigo-200 text-sm font-medium rounded-full'}, t))),
-          React.createElement('div',{className:'prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300'},[
-            React.createElement('h3',{className:'text-gray-900 dark:text-white'},'Problem'), React.createElement('p',null, project.problem),
-            React.createElement('h3',{className:'text-gray-900 dark:text-white'},'Process'), React.createElement('p',null, project.process),
-            React.createElement('h3',{className:'text-gray-900 dark:text-white'},'Findings'), React.createElement('p',null, project.findings)
+      return h('div',{onClick:close,className:'fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in'}, h('div',{onClick:(e)=>e.stopPropagation(),className:'bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-slide-up'},[
+        h('div',{className:'sticky top-0 z-10 flex justify-between items-center p-5 bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-700'}, [ h('h2',{className:'text-2xl font-bold text-gray-900 dark:text-white'}, project.title), h('button',{onClick:close,className:'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full p-2',title:'Close'}, '✕') ]),
+        h('div',{className:'p-6 md:p-8 space-y-6'},[
+          h('img',{src:project.image,alt:project.title,className:'w-full h-64 object-cover rounded-lg',loading:'lazy',onError:(e)=>{e.target.onerror=null; e.target.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Error';}}),
+          h('div',{className:'flex flex-wrap gap-2'}, project.tags.map(t=> h('span',{key:t,className:'px-3 py-1 bg-indigo-100 dark:bg-gray-900/40 text-indigo-800 dark:text-indigo-200 text-sm font-medium rounded-full'}, t))),
+          h('div',{className:'prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300'},[
+            h('h3',{className:'text-gray-900 dark:text-white'},'Problem'), h('p',null, project.problem),
+            h('h3',{className:'text-gray-900 dark:text-white'},'Process'), h('p',null, project.process),
+            h('h3',{className:'text-gray-900 dark:text-white'},'Findings'), h('p',null, project.findings)
           ]),
-          React.createElement('div',{className:'bg-gray-50 dark:bg-gray-900 p-6 rounded-lg'},[ React.createElement('h4',{className:'text-xl font-bold text-gray-900 dark:text-white mb-4'},'Project Visualization (Example)'), React.createElement('div',{className:'h-64'}, React.createElement(ChartBlock,{data:chartData})) ]),
-          React.createElement('div',{className:'bg-gray-50 dark:bg-gray-900 p-6 rounded-lg'},[
-            React.createElement('h4',{className:'text-xl font-bold text-gray-900 dark:text-white mb-4'},'Need a simpler summary?'),
-            React.createElement('button',{onClick:askAi,disabled:loading,className:'inline-flex items-center gap-2 px-5 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50'}, loading?'✨ Thinking...':'✨ Ask AI for a simple explanation'),
-            ai && React.createElement('div',{className:'mt-4 p-4 bg-purple-50 dark:bg-gray-800 border border-purple-200 dark:border-gray-700 rounded-lg'}, React.createElement('p',{className:'text-gray-700 dark:text-gray-300 italic whitespace-pre-line'}, ai))
+          h('div',{className:'bg-gray-50 dark:bg-gray-900 p-6 rounded-lg'},[ h('h4',{className:'text-xl font-bold text-gray-900 dark:text-white mb-4'},'Project Visualization (Example)'), h('div',{className:'h-64'}, h(ChartBlock,{data:chartData})) ]),
+          h('div',{className:'bg-gray-50 dark:bg-gray-900 p-6 rounded-lg'},[
+            h('h4',{className:'text-xl font-bold text-gray-900 dark:text-white mb-4'},'Need a simpler summary?'),
+            h('button',{onClick:askAi,disabled:loading,className:'inline-flex items-center gap-2 px-5 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50'}, loading?'✨ Thinking...':'✨ Ask AI for a simple explanation'),
+            ai && h('div',{className:'mt-4 p-4 bg-purple-50 dark:bg-gray-800 border border-purple-200 dark:border-gray-700 rounded-lg'}, h('p',{className:'text-gray-700 dark:text-gray-300 italic whitespace-pre-line'}, ai))
           ])
         ])
       ]));
     };
 
-    const Experience = ()=> React.createElement(Section,{id:'experience',title:'Professional Experience'}, React.createElement('div',{className:'relative max-w-3xl mx-auto'},[
-      React.createElement('div',{className:'absolute left-5 top-2 w-1.5 h-full bg-indigo-200 dark:bg-indigo-900 rounded-full'}),
-      React.createElement('div',{className:'space-y-12'}, EXPERIENCE.map((job,i)=> React.createElement(RevealOnScroll,{key:i,delay:i*150}, React.createElement('div',{className:'relative pl-12'},[
-        React.createElement('div',{className:'absolute left-0 top-2 w-10 h-10 flex items-center justify-center bg-indigo-600 rounded-full text-white'}, '💼'),
-        React.createElement('div',{className:'bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg'},[
-          React.createElement('span',{className:'text-sm font-medium text-indigo-600 dark:text-indigo-400'}, job.date),
-          React.createElement('h3',{className:'mt-1 text-xl font-bold text-gray-900 dark:text-white'}, job.role),
-          React.createElement('p',{className:'mt-1 text-md font-semibold text-gray-700 dark:text-gray-300'}, job.company),
-          React.createElement('p',{className:'mt-3 text-gray-600 dark:text-gray-400 whitespace-pre-line'}, job.description)
+    const Experience = ()=> h(Section,{id:'experience',title:'Professional Experience'}, h('div',{className:'relative max-w-3xl mx-auto'},[
+      h('div',{className:'absolute left-5 top-2 w-1.5 h-full bg-indigo-200 dark:bg-indigo-900 rounded-full'}),
+      h('div',{className:'space-y-12'}, EXPERIENCE.map((job,i)=> h(RevealOnScroll,{key:i,delay:i*150}, h('div',{className:'relative pl-12'},[
+        h('div',{className:'absolute left-0 top-2 w-10 h-10 flex items-center justify-center bg-indigo-600 rounded-full text-white'}, '💼'),
+        h('div',{className:'bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg'},[
+          h('span',{className:'text-sm font-medium text-indigo-600 dark:text-indigo-400'}, job.date),
+          h('h3',{className:'mt-1 text-xl font-bold text-gray-900 dark:text-white'}, job.role),
+          h('p',{className:'mt-1 text-md font-semibold text-gray-700 dark:text-gray-300'}, job.company),
+          h('p',{className:'mt-3 text-gray-600 dark:text-gray-400 whitespace-pre-line'}, job.description)
         ])
       ]))))
     ]));
 
-    const CertificationsView = ()=> React.createElement(Section,{id:'certifications',title:'My Certifications'}, React.createElement('div',{className:'max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6'}, CERTIFICATIONS.map((c,i)=> React.createElement(RevealOnScroll,{key:c.name,delay:i*100}, React.createElement('a',{href:c.url,target:'_blank',rel:'noopener noreferrer',className:'flex items-center p-5 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all hover:shadow-xl hover:scale-105'},[
-      React.createElement('div',{className:'flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300'}, '🧠'),
-      React.createElement('div',{className:'ml-4'},[ React.createElement('p',{className:'text-lg font-medium text-gray-900 dark:text-white'}, c.name), React.createElement('p',{className:'text-sm text-gray-600 dark:text-gray-400'}, c.issuer) ]),
-      React.createElement('div',{className:'ml-auto flex-shrink-0 text-gray-400 dark:text-gray-500'}, '↗')
+    const CertificationsView = ()=> h(Section,{id:'certifications',title:'My Certifications'}, h('div',{className:'max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6'}, CERTIFICATIONS.map((c,i)=> h(RevealOnScroll,{key:c.name,delay:i*100}, h('a',{href:c.url,target:'_blank',rel:'noopener noreferrer',className:'flex items-center p-5 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all hover:shadow-xl hover:scale-105'},[
+      h('div',{className:'flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300'}, '🧠'),
+      h('div',{className:'ml-4'},[ h('p',{className:'text-lg font-medium text-gray-900 dark:text-white'}, c.name), h('p',{className:'text-sm text-gray-600 dark:text-gray-400'}, c.issuer) ]),
+      h('div',{className:'ml-auto flex-shrink-0 text-gray-400 dark:text-gray-500'}, '↗')
     ])))));
 
-    const Contact = ()=> React.createElement(Section,{id:'contact',title:'Get In Touch'}, React.createElement(RevealOnScroll,null, React.createElement('div',{className:'max-w-xl mx-auto text-center'},[
-      React.createElement('p',{className:'text-lg text-gray-700 dark:text-gray-300 mb-8'}, "I’m open to roles and collaborations. Reach out for analytics, dashboards, and ML projects."),
-      React.createElement('div',{className:'flex justify-center items-center flex-wrap gap-6'},[
-        React.createElement('a',{href:'mailto:arjun.malgwa@gmail.com',className:'inline-flex items-center gap-3 px-6 py-3 bg-indigo-600 text-white text-lg font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-transform hover:scale-105 focus-ring'}, ['✉',' Email Me']),
-        React.createElement('a',{href:'https://linkedin.com/in/arjunmalgwa',target:'_blank',rel:'noopener noreferrer',className:'inline-flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring'}, ['in', React.createElement('span',{className:'font-medium'},'LinkedIn')]),
-        React.createElement('a',{href:'https://github.com/Arjun-malgwa',target:'_blank',rel:'noopener noreferrer',className:'inline-flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring'}, ['gh', React.createElement('span',{className:'font-medium'},'GitHub')])
+    const Contact = ()=> h(Section,{id:'contact',title:'Get In Touch'}, h(RevealOnScroll,null, h('div',{className:'max-w-xl mx-auto text-center'},[
+      h('p',{className:'text-lg text-gray-700 dark:text-gray-300 mb-8'}, "I’m open to roles and collaborations. Reach out for analytics, dashboards, and ML projects."),
+      h('div',{className:'flex justify-center items-center flex-wrap gap-6'},[
+        h('a',{href:'mailto:arjun.malgwa@gmail.com',className:'inline-flex items-center gap-3 px-6 py-3 bg-indigo-600 text-white text-lg font-medium rounded-lg shadow-lg hover:bg-indigo-700 transition-transform hover:scale-105 focus-ring'}, ['✉',' Email Me']),
+        h('a',{href:'https://linkedin.com/in/arjunmalgwa',target:'_blank',rel:'noopener noreferrer',className:'inline-flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring'}, ['in', h('span',{className:'font-medium'},'LinkedIn')]),
+        h('a',{href:'https://github.com/Arjun-malgwa',target:'_blank',rel:'noopener noreferrer',className:'inline-flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-ring'}, ['gh', h('span',{className:'font-medium'},'GitHub')])
       ]),
-      React.createElement('div',{className:'mt-10 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg'},[
-        React.createElement('h4',{className:'text-xl font-bold text-gray-900 dark:text-white mb-4'},'Resume'),
-        React.createElement('a',{href:'https://drive.google.com/file/d/1vuQqStkGZKV2AaJIJ9X8PYexzqNtg7kZ/view?usp=sharing',target:'_blank',rel:'noopener noreferrer',className:'inline-flex items-center gap-2 px-6 py-3 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-900 dark:hover:bg-gray-300 transition-colors focus-ring'}, ['↓',' View Resume (G‑Drive)'])
+      h('div',{className:'mt-10 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg'},[
+        h('h4',{className:'text-xl font-bold text-gray-900 dark:text-white mb-4'},'Resume'),
+        h('a',{href:'https://drive.google.com/file/d/1vuQqStkGZKV2AaJIJ9X8PYexzqNtg7kZ/view?usp=sharing',target:'_blank',rel:'noopener noreferrer',className:'inline-flex items-center gap-2 px-6 py-3 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 text-sm font-medium rounded-lg hover:bg-gray-900 dark:hover:bg-gray-300 transition-colors focus-ring'}, ['↓',' View Resume (G‑Drive)'])
       ])
     ])));
 
-    const Footer = ()=> React.createElement('footer',{className:'bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800'}, React.createElement('div',{className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left'},[
-      React.createElement('p',{className:'text-sm text-gray-600 dark:text-gray-400'}, '© '+(new Date().getFullYear())+' Arjun Malgwa. All rights reserved.'),
-      React.createElement('div',{className:'flex space-x-6 mt-4 md:mt-0'},[
-        React.createElement('a',{href:'https://github.com/Arjun-malgwa',target:'_blank',rel:'noopener noreferrer',className:'text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors focus-ring'}, 'gh'),
-        React.createElement('a',{href:'https://www.linkedin.com/in/arjunmalgwa',target:'_blank',rel:'noopener noreferrer',className:'text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors focus-ring'}, 'in'),
-        React.createElement('a',{href:'mailto:arjun.malgwa@gmail.com',className:'text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors focus-ring'}, '✉')
+    const Footer = ()=> h('footer',{className:'bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800'}, h('div',{className:'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left'},[
+      h('p',{className:'text-sm text-gray-600 dark:text-gray-400'}, '© '+(new Date().getFullYear())+' Arjun Malgwa. All rights reserved.'),
+      h('div',{className:'flex space-x-6 mt-4 md:mt-0'},[
+        h('a',{href:'https://github.com/Arjun-malgwa',target:'_blank',rel:'noopener noreferrer',className:'text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors focus-ring'}, 'gh'),
+        h('a',{href:'https://www.linkedin.com/in/arjunmalgwa',target:'_blank',rel:'noopener noreferrer',className:'text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors focus-ring'}, 'in'),
+        h('a',{href:'mailto:arjun.malgwa@gmail.com',className:'text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors focus-ring'}, '✉')
       ])
     ]));
 
+    // NEW: Sticky CTA bar (appears on all pages after ~20% scroll)
     const CTASticky = ({ setCurrentPage })=>{
       const [show,setShow] = React.useState(false);
       React.useEffect(()=>{
@@ -367,11 +391,11 @@
         return ()=> window.removeEventListener('scroll', onScroll);
       },[]);
       if(!show) return null;
-      return React.createElement('div',{className:'fixed bottom-4 left-1/2 -translate-x-1/2 z-50'}, React.createElement('div',{className:'flex items-center gap-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur px-4 py-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-700'},[
-        React.createElement(AvailableChip),
-        React.createElement('button',{onClick:()=>setCurrentPage('contact'),className:'px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition focus-ring'},'Email'),
-        React.createElement('a',{href:'https://www.linkedin.com/in/arjunmalgwa',target:'_blank',rel:'noopener noreferrer',className:'px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition focus-ring'},'LinkedIn'),
-        React.createElement('a',{href:'https://drive.google.com/file/d/1vuQqStkGZKV2AaJIJ9X8PYexzqNtg7kZ/view?usp=sharing',target:'_blank',rel:'noopener noreferrer',className:'px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition focus-ring'},'Resume')
+      return h('div',{className:'fixed bottom-4 left-1/2 -translate-x-1/2 z-50'}, h('div',{className:'flex items-center gap-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur px-4 py-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-700'},[
+        h(AvailableChip),
+        h('button',{onClick:()=>setCurrentPage('contact'),className:'px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition focus-ring'},'Email'),
+        h('a',{href:'https://www.linkedin.com/in/arjunmalgwa',target:'_blank',rel:'noopener noreferrer',className:'px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition focus-ring'},'LinkedIn'),
+        h('a',{href:'https://drive.google.com/file/d/1vuQqStkGZKV2AaJIJ9X8PYexzqNtg7kZ/view?usp=sharing',target:'_blank',rel:'noopener noreferrer',className:'px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition focus-ring'},'Resume')
       ]));
     };
 
@@ -385,53 +409,56 @@
 
       const render=()=>{
         switch(page){
-          case 'home': return React.createElement(Hero,{setCurrentPage:setPage});
-          case 'about': return React.createElement(About,{setCurrentPage:setPage});
-          case 'stack': return React.createElement(StackGrid);
-          case 'skills': return React.createElement(SkillsPage);
-          case 'projects': return React.createElement(ProjectGallery,{onProjectSelect:setModal});
-          case 'experience': return React.createElement(Experience);
-          case 'certifications': return React.createElement(CertificationsView);
-          case 'contact': return React.createElement(Contact);
-          default: return React.createElement(Hero,{setCurrentPage:setPage});
+          case 'home': return h(Hero,{setCurrentPage:setPage});
+          case 'about': return h(About,{setCurrentPage:setPage});
+          case 'stack': return h(StackGrid);
+          case 'skills': return h(SkillsPage);
+          case 'projects': return h(ProjectGallery,{onProjectSelect:setModal});
+          case 'experience': return h(Experience);
+          case 'certifications': return h(CertificationsView);
+          case 'contact': return h(Contact);
+          default: return h(Hero,{setCurrentPage:setPage});
         }
       };
 
-      return React.createElement(HelmetProvider,null,[
-        React.createElement(Helmet,null,[
-          React.createElement('title',null,'Arjun Malgwa | Data & AI Analyst'),
-          React.createElement('meta',{name:'description',content:'Dashboards, ETL automation, RAG/LLM evaluation, forecasting.'}),
-          React.createElement('link',{rel:'canonical',href:'https://arjun-malgwa.github.io'})
+      return h(HelmetProvider,null,[
+        h(Helmet,null,[
+          h('title',null,'Arjun Malgwa | Data & AI Analyst'),
+          h('meta',{name:'description',content:'Dashboards, ETL automation, RAG/LLM evaluation, forecasting.'}),
+          h('link',{rel:'canonical',href:'https://arjun-malgwa.github.io'})
         ]),
-        React.createElement('div',{className:'relative z-10'},[
-          React.createElement('a',{href:'#main',className:'skip-link sr-only focus:not-sr-only absolute top-0 left-0 bg-indigo-600 text-white p-2 z-[101]'},'Skip to main content'),
-          React.createElement(Navbar,{currentPage:page,setCurrentPage:setPage,theme, toggleTheme: ()=>setTheme(theme==='light'?'dark':'light')}),
-          React.createElement('main',{id:'main',className:'transition-opacity duration-500'}, render()),
-          React.createElement(Footer),
-          React.createElement(CTASticky,{setCurrentPage:setPage})
+        h('div',{className:'relative z-10'},[
+          h('a',{href:'#main',className:'skip-link sr-only focus:not-sr-only absolute top-0 left-0 bg-indigo-600 text-white p-2 z-[101]'},'Skip to main content'),
+          h(Navbar,{currentPage:page,setCurrentPage:setPage,theme, toggleTheme: ()=>setTheme(theme==='light'?'dark':'light')}),
+          h('main',{id:'main',className:'transition-opacity duration-500'}, render()),
+          h(Footer),
+          h(CTASticky,{setCurrentPage:setPage})
         ]),
-        modal && React.createElement(ProjectModal,{project:modal,onClose:()=>setModal(null)})
+        modal && h(ProjectModal,{project:modal,onClose:()=>setModal(null)})
       ]);
     }
 
     // Mount
-    if (!window.React || !window.ReactDOM) {
-      const root = document.getElementById('root');
-      if (root) {
-        root.innerHTML = '<div style="padding:16px;max-width:720px;margin:24px auto;font-family:sans-serif;background:#fff3cd;color:#856404;border:1px solid #ffeeba;border-radius:8px">Libraries didn\'t load. If you\'re on a restricted network, try mobile data or a VPN, or ping me the Console error and I\'ll ship a no‑CDN build.</div>';
-      }
-    } else {
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(React.createElement(App));
-    }
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(h(App));
 
-    // Runtime tests
-    function assert(name, ok){ (ok?console.log:console.error)('[TEST ' + (ok?'PASS':'FAIL') + ']', name); }
+    // ------------------ Runtime sanity checks ("tests") ------------------
+    function assert(name, condition){ if(!condition){ console.error('[TEST FAIL]', name); } else { console.log('[TEST PASS]', name); } }
     assert('React present', !!window.React && !!window.React.createElement);
     assert('ReactDOM present', !!window.ReactDOM && !!window.ReactDOM.createRoot);
-    const helmetGlobalOK = !!(window.reactHelmetAsync || window['react-helmet-async']);
-    console.log('[TEST INFO] Helmet UMD present:', helmetGlobalOK);
+    assert('Helmet (real or shim)', !!Helmet && !!HelmetProvider);
     console.log('[TEST INFO] Recharts present:', !!(window.Recharts && window.Recharts.BarChart));
+    // New tests
+    assert('StackGrid renders 8 tiles', STACK.length === 8);
+    window.addEventListener('load',()=>{
+      const heroHead = document.querySelector('#home h1');
+      assert('Hero heading present', !!heroHead);
+      const stickyTimer = setTimeout(()=>{
+        const sticky = document.querySelector('[class*="fixed bottom-4"]');
+        console.log('[TEST INFO] Sticky visible:', !!sticky);
+        clearTimeout(stickyTimer);
+      }, 1500);
+    });
   })();
   </script>
 </body>
