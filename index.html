@@ -1146,6 +1146,293 @@
         display: none !important;
       }
     }
+
+    /* ========== Skills Mind-Map Chips ========== */
+    .skills-mindmap {
+      padding: var(--section-padding);
+    }
+
+    .mm-title {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .mm-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .mm-branch {
+      margin-bottom: 1.5rem;
+    }
+
+    .mm-head {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .mm-branch:first-child .mm-head:first-child {
+      margin-top: 0;
+    }
+
+    .mm-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      background: var(--light-gray);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.813rem;
+      font-weight: 500;
+      color: var(--primary);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .chip::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    @media (max-width: 720px) {
+      .mm-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========== Dock Mobile "More" Dropdown ========== */
+    .dock-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dock-list > li {
+      position: relative;
+    }
+
+    .dock-more {
+      position: relative;
+    }
+
+    .dock-more-btn {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+    }
+
+    .dock-menu {
+      position: absolute;
+      bottom: calc(100% + 0.75rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--liquid-gradient);
+      backdrop-filter: blur(25px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 0.5rem;
+      box-shadow: 0 8px 32px var(--glass-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 140px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .dock-more-btn[aria-expanded="true"] + .dock-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dock-menu a {
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-decoration: none;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .dock-menu a:hover {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent);
+    }
+
+    @media (max-width: 560px) {
+      .dock-cta-wrap {
+        display: none;
+      }
+    }
+
+    /* ========== Projects Horizontal Slider ========== */
+    .proj-rail {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(320px, 1fr);
+      gap: 32px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 1rem;
+    }
+
+    .proj-rail::-webkit-scrollbar {
+      display: none;
+    }
+
+    .proj-rail > .project-card {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .proj-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .proj-prev,
+    .proj-next {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--light-gray);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .proj-prev:hover,
+    .proj-next:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .proj-prev:disabled,
+    .proj-next:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .proj-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .proj-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .proj-dot.active {
+      background: var(--accent);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 560px) {
+      .proj-rail {
+        grid-auto-columns: minmax(82%, 86%);
+        gap: 1rem;
+      }
+    }
+
+    /* ========== Global Tightening (clamp sizing) ========== */
+    section {
+      padding-block: clamp(28px, 5vw, 56px);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    p, li {
+      font-size: clamp(0.938rem, 1.5vw, 1.063rem);
+    }
+
+    /* ========== Smooth Scroll with Offset ========== */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* ========== Reveal Animations ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
