@@ -1023,13 +1023,34 @@
     /* ========== Responsive Design ========== */
     @media (max-width: 1024px) {
       :root {
-        --section-padding: 60px 20px;
+        --section-padding: 48px 20px;
       }
     }
 
     @media (max-width: 768px) {
       :root {
-        --section-padding: 48px 16px;
+        --section-padding: 40px 16px;
+      }
+
+      .hero-intro {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+        max-width: 24ch;
+      }
+
+      .project-card {
+        padding: 14px;
+      }
+
+      .btn {
+        min-height: 44px;
+      }
+
+      section {
+        padding: 40px 16px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr !important;
       }
 
       .bottom-nav {
