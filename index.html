@@ -568,90 +568,69 @@
     }
 
     /* ========== Skills Section ========== */
-    .stack-tiles {
+    .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      margin-bottom: 60px;
+      gap: 1.6rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      margin-bottom: 3rem;
     }
 
-    .stack-tile {
-      padding: 32px 24px;
-      text-align: center;
-      cursor: default;
+    .skill-group {
+      margin-bottom: 2.5rem;
     }
 
-    .stack-icon {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 16px;
+    .skill-group-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      padding-left: 4px;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--card-shadow);
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+    }
+
+    [data-theme="dark"] .skill-card:hover {
+      box-shadow: 0 8px 26px rgba(255,255,255,0.08);
+    }
+
+    .skill-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
       fill: var(--accent);
-      transition: var(--transition);
     }
 
-    .stack-tile:hover .stack-icon {
-      transform: scale(1.1) rotate(5deg);
+    .skill-info {
+      flex: 1;
+      min-width: 0;
     }
 
-    .stack-tile h3 {
-      font-size: 1.125rem;
-      margin: 0;
-      color: var(--primary);
-    }
-
-    .skill-bars {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .skill-category {
-      margin-bottom: 48px;
-    }
-
-    .skill-category h3 {
-      font-size: 1.5rem;
-      margin-bottom: 24px;
-      color: var(--accent);
+    .skill-title {
       font-weight: 600;
+      color: var(--card-text);
+      margin-bottom: 2px;
+      font-size: 0.938rem;
     }
 
-    .skill-item {
-      display: grid;
-      grid-template-columns: 200px 1fr 60px;
-      gap: 16px;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .skill-name {
-      font-weight: 500;
-      color: var(--primary);
-    }
-
-    .skill-bar-container {
-      height: 12px;
-      background: var(--light-gray);
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .skill-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), #8b5cf6);
-      width: 0;
-      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 6px;
-    }
-
-    .skill-bar.animate {
-      width: var(--skill-level);
-    }
-
-    .skill-level {
-      text-align: right;
-      font-weight: 600;
-      color: var(--accent);
+    .skill-subtitle {
+      font-size: 0.813rem;
+      color: var(--card-subtext);
+      line-height: 1.4;
     }
 
     /* ========== Projects Section ========== */
