@@ -1219,19 +1219,22 @@
   </svg>
 
   <!-- Bottom Navigation -->
-  <nav class="bottom-nav" id="bottomNav">
-    <div class="bottom-nav-container">
-      <a href="#home" class="nav-link-pill active">Home</a>
-      <a href="#skills" class="nav-link-pill">Skills</a>
-      <a href="#projects" class="nav-link-pill">Projects</a>
-      <a href="#experience" class="nav-link-pill">Experience</a>
-      <a href="#certifications" class="nav-link-pill">Certs</a>
-      <a href="#contact" class="nav-link-pill">Contact</a>
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        Open to opportunities
-      </div>
-    </div>
+  <nav class="bottom-nav dock" id="bottomNav">
+    <ul class="dock-list bottom-nav-container" role="menubar">
+      <li><a href="#home" class="dock-link nav-link-pill active" role="menuitem" aria-current="page">Home</a></li>
+      <li><a href="#skills" class="dock-link nav-link-pill" role="menuitem">Skills</a></li>
+      <li><a href="#projects" class="dock-link nav-link-pill" role="menuitem">Projects</a></li>
+      <li><a href="#experience" class="dock-link nav-link-pill" role="menuitem">Experience</a></li>
+      <li class="dock-more">
+        <button class="dock-link dock-more-btn nav-link-pill" aria-haspopup="true" aria-expanded="false">More ▾</button>
+        <div class="dock-menu" role="menu">
+          <a href="#certifications" role="menuitem">Certs</a>
+          <a href="#contact" role="menuitem">Contact</a>
+          <a href="https://drive.google.com/drive/folders/1QBGiI4Nt-bFcqpfjJEXOpaJsYWPg6JOU?usp=sharing" role="menuitem" target="_blank" rel="noopener">Resume</a>
+        </div>
+      </li>
+      <li class="dock-cta-wrap status-badge" role="none"><a class="dock-cta" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1QBGiI4Nt-bFcqpfjJEXOpaJsYWPg6JOU" aria-label="Open resume — I'm open to opportunities"><span class="pulse-dot status-dot" aria-hidden="true"></span>Open to opportunities</a></li>
+    </ul>
   </nav>
 
   <!-- Main Content -->
