@@ -4,21 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arjun Malgwa — Data & AI Analyst</title>
-  <meta name="description" content="Dashboards, ETL automation, RAG/LLM evaluation, forecasting.">
+  <meta name="description" content="Dashboards, automation, forecasting, marketplace analytics, and reliable LLM evaluation. Reduced manual reporting by 40%, improved MAPE by 18%.">
   <meta name="author" content="Arjun Malgwa">
   <link rel="canonical" href="https://arjun-malgwa.github.io">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Arjun Malgwa — Data & AI Analyst">
-  <meta property="og:description" content="Dashboards, ETL automation, RAG/LLM evaluation, forecasting.">
+  <meta property="og:description" content="Dashboards, automation, forecasting, marketplace analytics, and reliable LLM evaluation.">
   <meta property="og:image" content="https://arjun-malgwa.github.io/assets/og-image.png">
   <meta property="og:url" content="https://arjun-malgwa.github.io">
   <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Arjun Malgwa — Data & AI Analyst">
+  <meta name="twitter:description" content="Dashboards, automation, forecasting, marketplace analytics, and reliable LLM evaluation.">
+  <meta name="twitter:image" content="https://arjun-malgwa.github.io/assets/og-image.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Person Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Arjun Malgwa",
+    "jobTitle": "Data & AI Analyst",
+    "url": "https://arjun-malgwa.github.io",
+    "sameAs": [
+      "https://linkedin.com/in/arjunmalgwa",
+      "https://github.com/Arjun-malgwa"
+    ],
+    "email": "arjun.malgwa@gmail.com",
+    "description": "Data & AI Analyst specializing in dashboards, automation, forecasting, marketplace analytics, and LLM evaluation. Reduced manual reporting by 40%, improved MAPE by 18%.",
+    "knowsAbout": [
+      "Data Analytics",
+      "Machine Learning",
+      "Python",
+      "Tableau",
+      "Power BI",
+      "ETL Automation",
+      "RAG",
+      "LLM Evaluation",
+      "Forecasting"
+    ]
+  }
+  </script>
 
   <style>
     /* ========== CSS Reset & Base Styles ========== */
@@ -60,7 +94,7 @@
 
       /* Spacing */
       --container-max-width: 1200px;
-      --section-padding: 80px 20px;
+      --section-padding: 64px 20px;
     }
 
     [data-theme="dark"] {
@@ -394,6 +428,35 @@
       letter-spacing: -0.01em;
     }
 
+    .hero-metrics {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-metrics li {
+      font-size: clamp(0.938rem, 2vw, 1.063rem);
+      color: var(--secondary);
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .hero-metrics li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     .hero-subline {
       font-size: clamp(1.25rem, 2.5vw, 1.5rem);
       color: var(--accent);
@@ -666,6 +729,24 @@
 
     .project-content {
       padding: 24px;
+    }
+
+    .metric-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .metric-chip {
+      padding: 6px 12px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border-radius: 999px;
+      font-size: 0.813rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
     }
 
     .project-content h3 {
@@ -976,13 +1057,34 @@
     /* ========== Responsive Design ========== */
     @media (max-width: 1024px) {
       :root {
-        --section-padding: 60px 20px;
+        --section-padding: 48px 20px;
       }
     }
 
     @media (max-width: 768px) {
       :root {
-        --section-padding: 48px 16px;
+        --section-padding: 40px 16px;
+      }
+
+      .hero-intro {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+        max-width: 24ch;
+      }
+
+      .project-card {
+        padding: 14px;
+      }
+
+      .btn {
+        min-height: 44px;
+      }
+
+      section {
+        padding: 40px 16px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr !important;
       }
 
       .bottom-nav {
@@ -1144,9 +1246,14 @@
       </div>
       <div class="hero-content">
         <div class="hero-badge">He/Him</div>
-        <p id="hero-intro" class="hero-intro">hey, i'm arjun — i turn messy data into automation, forecasts, and insights that help teams make smarter, faster decisions.</p>
+        <p id="hero-intro" class="hero-intro">hey, i'm arjun — i turn messy data into automation, forecasts, and insights that reduce manual work and accelerate decisions.</p>
         <h1 class="hero-name">Arjun Malgwa</h1>
         <h2 class="hero-headline">Data & AI Analyst</h2>
+        <ul class="hero-metrics">
+          <li>Automated reporting pipelines, cutting manual work by 40%</li>
+          <li>Improved forecasting accuracy (MAPE) by 18%</li>
+          <li>Surfaced gaps driving products at 22% margin</li>
+        </ul>
         <div class="hero-subline">
           <span id="typewriter-text"></span><span id="typewriter-cursor" class="cursor">|</span>
         </div>
@@ -1156,7 +1263,7 @@
         </div>
         <div class="hero-cta">
           <a href="#projects" class="btn btn-solid">View Projects</a>
-          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+          <a href="/Arjun_Malgwa_Resume.pdf" class="btn btn-ghost" download>Download Resume</a>
         </div>
       </div>
     </section>
@@ -1330,6 +1437,10 @@
               <span class="project-category-badge">Analysis</span>
             </div>
             <div class="project-content">
+              <div class="metric-chips">
+                <span class="metric-chip">+15% satisfaction</span>
+                <span class="metric-chip">25%+ coverage gaps</span>
+              </div>
               <h3>Flood Risk Analytics for Montpelier, VT</h3>
               <p class="project-outcome">Flagged under-insured zones and improved satisfaction by 15%</p>
               <div class="project-tags">
@@ -1346,6 +1457,10 @@
               <span class="project-category-badge">Machine Learning</span>
             </div>
             <div class="project-content">
+              <div class="metric-chips">
+                <span class="metric-chip">95% accuracy</span>
+                <span class="metric-chip">Top-3 ISPs</span>
+              </div>
               <h3>Broadband Plan Recommendation Engine</h3>
               <p class="project-outcome">95% accuracy on plan picks; top-3 ISPs by county</p>
               <div class="project-tags">
@@ -1378,6 +1493,10 @@
               <span class="project-category-badge">Machine Learning</span>
             </div>
             <div class="project-content">
+              <div class="metric-chips">
+                <span class="metric-chip">#1 Kaggle</span>
+                <span class="metric-chip">Retention targeting</span>
+              </div>
               <h3>Predicting Customer Churn</h3>
               <p class="project-outcome">#1 on STAT642 Kaggle; retention targeting</p>
               <div class="project-tags">
@@ -1404,9 +1523,9 @@
               <div class="exp-date">Sep 2025 - Present · New Jersey (Hybrid)</div>
             </div>
             <ul class="exp-bullets">
-              <li>Conducted market analysis identifying Amazon marketplace trends aiding product expansion.</li>
-              <li>Built interactive dashboards for inventory, shipments, and seller performance.</li>
-              <li>Visualized e-commerce metrics improving internal and partner decision-making.</li>
+              <li>Built Tableau dashboards tracking inventory, shipments, and seller performance → surfaced insights accelerating internal and partner decisions.</li>
+              <li>Analyzed Amazon marketplace trends → identified expansion opportunities supporting ~1000 units/month at 22% profit margin.</li>
+              <li>Visualized e-commerce metrics for leadership → enabled data-driven decision-making across cross-functional teams.</li>
             </ul>
           </div>
 
@@ -1417,10 +1536,9 @@
               <div class="exp-date">Jul 2024 - Dec 2024 · Virginia (Hybrid)</div>
             </div>
             <ul class="exp-bullets">
-              <li>Designed retrieval-augmented generation models for regulation queries.</li>
-              <li>Evaluated GPT, Gemini, and Llama3 for accuracy, bias, and hallucination.</li>
-              <li>Built prompt optimization framework improving citation reliability.</li>
-              <li>Collaborated with AI researchers to enhance model interpretability.</li>
+              <li>Built RAG models (Python + LangChain) for regulation queries → evaluated GPT, Gemini, Llama3 for accuracy, bias, and hallucination.</li>
+              <li>Designed prompt optimization framework → improved citation reliability by reducing hallucinations in LLM outputs.</li>
+              <li>Collaborated with research teams → enhanced model interpretability and developed evaluation pipelines for production systems.</li>
             </ul>
           </div>
 
@@ -1431,9 +1549,9 @@
               <div class="exp-date">Feb 2023 - Jun 2023 · India (Hybrid)</div>
             </div>
             <ul class="exp-bullets">
-              <li>Created Tableau dashboards visualizing competitor and market gap analysis.</li>
-              <li>Reported insights influencing pricing and marketing strategy.</li>
-              <li>Supported product success reaching ~1000 units/month with 22% profit margin.</li>
+              <li>Built Tableau dashboards visualizing competitor and market gap analysis → influenced pricing and marketing strategy.</li>
+              <li>Delivered insights to leadership → supported product growth to ~1000 units/month with 22% profit margin.</li>
+              <li>Analyzed market positioning → identified opportunities driving revenue expansion and margin improvement.</li>
             </ul>
           </div>
 
@@ -1444,9 +1562,9 @@
               <div class="exp-date">Jan 2021 - Jan 2023 · India (Hybrid)</div>
             </div>
             <ul class="exp-bullets">
-              <li>Analyzed sales/operations data across 15+ Amazon sellers increasing sales by 20%.</li>
-              <li>Automated inventory reporting using Python reducing manual effort 40%.</li>
-              <li>Built Power BI/Tableau dashboards providing actionable trends.</li>
+              <li>Automated inventory reporting pipelines (Python + Pandas) → reduced manual effort by 40% (8h/week) across 15+ Amazon sellers.</li>
+              <li>Built Power BI/Tableau dashboards tracking sales and operations → provided actionable trends increasing sales by 20%.</li>
+              <li>Analyzed seller performance data → identified optimization opportunities improving conversion and reducing churn.</li>
             </ul>
           </div>
 
@@ -1520,14 +1638,15 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
       <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="contact-text">I'm open to roles and collaborations. Reach out for analytics, dashboards, and ML projects.</p>
+        <h2 class="section-title">Let's Talk About Reducing Manual Reporting</h2>
+        <p class="contact-text">I turn messy data into automation, forecasts, and insights. Open to roles in analytics, dashboards, ETL automation, and ML projects.</p>
 
         <div class="contact-buttons">
           <a href="mailto:arjun.malgwa@gmail.com" class="btn btn-solid">
             <svg class="icon-sm"><use href="#icon-email"></use></svg>
             Email Me
           </a>
+          <a href="/Arjun_Malgwa_Resume.pdf" class="btn btn-solid" download>Download Resume</a>
           <a href="https://linkedin.com/in/arjunmalgwa" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
             <svg class="icon-sm"><use href="#icon-linkedin"></use></svg>
             LinkedIn
