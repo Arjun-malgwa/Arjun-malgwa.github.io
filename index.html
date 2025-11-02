@@ -1146,6 +1146,293 @@
         display: none !important;
       }
     }
+
+    /* ========== Skills Mind-Map Chips ========== */
+    .skills-mindmap {
+      padding: var(--section-padding);
+    }
+
+    .mm-title {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .mm-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .mm-branch {
+      margin-bottom: 1.5rem;
+    }
+
+    .mm-head {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .mm-branch:first-child .mm-head:first-child {
+      margin-top: 0;
+    }
+
+    .mm-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      background: var(--light-gray);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.813rem;
+      font-weight: 500;
+      color: var(--primary);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .chip::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    @media (max-width: 720px) {
+      .mm-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========== Dock Mobile "More" Dropdown ========== */
+    .dock-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dock-list > li {
+      position: relative;
+    }
+
+    .dock-more {
+      position: relative;
+    }
+
+    .dock-more-btn {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+    }
+
+    .dock-menu {
+      position: absolute;
+      bottom: calc(100% + 0.75rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--liquid-gradient);
+      backdrop-filter: blur(25px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 0.5rem;
+      box-shadow: 0 8px 32px var(--glass-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 140px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .dock-more-btn[aria-expanded="true"] + .dock-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dock-menu a {
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-decoration: none;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .dock-menu a:hover {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent);
+    }
+
+    @media (max-width: 560px) {
+      .dock-cta-wrap {
+        display: none;
+      }
+    }
+
+    /* ========== Projects Horizontal Slider ========== */
+    .proj-rail {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(320px, 1fr);
+      gap: 32px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 1rem;
+    }
+
+    .proj-rail::-webkit-scrollbar {
+      display: none;
+    }
+
+    .proj-rail > .project-card {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .proj-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .proj-prev,
+    .proj-next {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--light-gray);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .proj-prev:hover,
+    .proj-next:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .proj-prev:disabled,
+    .proj-next:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .proj-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .proj-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .proj-dot.active {
+      background: var(--accent);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 560px) {
+      .proj-rail {
+        grid-auto-columns: minmax(82%, 86%);
+        gap: 1rem;
+      }
+    }
+
+    /* ========== Global Tightening (clamp sizing) ========== */
+    section {
+      padding-block: clamp(28px, 5vw, 56px);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    p, li {
+      font-size: clamp(0.938rem, 1.5vw, 1.063rem);
+    }
+
+    /* ========== Smooth Scroll with Offset ========== */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* ========== Reveal Animations ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1219,19 +1506,22 @@
   </svg>
 
   <!-- Bottom Navigation -->
-  <nav class="bottom-nav" id="bottomNav">
-    <div class="bottom-nav-container">
-      <a href="#home" class="nav-link-pill active">Home</a>
-      <a href="#skills" class="nav-link-pill">Skills</a>
-      <a href="#projects" class="nav-link-pill">Projects</a>
-      <a href="#experience" class="nav-link-pill">Experience</a>
-      <a href="#certifications" class="nav-link-pill">Certs</a>
-      <a href="#contact" class="nav-link-pill">Contact</a>
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        Open to opportunities
-      </div>
-    </div>
+  <nav class="bottom-nav dock" id="bottomNav">
+    <ul class="dock-list bottom-nav-container" role="menubar">
+      <li><a href="#home" class="dock-link nav-link-pill active" role="menuitem" aria-current="page">Home</a></li>
+      <li><a href="#skills" class="dock-link nav-link-pill" role="menuitem">Skills</a></li>
+      <li><a href="#projects" class="dock-link nav-link-pill" role="menuitem">Projects</a></li>
+      <li><a href="#experience" class="dock-link nav-link-pill" role="menuitem">Experience</a></li>
+      <li class="dock-more">
+        <button class="dock-link dock-more-btn nav-link-pill" aria-haspopup="true" aria-expanded="false">More ▾</button>
+        <div class="dock-menu" role="menu">
+          <a href="#certifications" role="menuitem">Certs</a>
+          <a href="#contact" role="menuitem">Contact</a>
+          <a href="https://drive.google.com/drive/folders/1QBGiI4Nt-bFcqpfjJEXOpaJsYWPg6JOU?usp=sharing" role="menuitem" target="_blank" rel="noopener">Resume</a>
+        </div>
+      </li>
+      <li class="dock-cta-wrap status-badge" role="none"><a class="dock-cta" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1QBGiI4Nt-bFcqpfjJEXOpaJsYWPg6JOU" aria-label="Open resume — I'm open to opportunities"><span class="pulse-dot status-dot" aria-hidden="true"></span>Open to opportunities</a></li>
+    </ul>
   </nav>
 
   <!-- Main Content -->
@@ -1270,245 +1560,34 @@
     </section>
 
     <!-- Skills & Stack Section -->
-    <section id="skills" class="skills">
-      <div class="container">
-        <h2 class="section-title">Skills & Stack</h2>
-
-        <!-- Programming & Tools -->
-        <div class="skill-group">
-          <h3 class="skill-group-title">Programming & Tools</h3>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-python"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Python</div>
-                <div class="skill-subtitle">Scripting & Automation</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">R</div>
-                <div class="skill-subtitle">Statistical Computing</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Scala</div>
-                <div class="skill-subtitle">Functional Data Ops</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Excel</div>
-                <div class="skill-subtitle">Analysis & Reporting</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-git"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Git</div>
-                <div class="skill-subtitle">Version Control</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-streamlit"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Streamlit</div>
-                <div class="skill-subtitle">Data Apps</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-docker"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Docker</div>
-                <div class="skill-subtitle">Containerization</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Visual Studio</div>
-                <div class="skill-subtitle">Development</div>
-              </div>
-            </div>
+    <section id="skills" class="skills-mindmap reveal">
+      <h2 class="mm-title">My Skills</h2>
+      <div class="mm-columns">
+        <div class="mm-branch">
+          <h3 class="mm-head">Analytics & Viz</h3>
+          <div class="mm-chips">
+            <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">EDA</span><span class="chip">Feature Eng.</span><span class="chip">PCA</span><span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Streamlit</span>
+          </div>
+          <h3 class="mm-head">AI / LLM</h3>
+          <div class="mm-chips">
+            <span class="chip">NLP</span><span class="chip">Prompt Eng.</span><span class="chip">RAG</span><span class="chip">TensorFlow</span><span class="chip">PyTorch</span>
           </div>
         </div>
-
-        <!-- Analytics -->
-        <div class="skill-group">
-          <h3 class="skill-group-title">Analytics</h3>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Pandas</div>
-                <div class="skill-subtitle">Data Wrangling</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">NumPy</div>
-                <div class="skill-subtitle">Computation</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">EDA</div>
-                <div class="skill-subtitle">Exploratory Analysis</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Data Cleaning</div>
-                <div class="skill-subtitle">Quality Control</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Feature Engineering</div>
-                <div class="skill-subtitle">Model Inputs</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">PCA</div>
-                <div class="skill-subtitle">Dimensionality Reduction</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-postgres"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Data Modeling</div>
-                <div class="skill-subtitle">Schema Design</div>
-              </div>
-            </div>
+        <div class="mm-branch">
+          <h3 class="mm-head">Data Eng. & Methods</h3>
+          <div class="mm-chips">
+            <span class="chip">SQL</span><span class="chip">Regression</span><span class="chip">Hypothesis Testing</span><span class="chip">Time Series</span><span class="chip">Data Cleaning</span><span class="chip">Data Modeling</span>
           </div>
-        </div>
-
-        <!-- Data Visualization -->
-        <div class="skill-group">
-          <h3 class="skill-group-title">Data Visualization</h3>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-tableau"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Tableau</div>
-                <div class="skill-subtitle">Dashboards</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-powerbi"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Power BI</div>
-                <div class="skill-subtitle">Business Insights</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Machine Learning -->
-        <div class="skill-group">
-          <h3 class="skill-group-title">Machine Learning</h3>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-tensorflow"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Machine Learning</div>
-                <div class="skill-subtitle">Predictive Models</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-tensorflow"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Deep Learning</div>
-                <div class="skill-subtitle">Neural Nets</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Clustering</div>
-                <div class="skill-subtitle">Segmentation</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Time Series Forecasting</div>
-                <div class="skill-subtitle">Trends & Cycles</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- AI & LLM -->
-        <div class="skill-group">
-          <h3 class="skill-group-title">AI & LLM</h3>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">NLP</div>
-                <div class="skill-subtitle">Text Analytics</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Prompt Engineering</div>
-                <div class="skill-subtitle">LLM Control</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">RAG</div>
-                <div class="skill-subtitle">Context Retrieval</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Methods / Statistics -->
-        <div class="skill-group">
-          <h3 class="skill-group-title">Methods / Statistics</h3>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Regression</div>
-                <div class="skill-subtitle">Prediction</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">Hypothesis Testing</div>
-                <div class="skill-subtitle">Significance</div>
-              </div>
-            </div>
-            <div class="skill-card">
-              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
-              <div class="skill-info">
-                <div class="skill-title">KPI Design</div>
-                <div class="skill-subtitle">Measurement</div>
-              </div>
-            </div>
+          <h3 class="mm-head">Tools</h3>
+          <div class="mm-chips">
+            <span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Excel</span><span class="chip">Visual Studio</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section id="projects" class="projects reveal">
       <div class="container">
         <h2 class="section-title">Featured Projects</h2>
 
@@ -1518,7 +1597,7 @@
           <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
         </div>
 
-        <div class="project-grid">
+        <div class="proj-rail project-grid">
           <div class="project-card glass-card" data-category="analysis" data-project-id="flood">
             <div class="project-image">
               <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect fill='%23667eea' width='800' height='500'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='32' fill='white'%3EFlood Risk Analytics%3C/text%3E%3C/svg%3E" alt="Flood Risk Analytics for Montpelier, VT" loading="lazy">
@@ -1595,11 +1674,16 @@
             </div>
           </div>
         </div>
+        <div class="proj-controls">
+          <button class="proj-prev" aria-label="Previous projects">‹</button>
+          <div class="proj-dots" aria-hidden="true"></div>
+          <button class="proj-next" aria-label="Next projects">›</button>
+        </div>
       </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="experience">
+    <section id="experience" class="experience reveal">
       <div class="container">
         <h2 class="section-title">Professional Experience</h2>
 
@@ -1671,7 +1755,7 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="certifications">
+    <section id="certifications" class="certifications reveal">
       <div class="container">
         <h2 class="section-title">My Certifications</h2>
 
@@ -1724,7 +1808,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact reveal">
       <div class="container">
         <h2 class="section-title">Let's Talk About Reducing Manual Reporting</h2>
         <p class="contact-text">I turn messy data into automation, forecasts, and insights. Open to roles in analytics, dashboards, ETL automation, and ML projects.</p>
@@ -2080,6 +2164,135 @@
       }
       scrollTimeout = window.requestAnimationFrame(handleScrollBlur);
     }, { passive: true });
+
+    // ========== Dock "More" Dropdown Toggle ==========
+    const dockMoreBtn = document.querySelector('.dock-more-btn');
+    const dockMenu = document.querySelector('.dock-menu');
+
+    if (dockMoreBtn && dockMenu) {
+      dockMoreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isExpanded = dockMoreBtn.getAttribute('aria-expanded') === 'true';
+        dockMoreBtn.setAttribute('aria-expanded', !isExpanded);
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dockMoreBtn.contains(e.target) && !dockMenu.contains(e.target)) {
+          dockMoreBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close menu when clicking on a menu link
+      dockMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          dockMoreBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // ========== Projects Horizontal Slider ==========
+    const projRail = document.querySelector('.proj-rail');
+    const projPrevBtn = document.querySelector('.proj-prev');
+    const projNextBtn = document.querySelector('.proj-next');
+    const projDotsContainer = document.querySelector('.proj-dots');
+
+    if (projRail && projPrevBtn && projNextBtn && projDotsContainer) {
+      const projCards = Array.from(projRail.querySelectorAll('.project-card'));
+      const cardCount = projCards.length;
+
+      // Create dots
+      for (let i = 0; i < cardCount; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'proj-dot';
+        dot.setAttribute('aria-label', `Go to project ${i + 1}`);
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          projCards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        });
+        projDotsContainer.appendChild(dot);
+      }
+
+      const dots = Array.from(projDotsContainer.querySelectorAll('.proj-dot'));
+
+      // Update active dot based on scroll position
+      function updateActiveDot() {
+        const scrollLeft = projRail.scrollLeft;
+        const cardWidth = projCards[0].offsetWidth + 32; // card width + gap
+        const currentIndex = Math.round(scrollLeft / cardWidth);
+
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+
+        // Update button states
+        projPrevBtn.disabled = currentIndex === 0;
+        projNextBtn.disabled = currentIndex === cardCount - 1;
+      }
+
+      // Scroll handler
+      projRail.addEventListener('scroll', updateActiveDot, { passive: true });
+
+      // Prev button
+      projPrevBtn.addEventListener('click', () => {
+        const scrollLeft = projRail.scrollLeft;
+        const cardWidth = projCards[0].offsetWidth + 32;
+        const currentIndex = Math.round(scrollLeft / cardWidth);
+        if (currentIndex > 0) {
+          projCards[currentIndex - 1].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        }
+      });
+
+      // Next button
+      projNextBtn.addEventListener('click', () => {
+        const scrollLeft = projRail.scrollLeft;
+        const cardWidth = projCards[0].offsetWidth + 32;
+        const currentIndex = Math.round(scrollLeft / cardWidth);
+        if (currentIndex < cardCount - 1) {
+          projCards[currentIndex + 1].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        }
+      });
+
+      // Initialize
+      updateActiveDot();
+    }
+
+    // ========== Reveal Animations (IntersectionObserver) ==========
+    const revealElements = document.querySelectorAll('.reveal');
+
+    if (revealElements.length > 0) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '-10% 0px -10% 0px',
+        threshold: 0
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    }
+
+    // ========== Anchor Links with Offset ==========
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || !href) return;
+
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const offsetTop = target.offsetTop - 90; // 90px offset for fixed dock
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>
