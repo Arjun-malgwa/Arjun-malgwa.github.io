@@ -84,6 +84,13 @@
       --glass-shadow: rgba(0,0,0,0.08);
       --liquid-gradient: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
 
+      /* Card Variables */
+      --card-bg: #FFFFFF;
+      --card-border: rgba(0,0,0,0.06);
+      --card-shadow: 0 5px 18px rgba(0,0,0,0.04);
+      --card-text: #1a1a1a;
+      --card-subtext: #6b7280;
+
       /* Effects */
       --radius: 20px;
       --radius-sm: 14px;
@@ -112,6 +119,13 @@
       --glass-border: rgba(255,255,255,0.15);
       --glass-shadow: rgba(255,255,255,0.05);
       --liquid-gradient: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%);
+
+      /* Card Variables Dark */
+      --card-bg: #151515;
+      --card-border: rgba(255,255,255,0.06);
+      --card-shadow: 0 0 0 rgba(0,0,0,0);
+      --card-text: #f5f5f5;
+      --card-subtext: #9ca3af;
     }
 
     body {
@@ -554,90 +568,69 @@
     }
 
     /* ========== Skills Section ========== */
-    .stack-tiles {
+    .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      margin-bottom: 60px;
+      gap: 1.6rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      margin-bottom: 3rem;
     }
 
-    .stack-tile {
-      padding: 32px 24px;
-      text-align: center;
-      cursor: default;
+    .skill-group {
+      margin-bottom: 2.5rem;
     }
 
-    .stack-icon {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 16px;
+    .skill-group-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      padding-left: 4px;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--card-shadow);
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+    }
+
+    [data-theme="dark"] .skill-card:hover {
+      box-shadow: 0 8px 26px rgba(255,255,255,0.08);
+    }
+
+    .skill-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
       fill: var(--accent);
-      transition: var(--transition);
     }
 
-    .stack-tile:hover .stack-icon {
-      transform: scale(1.1) rotate(5deg);
+    .skill-info {
+      flex: 1;
+      min-width: 0;
     }
 
-    .stack-tile h3 {
-      font-size: 1.125rem;
-      margin: 0;
-      color: var(--primary);
-    }
-
-    .skill-bars {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .skill-category {
-      margin-bottom: 48px;
-    }
-
-    .skill-category h3 {
-      font-size: 1.5rem;
-      margin-bottom: 24px;
-      color: var(--accent);
+    .skill-title {
       font-weight: 600;
+      color: var(--card-text);
+      margin-bottom: 2px;
+      font-size: 0.938rem;
     }
 
-    .skill-item {
-      display: grid;
-      grid-template-columns: 200px 1fr 60px;
-      gap: 16px;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .skill-name {
-      font-weight: 500;
-      color: var(--primary);
-    }
-
-    .skill-bar-container {
-      height: 12px;
-      background: var(--light-gray);
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .skill-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), #8b5cf6);
-      width: 0;
-      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 6px;
-    }
-
-    .skill-bar.animate {
-      width: var(--skill-level);
-    }
-
-    .skill-level {
-      text-align: right;
-      font-weight: 600;
-      color: var(--accent);
+    .skill-subtitle {
+      font-size: 0.813rem;
+      color: var(--card-subtext);
+      line-height: 1.4;
     }
 
     /* ========== Projects Section ========== */
@@ -1121,6 +1114,14 @@
         bottom: 0.75rem;
         transform: translateX(-50%) scale(0.6);
       }
+
+      .skill-subtitle {
+        display: none;
+      }
+
+      .skill-card {
+        padding: 1rem;
+      }
     }
 
     @media (max-width: 390px) {
@@ -1273,146 +1274,233 @@
       <div class="container">
         <h2 class="section-title">Skills & Stack</h2>
 
-        <div class="stack-tiles">
-          <div class="stack-tile glass-card">
-            <svg class="stack-icon"><use href="#icon-python"></use></svg>
-            <h3>Python</h3>
-          </div>
-          <div class="stack-tile glass-card">
-            <svg class="stack-icon"><use href="#icon-postgres"></use></svg>
-            <h3>SQL (PostgreSQL/MySQL)</h3>
-          </div>
-          <div class="stack-tile glass-card">
-            <svg class="stack-icon"><use href="#icon-tableau"></use></svg>
-            <h3>Tableau</h3>
-          </div>
-          <div class="stack-tile glass-card">
-            <svg class="stack-icon"><use href="#icon-powerbi"></use></svg>
-            <h3>Power BI</h3>
-          </div>
-          <div class="stack-tile glass-card">
-            <svg class="stack-icon"><use href="#icon-tensorflow"></use></svg>
-            <h3>TensorFlow</h3>
-          </div>
-          <div class="stack-tile glass-card">
-            <svg class="stack-icon"><use href="#icon-streamlit"></use></svg>
-            <h3>Streamlit</h3>
-          </div>
-          <div class="stack-tile glass-card">
-            <svg class="stack-icon"><use href="#icon-docker"></use></svg>
-            <h3>Docker</h3>
-          </div>
-          <div class="stack-tile glass-card">
-            <svg class="stack-icon"><use href="#icon-git"></use></svg>
-            <h3>Git</h3>
+        <!-- Programming & Tools -->
+        <div class="skill-group">
+          <h3 class="skill-group-title">Programming & Tools</h3>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-python"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Python</div>
+                <div class="skill-subtitle">Scripting & Automation</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">R</div>
+                <div class="skill-subtitle">Statistical Computing</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Scala</div>
+                <div class="skill-subtitle">Functional Data Ops</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Excel</div>
+                <div class="skill-subtitle">Analysis & Reporting</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-git"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Git</div>
+                <div class="skill-subtitle">Version Control</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-streamlit"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Streamlit</div>
+                <div class="skill-subtitle">Data Apps</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-docker"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Docker</div>
+                <div class="skill-subtitle">Containerization</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Visual Studio</div>
+                <div class="skill-subtitle">Development</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="skill-bars">
-          <div class="skill-category">
-            <h3>Languages & Databases</h3>
-            <div class="skill-item">
-              <div class="skill-name">Python (Pandas, NumPy)</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="95"></div>
+        <!-- Analytics -->
+        <div class="skill-group">
+          <h3 class="skill-group-title">Analytics</h3>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Pandas</div>
+                <div class="skill-subtitle">Data Wrangling</div>
               </div>
-              <div class="skill-level">95%</div>
             </div>
-            <div class="skill-item">
-              <div class="skill-name">SQL (PostgreSQL, MySQL)</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="90"></div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">NumPy</div>
+                <div class="skill-subtitle">Computation</div>
               </div>
-              <div class="skill-level">90%</div>
             </div>
-            <div class="skill-item">
-              <div class="skill-name">R</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="75"></div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">EDA</div>
+                <div class="skill-subtitle">Exploratory Analysis</div>
               </div>
-              <div class="skill-level">75%</div>
             </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Data Visualization</h3>
-            <div class="skill-item">
-              <div class="skill-name">Tableau</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="95"></div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Data Cleaning</div>
+                <div class="skill-subtitle">Quality Control</div>
               </div>
-              <div class="skill-level">95%</div>
             </div>
-            <div class="skill-item">
-              <div class="skill-name">Power BI</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="90"></div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Feature Engineering</div>
+                <div class="skill-subtitle">Model Inputs</div>
               </div>
-              <div class="skill-level">90%</div>
             </div>
-            <div class="skill-item">
-              <div class="skill-name">Streamlit</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="80"></div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">PCA</div>
+                <div class="skill-subtitle">Dimensionality Reduction</div>
               </div>
-              <div class="skill-level">80%</div>
             </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>AI & Machine Learning</h3>
-            <div class="skill-item">
-              <div class="skill-name">NLP / LLM Evaluation (RAG)</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="90"></div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-postgres"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Data Modeling</div>
+                <div class="skill-subtitle">Schema Design</div>
               </div>
-              <div class="skill-level">90%</div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-name">Predictive Modeling & Forecasting</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="85"></div>
-              </div>
-              <div class="skill-level">85%</div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-name">TensorFlow</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="80"></div>
-              </div>
-              <div class="skill-level">80%</div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-name">PyTorch</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="70"></div>
-              </div>
-              <div class="skill-level">70%</div>
             </div>
           </div>
+        </div>
 
-          <div class="skill-category">
-            <h3>Tools & Platforms</h3>
-            <div class="skill-item">
-              <div class="skill-name">Git & GitHub</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="90"></div>
+        <!-- Data Visualization -->
+        <div class="skill-group">
+          <h3 class="skill-group-title">Data Visualization</h3>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-tableau"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Tableau</div>
+                <div class="skill-subtitle">Dashboards</div>
               </div>
-              <div class="skill-level">90%</div>
             </div>
-            <div class="skill-item">
-              <div class="skill-name">Docker</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="70"></div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-powerbi"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Power BI</div>
+                <div class="skill-subtitle">Business Insights</div>
               </div>
-              <div class="skill-level">70%</div>
             </div>
-            <div class="skill-item">
-              <div class="skill-name">ETL Automation</div>
-              <div class="skill-bar-container">
-                <div class="skill-bar" data-level="85"></div>
+          </div>
+        </div>
+
+        <!-- Machine Learning -->
+        <div class="skill-group">
+          <h3 class="skill-group-title">Machine Learning</h3>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-tensorflow"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Machine Learning</div>
+                <div class="skill-subtitle">Predictive Models</div>
               </div>
-              <div class="skill-level">85%</div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-tensorflow"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Deep Learning</div>
+                <div class="skill-subtitle">Neural Nets</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Clustering</div>
+                <div class="skill-subtitle">Segmentation</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Time Series Forecasting</div>
+                <div class="skill-subtitle">Trends & Cycles</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI & LLM -->
+        <div class="skill-group">
+          <h3 class="skill-group-title">AI & LLM</h3>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">NLP</div>
+                <div class="skill-subtitle">Text Analytics</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Prompt Engineering</div>
+                <div class="skill-subtitle">LLM Control</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">RAG</div>
+                <div class="skill-subtitle">Context Retrieval</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Methods / Statistics -->
+        <div class="skill-group">
+          <h3 class="skill-group-title">Methods / Statistics</h3>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Regression</div>
+                <div class="skill-subtitle">Prediction</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">Hypothesis Testing</div>
+                <div class="skill-subtitle">Significance</div>
+              </div>
+            </div>
+            <div class="skill-card">
+              <svg class="skill-icon"><use href="#icon-badge"></use></svg>
+              <div class="skill-info">
+                <div class="skill-title">KPI Design</div>
+                <div class="skill-subtitle">Measurement</div>
+              </div>
             </div>
           </div>
         </div>
