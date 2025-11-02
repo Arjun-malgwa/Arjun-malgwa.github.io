@@ -2164,6 +2164,135 @@
       }
       scrollTimeout = window.requestAnimationFrame(handleScrollBlur);
     }, { passive: true });
+
+    // ========== Dock "More" Dropdown Toggle ==========
+    const dockMoreBtn = document.querySelector('.dock-more-btn');
+    const dockMenu = document.querySelector('.dock-menu');
+
+    if (dockMoreBtn && dockMenu) {
+      dockMoreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isExpanded = dockMoreBtn.getAttribute('aria-expanded') === 'true';
+        dockMoreBtn.setAttribute('aria-expanded', !isExpanded);
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dockMoreBtn.contains(e.target) && !dockMenu.contains(e.target)) {
+          dockMoreBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close menu when clicking on a menu link
+      dockMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          dockMoreBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // ========== Projects Horizontal Slider ==========
+    const projRail = document.querySelector('.proj-rail');
+    const projPrevBtn = document.querySelector('.proj-prev');
+    const projNextBtn = document.querySelector('.proj-next');
+    const projDotsContainer = document.querySelector('.proj-dots');
+
+    if (projRail && projPrevBtn && projNextBtn && projDotsContainer) {
+      const projCards = Array.from(projRail.querySelectorAll('.project-card'));
+      const cardCount = projCards.length;
+
+      // Create dots
+      for (let i = 0; i < cardCount; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'proj-dot';
+        dot.setAttribute('aria-label', `Go to project ${i + 1}`);
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          projCards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        });
+        projDotsContainer.appendChild(dot);
+      }
+
+      const dots = Array.from(projDotsContainer.querySelectorAll('.proj-dot'));
+
+      // Update active dot based on scroll position
+      function updateActiveDot() {
+        const scrollLeft = projRail.scrollLeft;
+        const cardWidth = projCards[0].offsetWidth + 32; // card width + gap
+        const currentIndex = Math.round(scrollLeft / cardWidth);
+
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+
+        // Update button states
+        projPrevBtn.disabled = currentIndex === 0;
+        projNextBtn.disabled = currentIndex === cardCount - 1;
+      }
+
+      // Scroll handler
+      projRail.addEventListener('scroll', updateActiveDot, { passive: true });
+
+      // Prev button
+      projPrevBtn.addEventListener('click', () => {
+        const scrollLeft = projRail.scrollLeft;
+        const cardWidth = projCards[0].offsetWidth + 32;
+        const currentIndex = Math.round(scrollLeft / cardWidth);
+        if (currentIndex > 0) {
+          projCards[currentIndex - 1].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        }
+      });
+
+      // Next button
+      projNextBtn.addEventListener('click', () => {
+        const scrollLeft = projRail.scrollLeft;
+        const cardWidth = projCards[0].offsetWidth + 32;
+        const currentIndex = Math.round(scrollLeft / cardWidth);
+        if (currentIndex < cardCount - 1) {
+          projCards[currentIndex + 1].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        }
+      });
+
+      // Initialize
+      updateActiveDot();
+    }
+
+    // ========== Reveal Animations (IntersectionObserver) ==========
+    const revealElements = document.querySelectorAll('.reveal');
+
+    if (revealElements.length > 0) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '-10% 0px -10% 0px',
+        threshold: 0
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    }
+
+    // ========== Anchor Links with Offset ==========
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || !href) return;
+
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const offsetTop = target.offsetTop - 90; // 90px offset for fixed dock
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>
